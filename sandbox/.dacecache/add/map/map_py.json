@@ -1,0 +1,66 @@
+{
+    "/home/maurinl/maurinl26/DE330_Task_10.3.6_gt4py_physics/dwarf-p-ice3/sandbox/handle_sdfg.py": {
+        "12": [
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 0
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 1
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 2
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 3
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 4
+            }
+        ],
+        "13": [
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 5
+            }
+        ],
+        "8": [
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 5
+            }
+        ],
+        "9": [
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 5
+            }
+        ],
+        "10": [
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 5
+            }
+        ],
+        "11": [
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 5
+            }
+        ]
+    }
+}
