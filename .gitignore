@@ -1,0 +1,4 @@
+*.log
+
+mode_condensation/
+__pycache__/
