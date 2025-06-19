@@ -64,16 +64,6 @@ Load PHYEX testprogs dataset :
   cd ..
 ```
 
-- rain_ice :
-```bash
-  cd ./data/
-  wget --no-check-certificate https://github.com/UMR-CNRM/PHYEX/files/12783935/rain_ice.tar.gz \
-  -O rain_ice.tar.gz
-  tar xf ice_adjust.tar.gz
-  rm -f ice_adjust.tar.gz
-  cd ..
-```
-
 
 Decode files to netcdf :
 
@@ -114,19 +104,6 @@ There are three components available for microphysical adjustments, under _/src/
 - Option 1:
   - Intégration Python (nécessite peut-être de la réécriture de composants).
 
-## Rain Ice
-
-There are three components available for rain_ice (one-moment microphysical processes computation), under _/src/ice3_gt4py/components_ directory:
-
-- RainIce (rain_ice.py) : calls stencils involved in RainIce computation,
-- AroRainIce (aro_rain_ice.py) : calls RainIce common computation plus non-negative filters for model coupling,
-- Ice4Tendencies (ice4_tendencies.py) : responsible for processes computation,
-- Ice4Stepping (ice4_stepping.py) : responsible for orchestration of processes computations (handling soft and heavy cycles plus accumulating tendencies).
-- To launch rain_ice (with cli):
-
-```
-python src/drivers/cli.py run-rain-ice gt:cpu_ifirst ./data/rain_ice/reference.nc ./data/rain_ice/run.nc track_rain_ice.json
-```
 
 ## Unit tests
 
@@ -159,31 +136,4 @@ as an input.
   - testprogs_data :
     - main : Command Line Interface pour le décodage des testprogs phyex
     - .yaml : config de décodage des fichiers
-
-## Work in Progress
-
-- branche ice_adjust_review :
-  - tous les stencils ont été testés unitairement (y compris l'interpolation en DaCe). 
-  - l'interpolation (sigrc_computation_dace) doit, être intégrée au composant ice_adjust_split
-    -> Couplage stencil dace + stencil gt4py à investiguer
-  - il y a un bug, les stencils cloud_fraction_1 et cloud_fraction_2 renvoient des valeurs nulles
-    -> Les variables inout doivent être découpées en in / out
-
-  
-- branche rain_ice_review :
-  - tous les stencils des tendances (Ice4Tendencies) ont été testés
-  - les stencils dace ice4_fast_rs (2 stencils gt4py + 2 stencils DaCe) et ice4_fast_rg doivent être intégrés au composant
-  - les appels des stencils de Ice4Tendencies doivent être mis à jour (débuggage)
-  - les tests unitaires sur le stepping ne sont pas nécessaire -> il est préférable de tester le composant dans un cas 
-simple (1 boucle ldsoft)
-  - les tests unitaires des rain_fr et sedimentation sont à réaliser
-
-- branches expérimentales :
-  - dace-interpolation : intégration des interpolations DaCe dans le stencil
-  - dace-orchestration : orchestration DaCe des composants pour livraison en standalone et l'intégration à pmapl :
-un composant DaCe fournit sa librairie partagée à la compilation,
-  - fortran-plugin : branche pour évaluer les branchements des composants DaCe (code complet)
-dans fortran
-
-
 
