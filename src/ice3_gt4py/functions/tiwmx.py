@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
 from __future__ import annotations
 
-from gt4py.cartesian.gtscript import Field, exp, function, log
+import dace
+from ice3_gt4py.utils.typingx import dtype_float, dtype_int
 
-from ice3_gt4py.functions.sign import sign
 
-
-@function
-def e_sat_w(t: Field["float"]) -> Field["float"]:
+@dace.program
+def e_sat_w(
+        t: dtype_float,
+        pv: dtype_float,
+        ALPW: dace.compiletime,
+        BETAW: dace.compiletime,
+        GAMW: dace.compiletime
+):
     """Saturation vapor pressure over liquid water
 
     Args:
@@ -17,13 +22,17 @@ def e_sat_w(t: Field["float"]) -> Field["float"]:
         Field[float]: saturation vapor pressure
     """
 
-    from __externals__ import ALPW, BETAW, GAMW
-
-    return exp(ALPW - BETAW / t - GAMW * log(t))
+    pv = exp(ALPW - BETAW / t - GAMW * log(t))
 
 
-@function
-def e_sat_i(t: Field["float"]):
+@dace.program
+def e_sat_i(
+    t: dtype_float,
+    piv: dtype_float,
+    ALPI: dace.compiletime,
+    BETAI: dace.compiletime,
+    GAMI: dace.compiletime
+):
     """Saturation vapor pressure over ice
 
     Args:
@@ -32,7 +41,6 @@ def e_sat_i(t: Field["float"]):
     Returns:
         Field[float]: saturation vapor pressure
     """
-    from __externals__ import ALPI, BETAI, GAMI
 
-    return exp(ALPI - BETAI / t - GAMI * log(t))
+    piv = exp(ALPI - BETAI / t - GAMI * log(t))
 

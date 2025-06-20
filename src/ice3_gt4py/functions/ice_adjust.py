@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import annotations
 
-from gt4py.cartesian.gtscript import Field, function
+import dace
+from ice3_gt4py.utils.typingx import dtype_float
 
 
-@function
+@dace.program
 def vaporisation_latent_heat(
-    t: Field["float"],
-) -> Field["float"]:
+    t: dtype_float,
+    lv: dtype_float,
+    CL: dace.compiletime,
+    CPV: dace.compiletime,
+    LVTT: dace.compiletime,
+    TT: dace.compiletime
+):
     """Computes latent heat of vaporisation
 
     Args:
@@ -17,15 +23,18 @@ def vaporisation_latent_heat(
         Field[float]: point wise vaporisation latent heat
     """
 
-    from __externals__ import CL, CPV, LVTT, TT
-
-    return LVTT + (CPV - CL) * (t - TT)
+    lv = LVTT + (CPV - CL) * (t - TT)
 
 
-@function
+@dace.program
 def sublimation_latent_heat(
-    t: Field["float"],
-) -> Field["float"]:
+    t: dtype_float,
+    ls: dtype_float,
+    CI: dace.compiletime,
+    CPV: dace.compiletime,
+    LSTT: dace.compiletime,
+    TT: dace.compiletime
+):
     """Computes latent heat of sublimation
 
     Args:
@@ -35,27 +44,5 @@ def sublimation_latent_heat(
         Field[float]: point wise sublimation latent heat
     """
 
-    from __externals__ import CI, CPV, LSTT, TT
+    ls = LSTT + (CPV - CI) * (t - TT)
 
-    return LSTT + (CPV - CI) * (t - TT)
-
-
-@function
-def constant_pressure_heat_capacity(
-    rv: Field["float"],
-    rc: Field["float"],
-    ri: Field["float"],
-    rr: Field["float"],
-    rs: Field["float"],
-    rg: Field["float"],
-) -> Field["float"]:
-    """Compute specific heat at constant pressure for a
-    moist parcel given mixing ratios
-
-    Returns:
-        Field[float]: specific heat of parcel
-    """
-
-    from __externals__ import CI, CL, CPD, CPV
-
-    return CPD + CPV * rv + CL * (rc + rr) + CI * (ri + rs + rg)
