@@ -1,3 +1,0 @@
-[console_scripts]
-standalone-model = drivers.cli:app
-testprogs-data = testprogs_data.main:app
