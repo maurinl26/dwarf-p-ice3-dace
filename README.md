@@ -84,10 +84,7 @@ There are three components available for microphysical adjustments, under _/src/
 
 ```bash
   uv run standalone-model ice-adjust-split \
-  gt:cpu_kfirst \
-  ./data/ice_adjust/reference.nc \
-  ./data/ice_adjust/run.nc \
-  track_ice_adjust.json --no-rebuild 
+  ./data/ice_adjust/reference.nc
 ```
 
 ## (WIP) Integration with PHYEX
