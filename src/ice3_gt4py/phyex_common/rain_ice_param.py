@@ -1,22 +1,17 @@
 # -*- coding: utf-8 -*-
 from dataclasses import dataclass, field
 from math import gamma, log
-from typing import Literal, Tuple
 from numpy.typing import NDArray
 import logging
 
 import numpy as np
-from ifs_physics_common.utils.f2py import ported_class, ported_method
 
 from ice3_gt4py.phyex_common.constants import Constants
 from ice3_gt4py.phyex_common.gamma_inc import generalized_incomplete_gamma
 from ice3_gt4py.phyex_common.param_ice import ParamIce
 from ice3_gt4py.phyex_common.rain_ice_descr import RainIceDescr
 
-logging.getLogger()
 
-
-@ported_class(from_file="PHYEX/src/common/aux/modd_rain_ice_paramn.F90")
 @dataclass
 class RainIceParam:
     """Constants for RainIce parametrization and source computation
@@ -733,7 +728,7 @@ class RainIceParam:
         self.ker_rdryg = self.get_kernel("rdryg")
         self.ker_sdryg = self.get_kernel("sdryg")
 
-    @ported_method(from_file="PHYEX/src/common/micro/mode_ini_rain_ice.F90")
+
     def init_gaminc_rim_tables(self):
         """Compute generalized incomplete gamma tables for riming"""
 

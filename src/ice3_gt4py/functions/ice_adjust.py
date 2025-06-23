@@ -46,3 +46,26 @@ def sublimation_latent_heat(
 
     ls = LSTT + (CPV - CI) * (t - TT)
 
+
+@dace.program
+def constant_pressure_heat_capacity(
+    rv: dtype_float,
+    rc: dtype_float,
+    ri: dtype_float,
+    rr: dtype_float,
+    rs: dtype_float,
+    rg: dtype_float,
+    cph: dtype_float,
+    CI: dace.compiletime,
+    CL: dace.compiletime,
+    CPD: dace.compiletime,
+    CPV: dace.compiletime
+):
+    """Compute specific heat at constant pressure for a
+    moist parcel given mixing ratios
+
+    Returns:
+        Field[float]: specific heat of parcel
+    """
+    cph = CPD + CPV * rv + CL * (rc + rr) + CI * (ri + rs + rg)
+

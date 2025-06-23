@@ -1,422 +1,143 @@
 # -*- coding: utf-8 -*-
 from __future__ import annotations
 
-import logging
-from datetime import timedelta
-import sys
-from functools import cached_property
-from itertools import repeat
-from typing import Dict
 
 import dace
-from ifs_physics_common.framework.components import ImplicitTendencyComponent
-from ifs_physics_common.framework.config import GT4PyConfig
-from ifs_physics_common.framework.grid import ComputationalGrid, I, J, K
-from ifs_physics_common.framework.storage import managed_temporary_storage
-from ifs_physics_common.utils.typingx import NDArrayLikeDict, PropertyDict
+import numpy as np
 
-from ice3_gt4py.phyex_common.phyex import Phyex
+from ice3_gt4py.stencils.condensation_split import condensation
+from ice3_gt4py.stencils.sigma_rc_dace import sigrc_computation
+from ice3_gt4py.stencils.cloud_fraction_split import thermodynamic_fields, cloud_fraction_1, cloud_fraction_2
 from ice3_gt4py.phyex_common.tables import SRC_1D
 
-logging.basicConfig(level=logging.DEBUG, stream=sys.stdout)
-logging.getLogger()
+from ice3_gt4py.utils.typingx import dtype_float, dtype_int, FloatFieldIJK
+from ice3_gt4py.utils.dims import I, J, K
 
 
-class IceAdjustSplit(ImplicitTendencyComponent):
-    """Implicit Tendency Component calling
-    ice_adjust : saturation adjustment of temperature and mixing ratios
+@dace.program
+def ice_adjust(
+    th: dace.float64[I, J, K],
+    exn: dace.float64[I, J, K],
+    rhodref: dace.float64[I, J, K],
+    sigqsat: dace.float64[I, J, K],
+    pabs: dace.float64[I, J, K],
+    cldfr: dace.float64[I, J, K],
+    sigs: dace.float64[I, J, K],
+    rc_mf: dace.float64[I, J, K],
+    ri_mf: dace.float64[I, J, K],
+    cf_mf: dace.float64[I, J, K],
+    rv: dace.float64[I, J, K],
+    rc: dace.float64[I, J, K],
+    rr: dace.float64[I, J, K],
+    ri: dace.float64[I, J, K],
+    rs: dace.float64[I, J, K],
+    rg: dace.float64[I, J, K],
+    ths0: dace.float64[I, J, K],
+    rvs0: dace.float64[I, J, K],
+    rcs0: dace.float64[I, J, K],
+    ris0: dace.float64[I, J, K],
+    ths1: dace.float64[I, J, K],
+    rvs1: dace.float64[I, J, K],
+    rcs1: dace.float64[I, J, K],
+    ris1: dace.float64[I, J, K],
+    hlc_hrc: dace.float64[I, J, K],
+    hlc_hcf: dace.float64[I, J, K],
+    hli_hcf: dace.float64[I, J, K],
+    hli_hri: dace.float64[I, J, K],
+    externals: dace.compiletime
+):
 
-    ice_adjust stencil is ice_adjust.F90 in PHYEX
-    """
+    cph = np.ndarray([I, J, K], dtype=dtype_float)
+    lv = np.ndarray([I, J, K], dtype=dtype_float)
+    ls = np.ndarray([I, J, K], dtype=dtype_float)
+    t = np.ndarray([I, J, K], dtype=dtype_float)
 
-    def __init__(
-        self,
-        computational_grid: ComputationalGrid,
-        gt4py_config: GT4PyConfig,
-        phyex: Phyex,
-        *,
-        enable_checks: bool = True,
-    ) -> None:
-        super().__init__(
-            computational_grid, enable_checks=enable_checks, gt4py_config=gt4py_config
-        )
+    rc_out = np.ndarray([I, J, K], dtype=dtype_float)
+    ri_out = np.ndarray([I, J, K], dtype=dtype_float)
+    rv_out = np.ndarray([I, J, K], dtype=dtype_float)
+    q1 = np.ndarray([I, J, K], dtype=dtype_float)
 
-        self.externals = phyex.to_externals()
-        self.externals.update({
-            "OCND2": False
-        })
+    sigrc = np.ndarray([I, J, K], dtype=dtype_float)
+    inq1 = np.ndarray([I, J, K], dtype=dtype_int)
 
-        logging.info(f"LAMBDA3 : {self.externals['LAMBDA3']}")
+    thermodynamic_fields(
+        th=th,
+        exn=exn,
+        rv=rv,
+        rc=rc,
+        rr=rr,
+        ri=ri,
+        rs=rs,
+        rg=rg,
+        cph=cph,
+        lv=lv,
+        ls=ls,
+        t=t,
+    )
 
+    condensation(
+        sigqsat=sigqsat,
+        pabs=pabs,
+        cldfr=cldfr,
+        sigs=sigs,
+        ri=ri,
+        rc=rc,
+        rv=rv,
+        cph=cph,
+        lv=lv,
+        ls=ls,
+        t=t,
+        rv_out=rv_out,
+        ri_out=ri_out,
+        rc_out=rc_out,
+        q1=q1,
+    )
 
-        self.thermo = self.compile_stencil("thermodynamic_fields", self.externals)
-        self.condensation = self.compile_stencil("condensation", self.externals)
+    sigrc_computation(
+        q1=q1,
+        inq1=inq1,
+        src_1d=SRC_1D,
+        sigrc=sigrc,
+        LAMBDA3=0,
+    )
 
-        # todo : add sigrc diagnostic compilation
-        # from ice3_gt4py.stencils.sigma_rc_dace import sigrc_computation
-        #
-        # self.nx, self.ny, self.nz = self.computational_grid.grids[(I, J, K)].shape
-        # self.sigrc_diagnostic = sigrc_computation.to_sdfg().compile()
+    cloud_fraction_1(
+        exnref=exn,
+        rc=rc,
+        ri=ri,
+        ths0=ths0,
+        rvs0=rvs0,
+        rcs0=rcs0,
+        ris0=ris0,
+        ths1=ths1,
+        rvs1=rvs1,
+        rcs1=rcs1,
+        ris1=ris1,
+        lv=lv,
+        ls=ls,
+        cph=cph,
+        rc_tmp=rc_out,
+        ri_tmp=ri_out,
+    )
 
-        self.cloud_fraction_1 = self.compile_stencil("cloud_fraction_1", self.externals)
-        self.cloud_fraction_2 = self.compile_stencil("cloud_fraction_2", self.externals)
-
-
-
-    @cached_property
-    def _input_properties(self) -> PropertyDict:
-        return {
-            "sigqsat": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "exn": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "exnref": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "rhodref": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "pabs": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "sigs": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "cf_mf": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "rc_mf": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "ri_mf": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "th": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "rv": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "rc": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "rr": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "ri": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "rs": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "rg": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "cldfr": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "ifr": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-
-        }
-
-    @cached_property
-    def _tendency_properties(self) -> PropertyDict:
-        return {
-            "ths": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "rcs": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "rrs": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "ris": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "rss": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "rvs": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "rgs": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-        }
-
-    @cached_property
-    def _diagnostic_properties(self) -> PropertyDict:
-        return {
-            "hlc_hrc": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "hlc_hcf": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "hli_hri": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "hli_hcf": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-            "sigrc": {
-                "grid": (I, J, K),
-                "units": "",
-                "dtype": "float",
-            },
-        }
-
-    @cached_property
-    def _temporaries(self) -> PropertyDict:
-        return {
-            "lv": {"grid": (I, J, K), "units": "", "dtype": "float"},
-            "ls": {"grid": (I, J, K), "units": "", "dtype": "float"},
-            "cph": {"grid": (I, J, K), "units": "", "dtype": "float"},
-            "t": {"grid": (I, J, K), "units": "", "dtype":"float"}
-        }
-
-    def array_call(
-        self,
-        state: NDArrayLikeDict,
-        timestep: timedelta,
-        out_tendencies: NDArrayLikeDict,
-        out_diagnostics: NDArrayLikeDict,
-        overwrite_tendencies: Dict[str, bool],
-    ) -> None:
-
-        logging.info(f"Timestep : {timestep.total_seconds()}")
-
-        with managed_temporary_storage(
-            self.computational_grid,
-            *repeat(((I, J, K), "float"), 9),
-            ((I,J,K), "int"),
-            gt4py_config=self.gt4py_config,
-        ) as (lv, ls, cph, t, rc_out, ri_out, rv_out, t_out, q1, inq1):
-
-            state_thermo = {
-                key: state[key]
-                for key in [
-                    "th",
-                    "exn",
-                    "rv",
-                    "rc",
-                    "rr",
-                    "ri",
-                    "rs",
-                    "rg",
-                ]
-            }
-
-            temporaries_thermo = {"cph": cph, "lv": lv, "ls": ls, "t": t}
-
-            logging.info("Launching thermo")
-
-            self.thermo(
-                **state_thermo,
-                **temporaries_thermo,
-                origin=(0, 0, 0),
-                domain=self.computational_grid.grids[I, J, K].shape,
-                validate_args=self.gt4py_config.validate_args,
-                exec_info=self.gt4py_config.exec_info,
-            )
-
-            logging.info(f"Thermo output")
-            logging.info(f"Mean cph {cph.mean()}")
-
-            state_condensation = {
-                key: state[key]
-                for key in ["sigqsat", "pabs", "cldfr", "sigs", "ri", "rc", "rv"]
-            }
-
-            temporaries_condensation = {
-                "cph": cph,
-                "lv": lv,
-                "ls": ls,
-                "t": t,
-                "rv_out": rv_out,
-                "ri_out": ri_out,
-                "rc_out": rc_out,
-                "q1": q1
-            }
-
-            self.condensation(
-                **state_condensation,
-                **temporaries_condensation,
-                origin=(0, 0, 0),
-                domain=self.computational_grid.grids[I, J, K].shape,
-                validate_args=self.gt4py_config.validate_args,
-                exec_info=self.gt4py_config.exec_info,
-            )
-
-            logging.info(f"Condensation output")
-            logging.info(f"Mean rv_out {rv_out.mean()}")
-
-            # todo : add dace managed sigrc diagnostic
-            # self.sigrc_diagnostic(
-            #     q1=q1,
-            #     inq1=inq1,
-            #     src_1d=SRC_1D,
-            #     sigrc=out_diagnostics["sigrc"],
-            #     LAMBDA3=0,
-            #     I=self.nx,
-            #     J=self.ny,
-            #     K=self.nz,
-            #     F=34
-            # )
-
-            state_cloud_fraction_1 = {
-                key: state[key]
-                for key in [
-                    "exnref",
-                    "rc",
-                    "ri",
-                ]
-            }
-
-            tendencies_cloud_fraction_1 = {
-                name: out_tendencies[name]
-                for name in [
-                    "ths",
-                    "rvs",
-                    "rcs",
-                    "ris"
-                ]
-            }
-
-            # TODO: check the scope of t
-            temporaries_cloud_fraction_1 = {
-                "lv": lv,
-                "ls": ls,
-                "cph": cph,
-                "rc_tmp": rc_out,
-                "ri_tmp": ri_out,
-            }
-
-            logging.info("Launching cloud fraction 1")
-            self.cloud_fraction_1(
-                **state_cloud_fraction_1,
-                **tendencies_cloud_fraction_1,
-                **temporaries_cloud_fraction_1,
-                dt=timestep.total_seconds(),
-                origin=(0, 0, 0),
-                domain=self.computational_grid.grids[I, J, K].shape,
-                validate_args=self.gt4py_config.validate_args,
-                exec_info=self.gt4py_config.exec_info,
-            )
-
-            logging.info(f"Cloud fraction 1 output")
-            logging.info(f"Mean rc_out {rc_out.mean()}")
-
-            state_cloud_fraction_2 = {
-                key: state[key]
-                for key in [
-                    "rhodref",
-                    "exnref",
-                    "rc_mf",
-                    "ri_mf",
-                    "cf_mf",
-                    "cldfr",
-                ]
-            }
-
-            diagnotics_cloud_fraction_2 = {
-                name: out_diagnostics[name]
-                for name in self._diagnostic_properties.keys()
-            }
-            diagnotics_cloud_fraction_2.pop("sigrc")
-
-            tendencies_cloud_fraction_2 = {
-                name: out_tendencies[name]
-                for name in [
-                    "ths",
-                    "rvs",
-                    "rcs",
-                    "ris",
-                ]
-            }
-
-            temporaries_cloud_fraction_2 = {
-                "lv": lv,
-                "ls": ls,
-                "cph": cph,
-                "t": t,
-            }
-
-            self.cloud_fraction_2(
-                **state_cloud_fraction_2,
-                **diagnotics_cloud_fraction_2,
-                **tendencies_cloud_fraction_2,
-                **temporaries_cloud_fraction_2,
-                dt=timestep.total_seconds(),
-                origin=(0, 0, 0),
-                domain=self.computational_grid.grids[I, J, K].shape,
-                validate_args=self.gt4py_config.validate_args,
-                exec_info=self.gt4py_config.exec_info,
-            )
-
-            logging.info(f"Cloud fraction 2 output")
-            logging.info(f"Mean hlc_hrc {diagnotics_cloud_fraction_2['hlc_hrc'].mean()}")
+    cloud_fraction_2(
+        rhodref=rhodref,
+        exnref=exn,
+        rc_mf=rc_mf,
+        ri_mf=ri_mf,
+        cf_mf=cf_mf,
+        cldfr=cldfr,
+        hlc_hrc=hlc_hrc,
+        hlc_hcf=hlc_hcf,
+        hli_hri=hli_hri,
+        hli_hcf=hli_hcf,
+        ths=ths1,
+        rvs=rvs1,
+        rcs=rcs1,
+        ris=ris1,
+        lv=lv,
+        ls=ls,
+        cph=cph,
+        t=t,
+    )
 

@@ -1,7 +1,7 @@
 import dace
 
-I = dace.symbol("I")
+I = dace.symbol('I')
 
-J = dace.symbol("J")
+J = dace.symbol('J')
 
-K = dace.symbol("K")
+K = dace.symbol('K')

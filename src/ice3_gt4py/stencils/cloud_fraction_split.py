@@ -2,228 +2,201 @@
 from __future__ import annotations
 
 import dace
-from gt4py.cartesian.gtscript import PARALLEL, computation, interval, Field, __INLINED
-from ifs_physics_common.framework.stencil import stencil_collection
-from ifs_physics_common.utils.f2py import ported_method
+from dace.dtypes import StorageType, ScheduleType
+
+from ice3_gt4py.utils.dims import I, J, K
+from ice3_gt4py.utils.typingx import dtype_float, dtype_int
 
 from ice3_gt4py.functions.ice_adjust import sublimation_latent_heat, vaporisation_latent_heat
 
 
 @dace.program
 def thermodynamic_fields(
-    th: Field["float"],
-    exn: Field["float"],
-    rv: Field["float"],
-    rc: Field["float"],
-    rr: Field["float"],
-    ri: Field["float"],
-    rs: Field["float"],
-    rg: Field["float"],
-    lv: Field["float"],
-    ls: Field["float"],
-    cph: Field["float"],
-    t: Field["float"],
+    th: dace.float64[9472, 1, 15] @ StorageType.GPU_Global,
+    exn: dace.float64[I, J, K] @ StorageType.GPU_Global,
+    rv: dace.float64[I, J, K] @ StorageType.GPU_Global,
+    rc: dace.float64[I, J, K] @ StorageType.GPU_Global,
+    rr: dace.float64[I, J, K] @ StorageType.GPU_Global,
+    ri: dace.float64[I, J, K] @ StorageType.GPU_Global,
+    rs: dace.float64[I, J, K] @ StorageType.GPU_Global,
+    rg: dace.float64[I, J, K] @ StorageType.GPU_Global,
+    lv: dace.float64[I, J, K] @ StorageType.GPU_Global,
+    ls: dace.float64[I, J, K] @ StorageType.GPU_Global,
+    cph: dace.float64[I, J, K] @ StorageType.GPU_Global,
+    t: dace.float64[I, J, K] @ StorageType.GPU_Global,
+    ext: dace.compiletime,
 ):
-    from __externals__ import NRR, CPV, CPD, CL, CI
 
     # 2.3 Compute the variation of mixing ratio
-    with computation(PARALLEL), interval(...):
-        t = th * exn
-        lv = vaporisation_latent_heat(t)
-        ls = sublimation_latent_heat(t)
+    for i, j, k in dace.map[0:I, 0:J, 0:K] @ ScheduleType.GPU_Device:
+        t = exn * th
+        lv[i, j, k] = vaporisation_latent_heat(t[i, j, k])
+        ls[i, j, k] = sublimation_latent_heat(t[i, j, k])
 
-    # Translation note : in Fortran, ITERMAX = 1, DO JITER =1,ITERMAX
-    # Translation note : version without iteration is kept (1 iteration)
-    #                   IF jiter = 1; CALL ITERATION()
-    # jiter > 0
 
-    # numer of moist variables fixed to 6 (without hail)
-
-    # Translation note :
     # 2.4 specific heat for moist air at t+1
-    with computation(PARALLEL), interval(...):
-        # Translation note : case(7) removed because hail is not taken into account
-        # Translation note : l453 to l456 removed
-        if __INLINED(NRR == 6):
-            cph = CPD + CPV * rv + CL * (rc + rr) + CI * (ri + rs + rg)
-        if __INLINED(NRR == 5):
-            cph = CPD + CPV * rv + CL * (rc + rr) + CI * (ri + rs)
-        if __INLINED(NRR == 4):
-            cph = CPD + CPV * rv + CL * (rc + rr)
-        if __INLINED(NRR == 2):
-            cph = CPD + CPV * rv + CL * rc + CI * ri
+    for i, j, k in dace.map[0:I, 0:J, 0:K] @ ScheduleType.GPU_Device:
+        if ext.NRR == 6:
+            cph[i, j, k] = ext.CPD + ext.CPV * rv[i, j, k] + ext.CL * (rc[i, j, k] + rr[i, j, k]) + ext.CI * (ri[i, j, k] + rs[i, j, k] + rg[i, j, k])
+        if ext.NRR == 5:
+            cph[i, j, k] = ext.CPD + ext.CPV * rv[i, j, k] + ext.CL * (rc[i, j, k] + rr[i, j, k]) + ext.CI * (ri[i, j, k] + rs[i, j, k])
+        if ext.NRR == 4:
+            cph[i, j, k] = ext.CPD + ext.CPV * rv[i, j, k] + ext.CL * (rc[i, j, k] + rr[i, j, k])
+        if ext.NRR == 2:
+            cph[i, j, k] = ext.CPD + ext.CPV * rv[i, j, k] + ext.CL * rc[i, j, k] + ext.CI * ri[i, j, k]
 
 
 @dace.program
 def cloud_fraction_1(
-    lv: Field["float"],
-    ls: Field["float"],
-    cph: Field["float"],
-    exnref: Field["float"],
-    rc: Field["float"],
-    ri: Field["float"],
-    rc_tmp: Field["float"],
-    ri_tmp: Field["float"],
-    ths0: Field["float"],
-    rvs0: Field["float"],
-    rcs0: Field["float"],
-    ris0: Field["float"],
-    ths1: Field["float"],
-    rvs1: Field["float"],
-    rcs1: Field["float"],
-    ris1: Field["float"],
-    dt: "float",
+    lv: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    ls: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    cph: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    exnref: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    rc: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    ri: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    rc_tmp: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    ri_tmp: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    ths0: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    rvs0: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    rcs0: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    ris0: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    ths1: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    rvs1: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    rcs1: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    ris1: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    dt: dtype_float,
 ):
     """Cloud fraction computation (after condensation loop)"""
-    # l274 in ice_adjust.F90
+
     ##### 5.     COMPUTE THE SOURCES AND STORES THE CLOUD FRACTION #####
-    with computation(PARALLEL), interval(...):
+    for i, j, k in dace.map[0:I, 0:J, 0:K]:
         # 5.0 compute the variation of mixing ratio
-        w1 = (rc_tmp - rc) / dt
-        w2 = (ri_tmp - ri) / dt
+        w1 = (rc_tmp[i, j, k] - rc[i, j, k]) / dt
+        w2 = (ri_tmp[i, j, k] - ri[i, j, k]) / dt
 
         # 5.1 compute the sources
-        w1 = max(w1, -rcs0) if w1 < 0.0 else min(w1, rvs0)
-        rvs1 -= w1
-        rcs1 += w1
-        ths1 += w1 * lv / (cph * exnref)
+        w1 = max(w1, -rcs0[i, j, k]) if w1 < 0.0 else min(w1, rvs0[i, j, k])
+        rvs1[i, j, k] -= w1[i, j, k]
+        rcs1[i, j, k] += w1[i, j, k]
+        ths1[i, j, k] += w1[i, j, k] * lv[i, j, k] / (cph[i, j, k] * exnref[i, j, k])
 
-        w2 = max(w2, -ris0) if w2 < 0.0 else min(w2, rvs0)
-        rvs1 = rvs0 + w2
-        ris1 = ris0 + w2
-        ths1 = ths0 + w2 * ls / (cph * exnref)
+        w2 = max(w2, -ris0[i, j, k]) if w2 < 0.0 else min(w2, rvs0[i, j, k])
+        rvs1[i, j, k] = rvs0[i, j, k] + w2
+        ris1[i, j, k] = ris0[i, j, k] + w2
+        ths1[i, j, k] = ths0[i, j, k] + w2 * ls[i, j, k] / (cph[i, j, k] * exnref[i, j, k])
         
         #### split
     
 
 @dace.program
 def cloud_fraction_2(
-    rhodref: Field["float"],
-    exnref: Field["float"],
-    t: Field["float"],
-    cph: Field["float"],
-    lv: Field["float"],
-    ls: Field["float"],
-    ths1: Field["float"],
-    rvs1: Field["float"],
-    rcs1: Field["float"],
-    ris1: Field["float"],
-    rc_mf: Field["float"],
-    ri_mf: Field["float"],
-    cf_mf: Field["float"],
-    cldfr: Field["float"],
-    hlc_hrc: Field["float"],
-    hlc_hcf: Field["float"],
-    hli_hri: Field["float"],
-    hli_hcf: Field["float"],
-    dt: "float"
+    rhodref: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    exnref: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    t: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    cph: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    lv: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    ls: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    ths1: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    rvs1: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    rcs1: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    ris1: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    rc_mf: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    ri_mf: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    cf_mf: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    cldfr: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    hlc_hrc: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    hlc_hcf: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    hli_hri: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    hli_hcf: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
+    dt: dace.float64,
+    ext: dace.compiletime
 ):
-      
-    from __externals__ import (
-        LSUBG_COND,
-        SUBG_MF_PDF,
-        CRIAUTC,
-        CRIAUTI,
-        ACRIAUTI,
-        BCRIAUTI,
-        TT
-    )
 
     # 5.2  compute the cloud fraction cldfr
-    with computation(PARALLEL), interval(...):
+    for i, j, k in dace.map[0:I, 0:J, 0:K]:
         
-        if __INLINED(not LSUBG_COND):
-            cldfr = 1.0 if ((rcs1 + ris1)*dt > 1e-12) else 0.0
-        # Translation note : OCOMPUTE_SRC is taken False
-        # Translation note : l320 to l322 removed
+        if not ext.LSUBG_COND:
+            cldfr[i, j, k] = 1.0 if (([i, j, k] + ris1[i, j, k])*dt > 1e-12) else 0.0
 
-        # Translation note : LSUBG_COND = TRUE for Arome
         else:
-            # adding mass fluxes
-            w1 = rc_mf / dt
-            w2 = ri_mf / dt
+            w1 = rc_mf[i, j, k] / dt
+            w2 = ri_mf[i, j, k] / dt
 
-            if w1 + w2 > rvs1:
-                w1 *= rvs1 / (w1 + w2)
-                w2 = rvs1 - w1
+            if w1 + w2 > rvs1[i, j, k]:
+                w1 *= rvs1[i, j, k] / (w1 + w2)
+                w2 = rvs1[i, j, k] - w1
 
-            cldfr = min(1, cldfr + cf_mf)
-            rcs1 += w1
-            ris1 += w2
-            rvs1 -= (w1 + w2)
-            ths1 += (w1 * lv + w2 * ls) / (cph * exnref)
+            cldfr[i, j, k] = min(1, cldfr[i, j, k] + cf_mf[i, j, k])
+            rcs1[i, j, k] += w1
+            ris1[i, j, k] += w2
+            rvs1[i, j, k] -= (w1 + w2)
+            ths1[i, j, k] += (w1 * lv[i, j, k] + w2 * ls[i, j, k]) / (cph[i, j, k] * exnref[i, j, k])
 
-            # Droplets subgrid autoconversion
-            # LLHLC_H is True (AROME like) phlc_hrc and phlc_hcf are present
-            # LLHLI_H is True (AROME like) phli_hri and phli_hcf are present
-            criaut = CRIAUTC / rhodref
+            criaut = ext.CRIAUTC / rhodref[i, j, k]
             
-            # ice_adjust.F90 IF LLNONE; IF CSUBG_MF_PDF is None
-            if __INLINED(SUBG_MF_PDF == 0):
-                if w1 * dt > cf_mf * criaut:
-                    hlc_hrc += w1 * dt
-                    hlc_hcf = min(1.0, hlc_hcf + cf_mf)
+            if ext.SUBG_MF_PDF == 0:
+                if w1 * dt > cf_mf[i, j, k] * criaut:
+                    hlc_hrc[i, j, k] += w1 * dt
+                    hlc_hcf[i, j, k] = min(1.0, hlc_hcf[i, j, k] + cf_mf[i, j, k])
 
-            # Translation note : if LLTRIANGLE in .F90
-            if __INLINED(SUBG_MF_PDF == 1):
-                if w1 * dt > cf_mf * criaut:
-                    hcf = 1.0 - 0.5 * (criaut * cf_mf / max(1e-20, w1 * dt)) ** 2
-                    hr = w1 * dt - (criaut * cf_mf) ** 3 / (
+            if ext.SUBG_MF_PDF == 1:
+                if w1 * dt > cf_mf[i, j, k] * criaut:
+                    hcf = 1.0 - 0.5 * (criaut * cf_mf[i, j, k] / max(1e-20, w1 * dt)) ** 2
+                    hr = w1 * dt - (criaut * cf_mf[i, j, k]) ** 3 / (
                         3 * max(1e-20, w1 * dt) ** 2
                     )
 
-                elif 2.0 * w1 * dt <= cf_mf * criaut:
+                elif 2.0 * w1 * dt <= cf_mf[i, j, k] * criaut:
                     hcf = 0.0
                     hr = 0.0
 
                 else:
-                    hcf = (2.0 * w1 * dt - criaut * cf_mf) ** 2 / (
+                    hcf = (2.0 * w1 * dt - criaut * cf_mf[i, j, k]) ** 2 / (
                         2.0 * max(1.0e-20, w1 * dt) ** 2
                     )
                     hr = (
                         4.0 * (w1 * dt) ** 3
-                        - 3.0 * w1 * dt * (criaut * cf_mf) ** 2
-                        + (criaut * cf_mf ** 3)
+                        - 3.0 * w1 * dt * (criaut * cf_mf[i, j, k]) ** 2
+                        + (criaut * cf_mf[i, j, k] ** 3)
                     ) / (3 * max(1.0e-20, w1 * dt) ** 2)
 
-                hcf *= cf_mf
-                hlc_hcf = min(1.0, hlc_hcf + hcf)
-                hlc_hrc += hr
+                hcf *= cf_mf[i, j, k]
+                hlc_hcf[i, j, k] = min(1.0, hlc_hcf[i, j, k] + hcf)
+                hlc_hrc[i, j, k] += hr
 
             # Ice subgrid autoconversion
             criaut = min(
-                CRIAUTI,
-                10 ** (ACRIAUTI * (t - TT) + BCRIAUTI),
+                ext.CRIAUTI,
+                10 ** (ext.ACRIAUTI * (t[i, j, k] - ext.TT) + ext.BCRIAUTI),
             )
 
             # LLNONE in ice_adjust.F90
-            if __INLINED(SUBG_MF_PDF == 0):
+            if ext.SUBG_MF_PDF == 0:
                 if w2 * dt > cf_mf * criaut:
-                    hli_hri += w2 * dt
-                    hli_hcf = min(1.0, hli_hcf + cf_mf)
+                    hli_hri[i, j, k] += w2 * dt
+                    hli_hcf[i, j, k] = min(1.0, hli_hcf[i, j, k] + cf_mf[i, j, k])
 
             # LLTRIANGLE in ice_adjust.F90
-            if __INLINED(SUBG_MF_PDF == 1):
-                if w2 * dt > cf_mf * criaut:
-                    hcf = 1.0 - 0.5 * ((criaut * cf_mf) / (w2 * dt)) ** 2
-                    hri = w2 * dt - (criaut * cf_mf) ** 3 / (3 * (w2 * dt) ** 2)
+            if ext.SUBG_MF_PDF == 1:
+                if w2 * dt > cf_mf[i, j, k] * criaut:
+                    hcf = 1.0 - 0.5 * ((criaut * cf_mf[i, j, k]) / (w2 * dt)) ** 2
+                    hri = w2 * dt - (criaut * cf_mf[i, j, k]) ** 3 / (3 * (w2 * dt) ** 2)
 
-                elif 2 * w2 * dt <= cf_mf * criaut:
+                elif 2 * w2 * dt <= cf_mf[i, j, k] * criaut:
                     hcf = 0.0
                     hri = 0.0
 
                 else:
-                    hcf = (2.0 * w2 * dt - criaut * cf_mf) ** 2 / (
+                    hcf = (2.0 * w2 * dt - criaut * cf_mf[i, j, k]) ** 2 / (
                         2.0 * (w2 * dt) ** 2
                     )
                     hri = (
                         4.0 * (w2 * dt) ** 3
-                        - 3.0 * w2 * dt * (criaut * cf_mf) ** 2
-                        + (criaut * cf_mf) ** 3
+                        - 3.0 * w2 * dt * (criaut * cf_mf[i, j, k]) ** 2
+                        + (criaut * cf_mf[i, j, k]) ** 3
                     ) / (3.0 * (w2 * dt) ** 2)
 
-                hcf *= cf_mf
-                hli_hcf = min(1.0, hli_hcf + hcf)
-                hli_hri += hri
-    # Translation note : 402 -> 427 (removed pout_x not present )
+                hcf *= cf_mf[i, j, k]
+                hli_hcf[i, j, k] = min(1.0, hli_hcf[i, j, k] + hcf)
+                hli_hri[i, j, k] += hri
 

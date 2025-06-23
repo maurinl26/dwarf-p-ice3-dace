@@ -23,6 +23,7 @@ else:
 import os
 
 import dace
+from ice3_gt4py.utils.dims import I, J, K
 
 try:
     precision = os.environ["PRECISION"]
@@ -34,10 +35,13 @@ match precision:
     case "simple":
         dtype_float = dace.float32
         dtype_int32 = dace.int32
+        FloatFieldIJK = dace.float32[I, J, K]
     case "double":
         dtype_float = dace.float64
         dtype_int = dace.int64
+        FloatFieldIJK = dace.float64[I, J, K]
     case _:
         dtype_float = np.float64
         dtype_int = np.int64
+        FloatFieldIJK = dace.float64[I, J, K]
 
