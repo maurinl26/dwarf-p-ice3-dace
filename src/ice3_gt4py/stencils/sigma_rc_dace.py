@@ -6,7 +6,7 @@ from dace.dtypes import ScheduleType, StorageType
 from ice3_gt4py.utils.dims import I, J, K
 from ice3_gt4py.utils.typingx import dtype_float, dtype_int
 
-@dace.program
+
 def sigrc_computation(
         q1: dace.float64[I, J, K] @ StorageType.GPU_Global,
         inq1: dace.int64[I, J, K] @ StorageType.GPU_Global,

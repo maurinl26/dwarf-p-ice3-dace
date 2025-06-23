@@ -13,7 +13,6 @@ from ice3_gt4py.functions.ice_adjust import (
 )
 
 
-@dace.program
 def aro_filter(
     exnref: dace.float64[I, J, K] @ StorageType.GPU_Global,
     cph: dace.float64[I, J, K] @ StorageType.GPU_Global,

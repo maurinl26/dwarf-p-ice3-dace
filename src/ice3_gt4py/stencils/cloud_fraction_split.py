@@ -10,7 +10,6 @@ from ice3_gt4py.utils.typingx import dtype_float, dtype_int
 from ice3_gt4py.functions.ice_adjust import sublimation_latent_heat, vaporisation_latent_heat
 
 
-@dace.program
 def thermodynamic_fields(
     th: dace.float64[9472, 1, 15] @ StorageType.GPU_Global,
     exn: dace.float64[I, J, K] @ StorageType.GPU_Global,
@@ -46,7 +45,6 @@ def thermodynamic_fields(
             cph[i, j, k] = ext.CPD + ext.CPV * rv[i, j, k] + ext.CL * rc[i, j, k] + ext.CI * ri[i, j, k]
 
 
-@dace.program
 def cloud_fraction_1(
     lv: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
     ls: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
@@ -88,7 +86,6 @@ def cloud_fraction_1(
         #### split
     
 
-@dace.program
 def cloud_fraction_2(
     rhodref: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
     exnref: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
