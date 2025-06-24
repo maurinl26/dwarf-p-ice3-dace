@@ -1,9 +1,9 @@
 import numpy as np
 
-from ice3_gt4py.stencils.condensation_split import condensation
-from ice3_gt4py.stencils.sigma_rc_dace import sigrc_computation
-from ice3_gt4py.stencils.cloud_fraction_split import thermodynamic_fields, cloud_fraction_1, cloud_fraction_2
-from ice3_gt4py.phyex_common.tables import SRC_1D
+from ice3.stencils.condensation_split import condensation
+from ice3.stencils.sigma_rc_dace import sigrc_computation
+from ice3.stencils.cloud_fraction_split import thermodynamic_fields, cloud_fraction_1, cloud_fraction_2
+from ice3.phyex_common.tables import SRC_1D
 
 
 def test_thermodynamic_fields(grid):
