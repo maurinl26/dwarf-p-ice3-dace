@@ -23,7 +23,7 @@ else:
 import os
 
 import dace
-from ice3_gt4py.utils.dims import I, J, K
+from ice3.utils.dims import I, J, K
 
 try:
     precision = os.environ["PRECISION"]
