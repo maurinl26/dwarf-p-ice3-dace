@@ -6,10 +6,18 @@ from ice3.stencils.cloud_fraction_split import thermodynamic_fields, cloud_fract
 from ice3.phyex_common.tables import SRC_1D
 
 
-def test_thermodynamic_fields(grid):
+def test_thermodynamic_fields(domain):
+
+    I = domain[0]
+    J = domain[1]
+    K = domain[2]
+
+    sdfg = thermodynamic_fields.to_sdfg()
+    sdfg.save("thermo.sdfg")
+    sdfg.compile()
 
     state = {
-        name: np.ones(grid, dtype=np.float64)
+        name: np.ones(shape=(I, J, K), dtype=np.float64)
         for name in [
             "th",
             "exn",
@@ -23,7 +31,7 @@ def test_thermodynamic_fields(grid):
     }
 
     outputs = {
-        name: np.zeros(grid, dtype=np.float64)
+        name: np.zeros(shape=(I, J, K), dtype=np.float64)
         for name in [
             "cph",
             "lv",
@@ -32,30 +40,54 @@ def test_thermodynamic_fields(grid):
         ]
     }
 
-    thermodynamic_fields(
+    sdfg(
         **state,
-        **outputs
+        **outputs,
+        NRR=6,
+        CPD=1.0,
+        CPV=1.0,
+        CL=1.0,
+        CI=1.0,
+        I=I,
+        J=J,
+        K=K
     )
 
 
-def test_condensation():
+def test_condensation(domain):
+    state = {
+        name: np.ones(domain, dtype=np.float64)
+        for name in [
+            "sigqsat",
+            "pabs",
+            "cldfr",
+            "sigs",
+            "ri",
+            "rc",
+            "rv",
+            "cph",
+            "lv",
+            "ls",
+            "t",
+        ]
+    }
+
+    outputs = {
+        name: np.zeros(domain, dtype=np.float64)
+        for name in [
+            "rv_out",
+            "ri_out",
+            "rc_out",
+            "q1",
+        ]
+    }
 
     condensation(
-        sigqsat=sigqsat,
-        pabs=pabs,
-        cldfr=cldfr,
-        sigs=sigs,
-        ri=ri,
-        rc=rc,
-        rv=rv,
-        cph=cph,
-        lv=lv,
-        ls=ls,
-        t=t,
-        rv_out=rv_out,
-        ri_out=ri_out,
-        rc_out=rc_out,
-        q1=q1,
+        **state,
+        **outputs,
+        I=domain[0],
+        J=domain[1],
+        K=domain[2]
     )
 
 
@@ -69,47 +101,82 @@ def test_sigrc_computation():
         LAMBDA3=0,
     )
 
-def test_cloud_fraction_1():
+def test_cloud_fraction_1(domain):
+
+    state = {
+        name: np.ones(domain, dtype=np.float64)
+        for name in [
+            "exnref",
+            "rc",
+            "ri",
+            "ths0"
+            "rvs0",
+            "rcs0",
+            "ris0",
+        ]
+    }
+
+    outputs = {
+        name: np.zeros(domain, dtype=np.float64)
+        for name in [
+             "ths1",
+            "rvs1",
+            "rcs1",
+            "ris1",
+            "lv",
+            "ls",
+            "cph",
+            "rc_tmp",
+            "ri_tmp",
+        ]
+    }
+
     cloud_fraction_1(
-        exnref=exn,
-        rc=rc,
-        ri=ri,
-        ths0=ths0,
-        rvs0=rvs0,
-        rcs0=rcs0,
-        ris0=ris0,
-        ths1=ths1,
-        rvs1=rvs1,
-        rcs1=rcs1,
-        ris1=ris1,
-        lv=lv,
-        ls=ls,
-        cph=cph,
-        rc_tmp=rc_out,
-        ri_tmp=ri_out,
+        **state,
+        **outputs,
+        I=domain[0],
+        J=domain[1],
+        K=domain[2]
     )
 
 
-def test_cloud_fraction_2():
+def test_cloud_fraction_2(domain):
+    state = {
+        name: np.ones(domain, dtype=np.float64)
+        for name in [
+            "rhodref",
+            "exnref",
+            "rc_mf",
+            "ri_mf",
+            "cf_mf",
+            "cldfr",
+        ]
+    }
+
+    outputs = {
+        name: np.zeros(domain, dtype=np.float64)
+        for name in [
+             "hlc_hrc",
+        "hlc_hcf",
+        "hli_hri",
+        "hli_hcf",
+        "ths",
+        "rvs",
+        "rcs",
+        "ris",
+        "lv",
+        "ls",
+        "cph",
+        "t",
+        ]
+    }
+
     cloud_fraction_2(
-        rhodref=rhodref,
-        exnref=exn,
-        rc_mf=rc_mf,
-        ri_mf=ri_mf,
-        cf_mf=cf_mf,
-        cldfr=cldfr,
-        hlc_hrc=hlc_hrc,
-        hlc_hcf=hlc_hcf,
-        hli_hri=hli_hri,
-        hli_hcf=hli_hcf,
-        ths=ths1,
-        rvs=rvs1,
-        rcs=rcs1,
-        ris=ris1,
-        lv=lv,
-        ls=ls,
-        cph=cph,
-        t=t,
+        **state,
+        **outputs,
+        I=domain[0],
+        J=domain[1],
+        K=domain[2]
     )
 
 
