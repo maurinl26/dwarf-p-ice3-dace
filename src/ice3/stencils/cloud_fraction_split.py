@@ -1,55 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import annotations
 
-import numpy as np
-
 import dace
 from dace.dtypes import StorageType, ScheduleType
 
+from ice3.utils.dims import I, J, K
 from ice3.utils.typingx import dtype_float, dtype_int
 from ice3.functions.ice_adjust import sublimation_latent_heat, vaporisation_latent_heat
-
-I, J, K = (dace.symbol(s) for s in ['I', 'J', 'K'])
-
-
-@dace.program
-def thermodynamic_fields(
-    th: dtype_float[50, 50, 15] @ StorageType.GPU_Global,
-    exn: dtype_float[50, 50, 15] @ StorageType.GPU_Global,
-    rv: dtype_float[50, 50, 15] @ StorageType.GPU_Global,
-    rc: dtype_float[50, 50, 15] @ StorageType.GPU_Global,
-    rr: dtype_float[50, 50, 15] @ StorageType.GPU_Global,
-    ri: dtype_float[50, 50, 15] @ StorageType.GPU_Global,
-    rs: dtype_float[50, 50, 15] @ StorageType.GPU_Global,
-    rg: dtype_float[50, 50, 15] @ StorageType.GPU_Global,
-    lv: dtype_float[50, 50, 15] @ StorageType.GPU_Global,
-    ls: dtype_float[50, 50, 15] @ StorageType.GPU_Global,
-    cph: dtype_float[50, 50, 15] @ StorageType.GPU_Global,
-    NRR: dtype_float,
-    CPD: dtype_float,
-    CPV: dtype_float,
-    CL: dtype_float,
-    CI: dtype_float
-):
-
-    # 2.3 Compute the variation of mixing ratio
-    for i, j, k in dace.map[0:I, 0:J, 0:K] @ ScheduleType.GPU_Device:
-        t[i, j, k] = exn[i, j, k] * th[i, j, k]
-        vaporisation_latent_heat(lv[i, j, k], t[i, j, k])
-        sublimation_latent_heat(ls[i, j, k], t[i, j, k])
-
-    # 2.4 specific heat for moist air at t+1
-    for i, j, k in dace.map[0:I, 0:J, 0:K] @ ScheduleType.GPU_Device:
-        if NRR == 6:
-            cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * (rc[i, j, k] + rr[i, j, k]) + CI * (ri[i, j, k] + rs[i, j, k] + rg[i, j, k])
-        # if NRR == 5:
-        #     cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * (rc[i, j, k] + rr[i, j, k]) + CI * (ri[i, j, k] + rs[i, j, k])
-        # if NRR == 4:
-        #     cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * (rc[i, j, k] + rr[i, j, k])
-        # if NRR == 2:
-        #     cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * rc[i, j, k] + CI * ri[i, j, k]
-
-    return t, ls, lv, cph
 
 
 @dace.program
