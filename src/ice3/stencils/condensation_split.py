@@ -9,6 +9,7 @@ from ice3.utils.typingx import dtype_int, dtype_float
 from ice3.utils.dims import I, J, K
 from ice3.functions.tiwmx import e_sat_i, e_sat_w
 
+@dace.program
 def condensation(
     sigqsat: dtype_float[I, J, K] @ StorageType.GPU_Global,
     pabs: dtype_float[I, J, K] @ StorageType.GPU_Global,
