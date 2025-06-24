@@ -1,7 +1,5 @@
 import pytest
 
-from ice3_gt4py.phyex_common.phyex import Phyex
-
 
 # fixtures
 @pytest.fixture(name="computational_grid", scope="module")
@@ -11,10 +9,6 @@ def computational_grid_fixture():
 @pytest.fixture(name="origin", scope="module")
 def origin_fixture():
     return (0, 0, 0)
-
-@pytest.fixture(name="phyex", scope="module")
-def phyex_fixture():
-    return Phyex("AROME")
 
 @pytest.fixture(name="externals", scope="module")
 def externals_fixture(phyex):

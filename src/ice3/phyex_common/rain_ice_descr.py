@@ -2,6 +2,7 @@
 from dataclasses import dataclass, field
 from math import gamma, sqrt
 
+import dace
 import numpy as np
 
 from ice3_gt4py.phyex_common.constants import Constants
@@ -32,7 +33,7 @@ class RainIceDescr:
 
     CEXVT: float = 0.4  # Air density fall speed correction
 
-    RTMIN: np.ndarray = field(default_factory=lambda: np.zeros(41))
+    RTMIN: dace.float64[41] = field(default_factory=lambda: np.zeros(41))
     # Min values allowed for mixing ratios
 
     # Cloud droplet charact.

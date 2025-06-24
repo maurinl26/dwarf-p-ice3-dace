@@ -4,6 +4,7 @@ from enum import Enum
 from typing import Literal
 
 import numpy as np
+import dace
 
 # Stands for CSUBG_MF_PDF in modd_param_icen.F90
 # Default to NONE
@@ -215,7 +216,7 @@ class ParamIce:
     LCOND2: bool = field(default=False)
 
     # TODO : replace frmin_nam by a global table
-    FRMIN_NAM: np.ndarray = field(init=False)
+    # FRMIN_NAM: dace.float64[41] = field(init=False)
 
     def __post_init__(self):
         self.T0CRIAUTI_NAM = (np.log10(self.CRIAUTI_NAM) - self.BRCRIAUTI_NAM) / 0.06

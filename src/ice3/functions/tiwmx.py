@@ -5,13 +5,10 @@ import dace
 from ice3_gt4py.utils.typingx import dtype_float, dtype_int
 
 
-@dace.program
 def e_sat_w(
         t: dtype_float,
         pv: dtype_float,
-        ALPW: dace.compiletime,
-        BETAW: dace.compiletime,
-        GAMW: dace.compiletime
+        ext: dace.compiletime
 ):
     """Saturation vapor pressure over liquid water
 
@@ -22,16 +19,13 @@ def e_sat_w(
         Field[float]: saturation vapor pressure
     """
 
-    pv = exp(ALPW - BETAW / t - GAMW * log(t))
+    pv = exp(ext.ALPW - ext.BETAW / t - ext.GAMW * log(t))
 
 
-@dace.program
 def e_sat_i(
     t: dtype_float,
     piv: dtype_float,
-    ALPI: dace.compiletime,
-    BETAI: dace.compiletime,
-    GAMI: dace.compiletime
+    ext: dace.compiletime
 ):
     """Saturation vapor pressure over ice
 
@@ -42,5 +36,5 @@ def e_sat_i(
         Field[float]: saturation vapor pressure
     """
 
-    piv = exp(ALPI - BETAI / t - GAMI * log(t))
+    piv = exp(ext.ALPI - ext.BETAI / t - ext.GAMI * log(t))
 

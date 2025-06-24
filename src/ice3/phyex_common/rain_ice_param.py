@@ -208,9 +208,9 @@ class RainIceParam:
 
     NGAMINC: int = field(init=False)  # Number of tab. Lbda_s
 
-    GAMINC_RIM1: NDArray = field(init=False)
-    GAMINC_RIM2: NDArray = field(init=False)
-    GAMINC_RIM4: NDArray = field(init=False)
+    # GAMINC_RIM1: NDArray = field(init=False)
+    # GAMINC_RIM2: NDArray = field(init=False)
+    # GAMINC_RIM4: NDArray = field(init=False)
 
     # Constants for the accretion
     FRACCSS: float = field(init=False)
@@ -560,7 +560,7 @@ class RainIceParam:
         )
 
         # init GAMINC_RIM1, GAMINC_RIM2, GAMINC_RIM4
-        self.init_gaminc_rim_tables()
+        # self.init_gaminc_rim_tables()
 
         # 7.2 Constants for the accretion of raindrops
 
@@ -722,11 +722,11 @@ class RainIceParam:
         #                    l1162 to l1481 removed
 
         # kernels
-        self.ker_saccrg = self.get_kernel("saccrg")
-        self.ker_raccs = self.get_kernel("raccs")
-        self.ker_raccss = self.get_kernel("raccss")
-        self.ker_rdryg = self.get_kernel("rdryg")
-        self.ker_sdryg = self.get_kernel("sdryg")
+        # self.ker_saccrg = self.get_kernel("saccrg")
+        # self.ker_raccs = self.get_kernel("raccs")
+        # self.ker_raccss = self.get_kernel("raccss")
+        # self.ker_rdryg = self.get_kernel("rdryg")
+        # self.ker_sdryg = self.get_kernel("sdryg")
 
 
     def init_gaminc_rim_tables(self):

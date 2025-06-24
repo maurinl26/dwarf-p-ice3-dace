@@ -3,48 +3,54 @@ from __future__ import annotations
 
 import dace
 from dace.dtypes import StorageType, ScheduleType
+from dace.dtypes import float64
 
 from ice3_gt4py.utils.dims import I, J, K
 from ice3_gt4py.utils.typingx import dtype_float, dtype_int
 
 from ice3_gt4py.functions.ice_adjust import sublimation_latent_heat, vaporisation_latent_heat
 
-
+@dace.program
 def thermodynamic_fields(
-    th: dace.float64[9472, 1, 15] @ StorageType.GPU_Global,
-    exn: dace.float64[I, J, K] @ StorageType.GPU_Global,
-    rv: dace.float64[I, J, K] @ StorageType.GPU_Global,
-    rc: dace.float64[I, J, K] @ StorageType.GPU_Global,
-    rr: dace.float64[I, J, K] @ StorageType.GPU_Global,
-    ri: dace.float64[I, J, K] @ StorageType.GPU_Global,
-    rs: dace.float64[I, J, K] @ StorageType.GPU_Global,
-    rg: dace.float64[I, J, K] @ StorageType.GPU_Global,
-    lv: dace.float64[I, J, K] @ StorageType.GPU_Global,
-    ls: dace.float64[I, J, K] @ StorageType.GPU_Global,
-    cph: dace.float64[I, J, K] @ StorageType.GPU_Global,
-    t: dace.float64[I, J, K] @ StorageType.GPU_Global,
-    ext: dace.compiletime,
+    th: float64[I, J, K] @ StorageType.GPU_Global,
+    exn: float64[I, J, K] @ StorageType.GPU_Global,
+    rv: float64[I, J, K] @ StorageType.GPU_Global,
+    rc: float64[I, J, K] @ StorageType.GPU_Global,
+    rr: float64[I, J, K] @ StorageType.GPU_Global,
+    ri: float64[I, J, K] @ StorageType.GPU_Global,
+    rs: float64[I, J, K] @ StorageType.GPU_Global,
+    rg: float64[I, J, K] @ StorageType.GPU_Global,
+    lv: float64[I, J, K] @ StorageType.GPU_Global,
+    ls: float64[I, J, K] @ StorageType.GPU_Global,
+    cph: float64[I, J, K] @ StorageType.GPU_Global,
+    t: float64[I, J, K] @ StorageType.GPU_Global,
+    NRR: float64,
+    CPD: float64,
+    CPV: float64,
+    CL: float64,
+    CI: float64
 ):
 
     # 2.3 Compute the variation of mixing ratio
     for i, j, k in dace.map[0:I, 0:J, 0:K] @ ScheduleType.GPU_Device:
-        t = exn * th
+        t[i, j, k] = exn[i, j, k] * th[i, j, k]
         lv[i, j, k] = vaporisation_latent_heat(t[i, j, k])
         ls[i, j, k] = sublimation_latent_heat(t[i, j, k])
 
 
     # 2.4 specific heat for moist air at t+1
     for i, j, k in dace.map[0:I, 0:J, 0:K] @ ScheduleType.GPU_Device:
-        if ext.NRR == 6:
-            cph[i, j, k] = ext.CPD + ext.CPV * rv[i, j, k] + ext.CL * (rc[i, j, k] + rr[i, j, k]) + ext.CI * (ri[i, j, k] + rs[i, j, k] + rg[i, j, k])
-        if ext.NRR == 5:
-            cph[i, j, k] = ext.CPD + ext.CPV * rv[i, j, k] + ext.CL * (rc[i, j, k] + rr[i, j, k]) + ext.CI * (ri[i, j, k] + rs[i, j, k])
-        if ext.NRR == 4:
-            cph[i, j, k] = ext.CPD + ext.CPV * rv[i, j, k] + ext.CL * (rc[i, j, k] + rr[i, j, k])
-        if ext.NRR == 2:
-            cph[i, j, k] = ext.CPD + ext.CPV * rv[i, j, k] + ext.CL * rc[i, j, k] + ext.CI * ri[i, j, k]
+        if NRR == 6:
+            cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * (rc[i, j, k] + rr[i, j, k]) + CI * (ri[i, j, k] + rs[i, j, k] + rg[i, j, k])
+        if NRR == 5:
+            cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * (rc[i, j, k] + rr[i, j, k]) + CI * (ri[i, j, k] + rs[i, j, k])
+        if NRR == 4:
+            cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * (rc[i, j, k] + rr[i, j, k])
+        if NRR == 2:
+            cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * rc[i, j, k] + CI * ri[i, j, k]
 
 
+@dace.program
 def cloud_fraction_1(
     lv: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
     ls: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
@@ -82,10 +88,11 @@ def cloud_fraction_1(
         rvs1[i, j, k] = rvs0[i, j, k] + w2
         ris1[i, j, k] = ris0[i, j, k] + w2
         ths1[i, j, k] = ths0[i, j, k] + w2 * ls[i, j, k] / (cph[i, j, k] * exnref[i, j, k])
-        
-        #### split
-    
 
+        #### split
+
+
+@dace.program
 def cloud_fraction_2(
     rhodref: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
     exnref: dace.float64[I, J, K] @ ScheduleType.GPU_Device,
@@ -111,7 +118,7 @@ def cloud_fraction_2(
 
     # 5.2  compute the cloud fraction cldfr
     for i, j, k in dace.map[0:I, 0:J, 0:K]:
-        
+
         if not ext.LSUBG_COND:
             cldfr[i, j, k] = 1.0 if (([i, j, k] + ris1[i, j, k])*dt > 1e-12) else 0.0
 
@@ -130,7 +137,7 @@ def cloud_fraction_2(
             ths1[i, j, k] += (w1 * lv[i, j, k] + w2 * ls[i, j, k]) / (cph[i, j, k] * exnref[i, j, k])
 
             criaut = ext.CRIAUTC / rhodref[i, j, k]
-            
+
             if ext.SUBG_MF_PDF == 0:
                 if w1 * dt > cf_mf[i, j, k] * criaut:
                     hlc_hrc[i, j, k] += w1 * dt
