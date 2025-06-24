@@ -4,9 +4,9 @@ from __future__ import annotations
 import dace
 from dace.dtypes import ScheduleType, StorageType
 import numpy as np
-from ice3_gt4py.utils.typingx import dtype_float, dtype_int
-from ice3_gt4py.utils.dims import I, J, K
-from ice3_gt4py.functions.ice_adjust import (
+from ice3.utils.typingx import dtype_float, dtype_int
+from ice3.utils.dims import I, J, K
+from ice3.functions.ice_adjust import (
     constant_pressure_heat_capacity,
     sublimation_latent_heat,
     vaporisation_latent_heat,

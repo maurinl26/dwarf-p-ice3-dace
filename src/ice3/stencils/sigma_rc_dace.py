@@ -3,8 +3,8 @@ from math import floor
 import dace
 from dace.dtypes import ScheduleType, StorageType
 
-from ice3_gt4py.utils.dims import I, J, K
-from ice3_gt4py.utils.typingx import dtype_float, dtype_int
+from ice3.utils.dims import I, J, K
+from ice3.utils.typingx import dtype_float, dtype_int
 
 
 def sigrc_computation(

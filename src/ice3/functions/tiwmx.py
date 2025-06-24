@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import dace
-from ice3_gt4py.utils.typingx import dtype_float, dtype_int
+from ice3.utils.typingx import dtype_float, dtype_int
 
 
 def e_sat_w(

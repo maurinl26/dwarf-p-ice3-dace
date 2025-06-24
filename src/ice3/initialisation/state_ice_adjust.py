@@ -6,7 +6,7 @@ from typing import List, Tuple
 
 import numpy as np
 
-from ice3_gt4py.utils.reader import NetCDFReader
+from ice3.utils.reader import NetCDFReader
 
 KEYS = {
     "exn": "PEXNREF",

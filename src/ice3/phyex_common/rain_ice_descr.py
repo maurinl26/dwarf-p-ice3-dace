@@ -5,8 +5,8 @@ from math import gamma, sqrt
 import dace
 import numpy as np
 
-from ice3_gt4py.phyex_common.constants import Constants
-from ice3_gt4py.phyex_common.param_ice import ParamIce
+from ice3.phyex_common.constants import Constants
+from ice3.phyex_common.param_ice import ParamIce
 
 
 @dataclass

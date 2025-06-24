@@ -6,16 +6,16 @@ import typer
 import logging
 import time
 
-from ice3_gt4py.components.ice_adjust_split import ice_adjust, IceAdjustState
-from ice3_gt4py.initialisation.state_ice_adjust import (
+from ice3.components.ice_adjust_split import ice_adjust, IceAdjustState
+from ice3.initialisation.state_ice_adjust import (
     get_state_ice_adjust,
 )
-from ice3_gt4py.phyex_common.phyex import Phyex
-from ice3_gt4py.utils.reader import NetCDFReader
+from ice3.phyex_common.phyex import Phyex
+from ice3.utils.reader import NetCDFReader
 
-from ice3_gt4py.utils.typingx import dtype_float, precision
-from ice3_gt4py.utils.dims import I, J, K
-from ice3_gt4py.utils.dict_to_class import DictToClass
+from ice3.utils.typingx import dtype_float, precision
+from ice3.utils.dims import I, J, K
+from ice3.utils.dict_to_class import DictToClass
 
 app = typer.Typer()
 

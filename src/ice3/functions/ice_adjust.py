@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import dace
-from ice3_gt4py.utils.typingx import dtype_float
+from ice3.utils.typingx import dtype_float
 
 @dace.program
 def vaporisation_latent_heat(

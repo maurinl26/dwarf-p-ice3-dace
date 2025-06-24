@@ -5,10 +5,10 @@ import dace
 from dace.dtypes import StorageType, ScheduleType
 from dace.dtypes import float64
 
-from ice3_gt4py.utils.dims import I, J, K
-from ice3_gt4py.utils.typingx import dtype_float, dtype_int
+from ice3.utils.dims import I, J, K
+from ice3.utils.typingx import dtype_float, dtype_int
 
-from ice3_gt4py.functions.ice_adjust import sublimation_latent_heat, vaporisation_latent_heat
+from ice3.functions.ice_adjust import sublimation_latent_heat, vaporisation_latent_heat
 
 @dace.program
 def thermodynamic_fields(

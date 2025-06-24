@@ -3,9 +3,9 @@ from dataclasses import asdict, dataclass, field
 from typing import Literal, Tuple
 from enum import Enum
 
-from ice3_gt4py.phyex_common.constants import Constants
-from ice3_gt4py.phyex_common.nebn import Neb
-from ice3_gt4py.phyex_common.rain_ice_param import ParamIce, RainIceDescr, RainIceParam
+from ice3.phyex_common.constants import Constants
+from ice3.phyex_common.nebn import Neb
+from ice3.phyex_common.rain_ice_param import ParamIce, RainIceDescr, RainIceParam
 
 
 class Boundary(Enum):
