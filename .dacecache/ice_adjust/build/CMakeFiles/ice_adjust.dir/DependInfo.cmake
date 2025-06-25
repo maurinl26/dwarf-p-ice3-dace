@@ -1,0 +1,24 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/maurinl/maurinl26/dyn/dwarf-p-ice3-dace/.dacecache/ice_adjust/src/cpu/ice_adjust.cpp" "CMakeFiles/ice_adjust.dir/home/maurinl/maurinl26/dyn/dwarf-p-ice3-dace/.dacecache/ice_adjust/src/cpu/ice_adjust.cpp.o" "gcc" "CMakeFiles/ice_adjust.dir/home/maurinl/maurinl26/dyn/dwarf-p-ice3-dace/.dacecache/ice_adjust/src/cpu/ice_adjust.cpp.o.d"
+  "" "libice_adjust.so" "gcc" "CMakeFiles/ice_adjust.dir/link.d"
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")
