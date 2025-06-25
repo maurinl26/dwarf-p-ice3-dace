@@ -1,11 +1,12 @@
 import dace
 import numpy as np
 
-from ice3.functions.tiwmx import e_sat_i, e_sat_w
-
 from ice3.utils.dims import I, J, K
 from ice3.utils.typingx import dtype_int, dtype_float
 
+
+FRAC_ICE_ADJUST = dace.symbol("FRAC_ICE_ADJUST", dtype=dace.bool)
+LAMBDA3 = dace.symbol("LAMBDA3", dtype=dace.bool)
 
 @dace.program
 def condensation(
@@ -25,7 +26,6 @@ def condensation(
     ls: dtype_float[I, J, K],
     sigrc: dtype_float[I, J, K],
     OCND2: dace.bool,
-    FRAC_ICE_ADJUST: dace.bool,
     RD: dtype_float,
     RV: dtype_float,
     TMAXMIX: dtype_float,
@@ -38,7 +38,6 @@ def condensation(
     ALPI: dtype_float,
     BETAI: dtype_float,
     GAMI: dtype_float,
-    LAMBDA3: dace.bool
 ):
     """Microphysical adjustments for specific contents due to condensation."""
 
@@ -63,13 +62,13 @@ def condensation(
 
         # l334 to l337
         if not OCND2:
-            e_sat_w(pv[i, j, k], t[i, j, k], ALPW, BETAW, GAMW)
+            pv[i, j, k] = np.exp(ALPW - BETAW / t[i, j, k] - GAMW * np.log(t[i, j, k]))
             pv[i, j, k] = min(
             pv[i, j, k],
             0.99 * pabs[i, j, k],
             )
 
-            e_sat_i(piv[i, j, k], t[i, j, k], ALPI, BETAI, GAMI)
+            piv[i, j, k] = np.exp(ALPI - BETAI / t[i, j, k] - GAMI * np.log(t[i, j, k]))
             piv[i, j, k] = min(
             piv[i, j, k],
             0.99 * pabs[i, j, k],

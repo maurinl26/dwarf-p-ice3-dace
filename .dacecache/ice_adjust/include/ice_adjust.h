@@ -1,0 +1,5 @@
+#include <dace/dace.h>
+typedef void * ice_adjustHandle_t;
+extern "C" ice_adjustHandle_t __dace_init_ice_adjust(int I, int J, int K);
+extern "C" int __dace_exit_ice_adjust(ice_adjustHandle_t handle);
+extern "C" void __program_ice_adjust(ice_adjustHandle_t handle, double * __restrict__ cldfr, double * __restrict__ exn, double * __restrict__ pabs, double * __restrict__ rc0, double * __restrict__ rcs0, double * __restrict__ rcs1, double * __restrict__ rg0, double * __restrict__ ri0, double * __restrict__ ris0, double * __restrict__ ris1, double * __restrict__ rr0, double * __restrict__ rs0, double * __restrict__ rv0, double * __restrict__ rvs0, double * __restrict__ rvs1, double * __restrict__ sigqsat, double * __restrict__ sigrc, double * __restrict__ sigs, double * __restrict__ th0, double * __restrict__ ths0, double * __restrict__ ths1, double ALPI, double ALPW, double BETAI, double BETAW, double CI, double CL, double CPD, double CPV, double GAMI, double GAMW, int I, int J, int K, bool LSIGMAS, bool LSTATNW, double LSTT, double LVTT, bool OCND2, double RD, double RV, double TMAXMIX, double TMINMIX, double TT, double dt);

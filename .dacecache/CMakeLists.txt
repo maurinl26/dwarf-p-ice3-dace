@@ -1,0 +1,2 @@
+add_subdirectory(thermodynamic_fields/sample)
+add_subdirectory(ice_adjust/sample)

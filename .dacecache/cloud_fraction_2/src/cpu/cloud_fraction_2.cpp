@@ -1,0 +1,2042 @@
+/* DaCe AUTO-GENERATED FILE. DO NOT MODIFY */
+#include <dace/dace.h>
+#include "../../include/hash.h"
+
+struct cloud_fraction_2_state_t {
+
+};
+
+inline void cloud_fraction_2_87_4_0_0_2(cloud_fraction_2_state_t *__state, const double&  __tmp_103_53_r, const double&  __tmp_107_35_r, const double&  __tmp_107_54_r, const double&  __tmp_107_70_r, const double&  __tmp_107_85_r, const double&  __tmp_109_21_r, const double&  __tmp_109_31_r, const double&  __tmp_114_48_r, const double&  __tmp_143_16_r, const double&  __tmp_144_23_r, const double&  __tmp_144_35_r, const double&  __tmp_144_48_r, const double&  __tmp_144_54_r, const double&  __tmp_151_48_r, const bool&  __tmp_89_15_r, const double&  __tmp_90_16_r, const double&  __tmp_90_32_r, const double&  __tmp_90_47_r, const double&  __tmp_96_17_r, const double&  __tmp_97_17_r, const double&  __tmp_99_25_r, double&  __tmp_104_12_w, double&  __tmp_105_12_w, double&  __tmp_106_12_w, double&  __tmp_107_12_w, double&  __tmp_113_20_w, double&  __tmp_114_20_w, double&  __tmp_150_20_w, double&  __tmp_151_20_w, double&  __tmp_91_16_w, int64_t SUBG_MF_PDF) {
+    double __tmp3;
+    double __tmp7;
+    double __tmp47;
+    double __tmp108;
+    double w1;
+    double w2;
+    double criaut;
+    double hcf;
+    double hr;
+    double hri;
+    bool __tmp1;
+    bool __tmp8;
+    double __tmp90;
+    double __tmp91;
+    double __tmp109;
+    bool __tmp110;
+    double __tmp84;
+    double __tmp85;
+    double __tmp27;
+    double __tmp28;
+    double __tmp48;
+    bool __tmp49;
+    double __tmp21;
+    double __tmp22;
+    bool __tmp4;
+
+
+    __tmp1 = (! __tmp_89_15_r);
+
+    if ((! __tmp1)) {
+        {
+
+            {
+                double __in1 = __tmp_96_17_r;
+                double __in2 = __tmp_90_47_r;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Div_)
+                __out = (__in1 / __in2);
+                ///////////////////
+
+                w1 = __out;
+            }
+            {
+                double __in1 = __tmp_97_17_r;
+                double __in2 = __tmp_90_47_r;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Div_)
+                __out = (__in1 / __in2);
+                ///////////////////
+
+                w2 = __out;
+            }
+            {
+                double __in1 = w1;
+                double __in2 = w2;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Add_)
+                __out = (__in1 + __in2);
+                ///////////////////
+
+                __tmp7 = __out;
+            }
+
+        }
+        __tmp8 = (__tmp7 > __tmp_99_25_r);
+
+        if (__tmp8) {
+            {
+                double __tmp9;
+                double __tmp10;
+                double __tmp11;
+
+                {
+                    double __in1 = w1;
+                    double __in2 = w2;
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (_Add_)
+                    __out = (__in1 + __in2);
+                    ///////////////////
+
+                    __tmp9 = __out;
+                }
+                {
+                    double __in1 = __tmp_99_25_r;
+                    double __in2 = __tmp9;
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (_Div_)
+                    __out = (__in1 / __in2);
+                    ///////////////////
+
+                    __tmp10 = __out;
+                }
+                {
+                    double __in2 = __tmp10;
+                    double __in1 = w1;
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (augassign_100_16)
+                    __out = (__in1 * __in2);
+                    ///////////////////
+
+                    w1 = __out;
+                }
+                {
+                    double __in1 = __tmp_99_25_r;
+                    double __in2 = w1;
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (_Sub_)
+                    __out = (__in1 - __in2);
+                    ///////////////////
+
+                    __tmp11 = __out;
+                }
+                {
+                    double __inp = __tmp11;
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (assign_101_16)
+                    __out = __inp;
+                    ///////////////////
+
+                    w2 = __out;
+                }
+
+            }
+
+        }
+        {
+            double __tmp12;
+            double __tmp13;
+            double __tmp14;
+            double __tmp15;
+            double __tmp16;
+            double __tmp17;
+            double __tmp18;
+            double __tmp19;
+
+            {
+                double __in1 = __tmp_91_16_w;
+                double __in2 = __tmp_103_53_r;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Add_)
+                __out = (__in1 + __in2);
+                ///////////////////
+
+                __tmp12 = __out;
+            }
+            {
+                double __in_b = __tmp12;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (__min2)
+                __out = min(double(1), __in_b);
+                ///////////////////
+
+                __tmp13 = __out;
+            }
+            {
+                double __inp = __tmp13;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (assign_103_12)
+                __out = __inp;
+                ///////////////////
+
+                __tmp_91_16_w = __out;
+            }
+            {
+                double __inp = w1;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (assign_104_12)
+                __out = __inp;
+                ///////////////////
+
+                dace::wcr_fixed<dace::ReductionType::Sum, double>::reduce(&__tmp_104_12_w, __out);
+            }
+            {
+                double __in2 = w2;
+                double __in1 = w1;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Add_)
+                __out = (__in1 + __in2);
+                ///////////////////
+
+                __tmp14 = __out;
+            }
+            {
+                double __inp = __tmp14;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (assign_106_12)
+                __out = __inp;
+                ///////////////////
+
+                dace::wcr_custom<double>:: template reduce([] (const double& x, const double& y) { return (x - y); }, &__tmp_106_12_w, __out);
+            }
+            {
+                double __inp = w2;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (assign_105_12)
+                __out = __inp;
+                ///////////////////
+
+                dace::wcr_fixed<dace::ReductionType::Sum, double>::reduce(&__tmp_105_12_w, __out);
+            }
+            {
+                double __in2 = __tmp_107_35_r;
+                double __in1 = w1;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Mult_)
+                __out = (__in1 * __in2);
+                ///////////////////
+
+                __tmp15 = __out;
+            }
+            {
+                double __in2 = __tmp_107_54_r;
+                double __in1 = w2;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Mult_)
+                __out = (__in1 * __in2);
+                ///////////////////
+
+                __tmp16 = __out;
+            }
+            {
+                double __in2 = __tmp16;
+                double __in1 = __tmp15;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Add_)
+                __out = (__in1 + __in2);
+                ///////////////////
+
+                __tmp17 = __out;
+            }
+            {
+                double __in1 = __tmp_107_70_r;
+                double __in2 = __tmp_107_85_r;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Mult_)
+                __out = (__in1 * __in2);
+                ///////////////////
+
+                __tmp18 = __out;
+            }
+            {
+                double __in2 = __tmp18;
+                double __in1 = __tmp17;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Div_)
+                __out = (__in1 / __in2);
+                ///////////////////
+
+                __tmp19 = __out;
+            }
+            {
+                double __inp = __tmp19;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (assign_107_12)
+                __out = __inp;
+                ///////////////////
+
+                dace::wcr_fixed<dace::ReductionType::Sum, double>::reduce(&__tmp_107_12_w, __out);
+            }
+            {
+                double __in1 = __tmp_109_21_r;
+                double __in2 = __tmp_109_31_r;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Div_)
+                __out = (__in1 / __in2);
+                ///////////////////
+
+                criaut = __out;
+            }
+
+        }
+        if ((SUBG_MF_PDF == 0)) {
+
+            __tmp21 = (w1 * __tmp_90_47_r);
+            __tmp22 = (__tmp_103_53_r * criaut);
+
+            if ((__tmp21 > __tmp22)) {
+                {
+                    double __tmp24;
+                    double __tmp25;
+                    double __tmp26;
+
+                    {
+                        double __in1 = w1;
+                        double __in2 = __tmp_90_47_r;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (__in1 * __in2);
+                        ///////////////////
+
+                        __tmp24 = __out;
+                    }
+                    {
+                        double __inp = __tmp24;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (assign_113_20)
+                        __out = __inp;
+                        ///////////////////
+
+                        dace::wcr_fixed<dace::ReductionType::Sum, double>::reduce(&__tmp_113_20_w, __out);
+                    }
+                    {
+                        double __in1 = __tmp_114_48_r;
+                        double __in2 = __tmp_103_53_r;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Add_)
+                        __out = (__in1 + __in2);
+                        ///////////////////
+
+                        __tmp25 = __out;
+                    }
+                    {
+                        double __in_b = __tmp25;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (__min2)
+                        __out = min(1, __in_b);
+                        ///////////////////
+
+                        __tmp26 = __out;
+                    }
+                    {
+                        double __inp = __tmp26;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (assign_114_20)
+                        __out = __inp;
+                        ///////////////////
+
+                        __tmp_114_20_w = __out;
+                    }
+
+                }
+
+            }
+
+
+        }
+
+        if ((SUBG_MF_PDF == 1)) {
+
+            __tmp27 = (w1 * __tmp_90_47_r);
+            __tmp28 = (__tmp_103_53_r * criaut);
+
+            if ((__tmp27 > __tmp28)) {
+                {
+                    double __tmp30;
+                    double __tmp31;
+                    double __tmp32;
+                    double __tmp33;
+                    double __tmp34;
+                    double __tmp35;
+                    double __tmp37;
+                    double __tmp38;
+                    double __tmp39;
+                    double __tmp40;
+                    double __tmp41;
+                    double __tmp42;
+                    double __tmp43;
+                    double __tmp44;
+
+                    {
+                        double __in1 = criaut;
+                        double __in2 = __tmp_103_53_r;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (__in1 * __in2);
+                        ///////////////////
+
+                        __tmp30 = __out;
+                    }
+                    {
+                        double __in1 = w1;
+                        double __in2 = __tmp_90_47_r;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (__in1 * __in2);
+                        ///////////////////
+
+                        __tmp31 = __out;
+                    }
+                    {
+                        double __in_b = __tmp31;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (__max2)
+                        __out = max(1e-20, __in_b);
+                        ///////////////////
+
+                        __tmp32 = __out;
+                    }
+                    {
+                        double __in1 = __tmp30;
+                        double __in2 = __tmp32;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Div_)
+                        __out = (__in1 / __in2);
+                        ///////////////////
+
+                        __tmp33 = __out;
+                    }
+                    {
+                        double __in1 = __tmp33;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Pow_)
+                        __out = (dace::math::ipow(__in1, 2));
+                        ///////////////////
+
+                        __tmp34 = __out;
+                    }
+                    {
+                        double __in2 = __tmp34;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (0.5 * __in2);
+                        ///////////////////
+
+                        __tmp35 = __out;
+                    }
+                    {
+                        double __in2 = __tmp35;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Sub_)
+                        __out = (1.0 - __in2);
+                        ///////////////////
+
+                        hcf = __out;
+                    }
+                    {
+                        double __in1 = criaut;
+                        double __in2 = __tmp_103_53_r;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (__in1 * __in2);
+                        ///////////////////
+
+                        __tmp38 = __out;
+                    }
+                    {
+                        double __in1 = __tmp38;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Pow_)
+                        __out = (dace::math::ipow(__in1, 3));
+                        ///////////////////
+
+                        __tmp39 = __out;
+                    }
+                    {
+                        double __in1 = w1;
+                        double __in2 = __tmp_90_47_r;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (__in1 * __in2);
+                        ///////////////////
+
+                        __tmp37 = __out;
+                    }
+                    {
+                        double __in1 = w1;
+                        double __in2 = __tmp_90_47_r;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (__in1 * __in2);
+                        ///////////////////
+
+                        __tmp40 = __out;
+                    }
+                    {
+                        double __in_b = __tmp40;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (__max2)
+                        __out = max(1e-20, __in_b);
+                        ///////////////////
+
+                        __tmp41 = __out;
+                    }
+                    {
+                        double __in1 = __tmp41;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Pow_)
+                        __out = (dace::math::ipow(__in1, 2));
+                        ///////////////////
+
+                        __tmp42 = __out;
+                    }
+                    {
+                        double __in2 = __tmp42;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (double(3) * __in2);
+                        ///////////////////
+
+                        __tmp43 = __out;
+                    }
+                    {
+                        double __in2 = __tmp43;
+                        double __in1 = __tmp39;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Div_)
+                        __out = (__in1 / __in2);
+                        ///////////////////
+
+                        __tmp44 = __out;
+                    }
+                    {
+                        double __in1 = __tmp37;
+                        double __in2 = __tmp44;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Sub_)
+                        __out = (__in1 - __in2);
+                        ///////////////////
+
+                        hr = __out;
+                    }
+
+                }
+
+            } else {
+
+                __tmp48 = (__tmp_103_53_r * criaut);
+                {
+                    double __tmp46;
+
+                    {
+                        double __in2 = w1;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (2.0 * __in2);
+                        ///////////////////
+
+                        __tmp46 = __out;
+                    }
+                    {
+                        double __in2 = __tmp_90_47_r;
+                        double __in1 = __tmp46;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (__in1 * __in2);
+                        ///////////////////
+
+                        __tmp47 = __out;
+                    }
+
+                }
+                __tmp49 = (__tmp47 <= __tmp48);
+
+                if ((! __tmp49)) {
+                    {
+                        double __tmp50;
+                        double __tmp51;
+                        double __tmp52;
+                        double __tmp53;
+                        double __tmp54;
+                        double __tmp55;
+                        double __tmp56;
+                        double __tmp57;
+                        double __tmp58;
+                        double __tmp59;
+                        double __tmp60;
+                        double __tmp61;
+                        double __tmp62;
+                        double __tmp63;
+                        double __tmp64;
+                        double __tmp65;
+                        double __tmp66;
+                        double __tmp67;
+                        double __tmp68;
+                        double __tmp69;
+                        double __tmp70;
+                        double __tmp71;
+                        double __tmp72;
+                        double __tmp73;
+                        double __tmp74;
+                        double __tmp75;
+                        double __tmp76;
+
+                        {
+                            double __in2 = w1;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (2.0 * __in2);
+                            ///////////////////
+
+                            __tmp50 = __out;
+                        }
+                        {
+                            double __in2 = __tmp_90_47_r;
+                            double __in1 = __tmp50;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp51 = __out;
+                        }
+                        {
+                            double __in1 = w1;
+                            double __in2 = __tmp_90_47_r;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp55 = __out;
+                        }
+                        {
+                            double __in_b = __tmp55;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (__max2)
+                            __out = max(1e-20, __in_b);
+                            ///////////////////
+
+                            __tmp56 = __out;
+                        }
+                        {
+                            double __in1 = __tmp56;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Pow_)
+                            __out = (dace::math::ipow(__in1, 2));
+                            ///////////////////
+
+                            __tmp57 = __out;
+                        }
+                        {
+                            double __in2 = __tmp57;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (2.0 * __in2);
+                            ///////////////////
+
+                            __tmp58 = __out;
+                        }
+                        {
+                            double __in1 = criaut;
+                            double __in2 = __tmp_103_53_r;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp52 = __out;
+                        }
+                        {
+                            double __in1 = __tmp51;
+                            double __in2 = __tmp52;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Sub_)
+                            __out = (__in1 - __in2);
+                            ///////////////////
+
+                            __tmp53 = __out;
+                        }
+                        {
+                            double __in1 = __tmp53;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Pow_)
+                            __out = (dace::math::ipow(__in1, 2));
+                            ///////////////////
+
+                            __tmp54 = __out;
+                        }
+                        {
+                            double __in2 = __tmp58;
+                            double __in1 = __tmp54;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Div_)
+                            __out = (__in1 / __in2);
+                            ///////////////////
+
+                            __tmp59 = __out;
+                        }
+                        {
+                            double __inp = __tmp59;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (assign_128_20)
+                            __out = __inp;
+                            ///////////////////
+
+                            hcf = __out;
+                        }
+                        {
+                            double __in2 = w1;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (3.0 * __in2);
+                            ///////////////////
+
+                            __tmp63 = __out;
+                        }
+                        {
+                            double __in1 = w1;
+                            double __in2 = __tmp_90_47_r;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp60 = __out;
+                        }
+                        {
+                            double __in1 = __tmp60;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Pow_)
+                            __out = (dace::math::ipow(__in1, 3));
+                            ///////////////////
+
+                            __tmp61 = __out;
+                        }
+                        {
+                            double __in2 = __tmp61;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (4.0 * __in2);
+                            ///////////////////
+
+                            __tmp62 = __out;
+                        }
+                        {
+                            double __in1 = __tmp63;
+                            double __in2 = __tmp_90_47_r;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp64 = __out;
+                        }
+                        {
+                            double __in2 = __tmp_90_47_r;
+                            double __in1 = w1;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp72 = __out;
+                        }
+                        {
+                            double __in_b = __tmp72;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (__max2)
+                            __out = max(1e-20, __in_b);
+                            ///////////////////
+
+                            __tmp73 = __out;
+                        }
+                        {
+                            double __in1 = __tmp73;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Pow_)
+                            __out = (dace::math::ipow(__in1, 2));
+                            ///////////////////
+
+                            __tmp74 = __out;
+                        }
+                        {
+                            double __in2 = __tmp74;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (double(3) * __in2);
+                            ///////////////////
+
+                            __tmp75 = __out;
+                        }
+                        {
+                            double __in1 = criaut;
+                            double __in2 = __tmp_103_53_r;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp65 = __out;
+                        }
+                        {
+                            double __in1 = __tmp65;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Pow_)
+                            __out = (dace::math::ipow(__in1, 2));
+                            ///////////////////
+
+                            __tmp66 = __out;
+                        }
+                        {
+                            double __in2 = __tmp66;
+                            double __in1 = __tmp64;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp67 = __out;
+                        }
+                        {
+                            double __in2 = __tmp67;
+                            double __in1 = __tmp62;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Sub_)
+                            __out = (__in1 - __in2);
+                            ///////////////////
+
+                            __tmp68 = __out;
+                        }
+                        {
+                            double __in1 = __tmp_103_53_r;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Pow_)
+                            __out = (dace::math::ipow(__in1, 3));
+                            ///////////////////
+
+                            __tmp69 = __out;
+                        }
+                        {
+                            double __in2 = __tmp69;
+                            double __in1 = criaut;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp70 = __out;
+                        }
+                        {
+                            double __in2 = __tmp70;
+                            double __in1 = __tmp68;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Add_)
+                            __out = (__in1 + __in2);
+                            ///////////////////
+
+                            __tmp71 = __out;
+                        }
+                        {
+                            double __in2 = __tmp75;
+                            double __in1 = __tmp71;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Div_)
+                            __out = (__in1 / __in2);
+                            ///////////////////
+
+                            __tmp76 = __out;
+                        }
+                        {
+                            double __inp = __tmp76;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (assign_131_20)
+                            __out = __inp;
+                            ///////////////////
+
+                            hr = __out;
+                        }
+
+                    }
+
+                } else {
+                    {
+
+                        {
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (assign_124_20)
+                            __out = 0.0;
+                            ///////////////////
+
+                            hcf = __out;
+                        }
+                        {
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (assign_125_20)
+                            __out = 0.0;
+                            ///////////////////
+
+                            hr = __out;
+                        }
+
+                    }
+
+                }
+
+
+            }
+            {
+                double __tmp77;
+                double __tmp78;
+
+                {
+                    double __in2 = __tmp_103_53_r;
+                    double __in1 = hcf;
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (augassign_137_16)
+                    __out = (__in1 * __in2);
+                    ///////////////////
+
+                    hcf = __out;
+                }
+                {
+                    double __in1 = __tmp_114_20_w;
+                    double __in2 = hcf;
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (_Add_)
+                    __out = (__in1 + __in2);
+                    ///////////////////
+
+                    __tmp77 = __out;
+                }
+                {
+                    double __in_b = __tmp77;
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (__min2)
+                    __out = min(1, __in_b);
+                    ///////////////////
+
+                    __tmp78 = __out;
+                }
+                {
+                    double __inp = __tmp78;
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (assign_138_16)
+                    __out = __inp;
+                    ///////////////////
+
+                    __tmp_114_20_w = __out;
+                }
+                {
+                    double __inp = hr;
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (assign_139_16)
+                    __out = __inp;
+                    ///////////////////
+
+                    dace::wcr_fixed<dace::ReductionType::Sum, double>::reduce(&__tmp_113_20_w, __out);
+                }
+
+            }
+
+        }
+        {
+            double __tmp79;
+            double __tmp80;
+            double __tmp81;
+            double __tmp82;
+            double __tmp83;
+
+            {
+                double __in1 = __tmp_144_35_r;
+                double __in2 = __tmp_144_48_r;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Sub_)
+                __out = (__in1 - __in2);
+                ///////////////////
+
+                __tmp79 = __out;
+            }
+            {
+                double __in1 = __tmp_144_23_r;
+                double __in2 = __tmp79;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Mult_)
+                __out = (__in1 * __in2);
+                ///////////////////
+
+                __tmp80 = __out;
+            }
+            {
+                double __in2 = __tmp_144_54_r;
+                double __in1 = __tmp80;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Add_)
+                __out = (__in1 + __in2);
+                ///////////////////
+
+                __tmp81 = __out;
+            }
+            {
+                double __in2 = __tmp81;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Pow_)
+                __out = dace::math::pow(double(10), __in2);
+                ///////////////////
+
+                __tmp82 = __out;
+            }
+            {
+                double __in_a = __tmp_143_16_r;
+                double __in_b = __tmp82;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (__min2)
+                __out = min(__in_a, __in_b);
+                ///////////////////
+
+                __tmp83 = __out;
+            }
+            {
+                double __inp = __tmp83;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (assign_142_12)
+                __out = __inp;
+                ///////////////////
+
+                criaut = __out;
+            }
+
+        }
+        if ((SUBG_MF_PDF == 0)) {
+
+            __tmp84 = (w2 * __tmp_90_47_r);
+            __tmp85 = (__tmp_103_53_r * criaut);
+
+            if ((__tmp84 > __tmp85)) {
+                {
+                    double __tmp87;
+                    double __tmp88;
+                    double __tmp89;
+
+                    {
+                        double __in1 = w2;
+                        double __in2 = __tmp_90_47_r;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (__in1 * __in2);
+                        ///////////////////
+
+                        __tmp87 = __out;
+                    }
+                    {
+                        double __inp = __tmp87;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (assign_150_20)
+                        __out = __inp;
+                        ///////////////////
+
+                        dace::wcr_fixed<dace::ReductionType::Sum, double>::reduce(&__tmp_150_20_w, __out);
+                    }
+                    {
+                        double __in1 = __tmp_151_48_r;
+                        double __in2 = __tmp_103_53_r;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Add_)
+                        __out = (__in1 + __in2);
+                        ///////////////////
+
+                        __tmp88 = __out;
+                    }
+                    {
+                        double __in_b = __tmp88;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (__min2)
+                        __out = min(1, __in_b);
+                        ///////////////////
+
+                        __tmp89 = __out;
+                    }
+                    {
+                        double __inp = __tmp89;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (assign_151_20)
+                        __out = __inp;
+                        ///////////////////
+
+                        __tmp_151_20_w = __out;
+                    }
+
+                }
+
+            }
+
+
+        }
+
+        if ((SUBG_MF_PDF == 1)) {
+
+            __tmp90 = (w2 * __tmp_90_47_r);
+            __tmp91 = (__tmp_103_53_r * criaut);
+
+            if ((__tmp90 > __tmp91)) {
+                {
+                    double __tmp93;
+                    double __tmp94;
+                    double __tmp95;
+                    double __tmp96;
+                    double __tmp97;
+                    double __tmp98;
+                    double __tmp99;
+                    double __tmp100;
+                    double __tmp101;
+                    double __tmp102;
+                    double __tmp103;
+                    double __tmp104;
+                    double __tmp105;
+
+                    {
+                        double __in1 = criaut;
+                        double __in2 = __tmp_103_53_r;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (__in1 * __in2);
+                        ///////////////////
+
+                        __tmp93 = __out;
+                    }
+                    {
+                        double __in1 = w2;
+                        double __in2 = __tmp_90_47_r;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (__in1 * __in2);
+                        ///////////////////
+
+                        __tmp94 = __out;
+                    }
+                    {
+                        double __in2 = __tmp94;
+                        double __in1 = __tmp93;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Div_)
+                        __out = (__in1 / __in2);
+                        ///////////////////
+
+                        __tmp95 = __out;
+                    }
+                    {
+                        double __in1 = __tmp95;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Pow_)
+                        __out = (dace::math::ipow(__in1, 2));
+                        ///////////////////
+
+                        __tmp96 = __out;
+                    }
+                    {
+                        double __in2 = __tmp96;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (0.5 * __in2);
+                        ///////////////////
+
+                        __tmp97 = __out;
+                    }
+                    {
+                        double __in2 = __tmp97;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Sub_)
+                        __out = (1.0 - __in2);
+                        ///////////////////
+
+                        __tmp98 = __out;
+                    }
+                    {
+                        double __inp = __tmp98;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (assign_156_20)
+                        __out = __inp;
+                        ///////////////////
+
+                        hcf = __out;
+                    }
+                    {
+                        double __in1 = criaut;
+                        double __in2 = __tmp_103_53_r;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (__in1 * __in2);
+                        ///////////////////
+
+                        __tmp100 = __out;
+                    }
+                    {
+                        double __in1 = __tmp100;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Pow_)
+                        __out = (dace::math::ipow(__in1, 3));
+                        ///////////////////
+
+                        __tmp101 = __out;
+                    }
+                    {
+                        double __in1 = w2;
+                        double __in2 = __tmp_90_47_r;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (__in1 * __in2);
+                        ///////////////////
+
+                        __tmp99 = __out;
+                    }
+                    {
+                        double __in1 = w2;
+                        double __in2 = __tmp_90_47_r;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (__in1 * __in2);
+                        ///////////////////
+
+                        __tmp102 = __out;
+                    }
+                    {
+                        double __in1 = __tmp102;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Pow_)
+                        __out = (dace::math::ipow(__in1, 2));
+                        ///////////////////
+
+                        __tmp103 = __out;
+                    }
+                    {
+                        double __in2 = __tmp103;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (double(3) * __in2);
+                        ///////////////////
+
+                        __tmp104 = __out;
+                    }
+                    {
+                        double __in2 = __tmp104;
+                        double __in1 = __tmp101;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Div_)
+                        __out = (__in1 / __in2);
+                        ///////////////////
+
+                        __tmp105 = __out;
+                    }
+                    {
+                        double __in2 = __tmp105;
+                        double __in1 = __tmp99;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Sub_)
+                        __out = (__in1 - __in2);
+                        ///////////////////
+
+                        hri = __out;
+                    }
+
+                }
+
+            } else {
+
+                __tmp109 = (__tmp_103_53_r * criaut);
+                {
+                    double __tmp107;
+
+                    {
+                        double __in2 = w2;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (double(2) * __in2);
+                        ///////////////////
+
+                        __tmp107 = __out;
+                    }
+                    {
+                        double __in2 = __tmp_90_47_r;
+                        double __in1 = __tmp107;
+                        double __out;
+
+                        ///////////////////
+                        // Tasklet code (_Mult_)
+                        __out = (__in1 * __in2);
+                        ///////////////////
+
+                        __tmp108 = __out;
+                    }
+
+                }
+                __tmp110 = (__tmp108 <= __tmp109);
+
+                if ((! __tmp110)) {
+                    {
+                        double __tmp111;
+                        double __tmp112;
+                        double __tmp113;
+                        double __tmp114;
+                        double __tmp115;
+                        double __tmp116;
+                        double __tmp117;
+                        double __tmp118;
+                        double __tmp119;
+                        double __tmp120;
+                        double __tmp121;
+                        double __tmp122;
+                        double __tmp123;
+                        double __tmp124;
+                        double __tmp125;
+                        double __tmp126;
+                        double __tmp127;
+                        double __tmp128;
+                        double __tmp129;
+                        double __tmp130;
+                        double __tmp131;
+                        double __tmp132;
+                        double __tmp133;
+                        double __tmp134;
+                        double __tmp135;
+
+                        {
+                            double __in2 = w2;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (2.0 * __in2);
+                            ///////////////////
+
+                            __tmp111 = __out;
+                        }
+                        {
+                            double __in2 = __tmp_90_47_r;
+                            double __in1 = __tmp111;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp112 = __out;
+                        }
+                        {
+                            double __in1 = w2;
+                            double __in2 = __tmp_90_47_r;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp116 = __out;
+                        }
+                        {
+                            double __in1 = __tmp116;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Pow_)
+                            __out = (dace::math::ipow(__in1, 2));
+                            ///////////////////
+
+                            __tmp117 = __out;
+                        }
+                        {
+                            double __in2 = __tmp117;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (2.0 * __in2);
+                            ///////////////////
+
+                            __tmp118 = __out;
+                        }
+                        {
+                            double __in1 = criaut;
+                            double __in2 = __tmp_103_53_r;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp113 = __out;
+                        }
+                        {
+                            double __in1 = __tmp112;
+                            double __in2 = __tmp113;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Sub_)
+                            __out = (__in1 - __in2);
+                            ///////////////////
+
+                            __tmp114 = __out;
+                        }
+                        {
+                            double __in1 = __tmp114;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Pow_)
+                            __out = (dace::math::ipow(__in1, 2));
+                            ///////////////////
+
+                            __tmp115 = __out;
+                        }
+                        {
+                            double __in2 = __tmp118;
+                            double __in1 = __tmp115;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Div_)
+                            __out = (__in1 / __in2);
+                            ///////////////////
+
+                            __tmp119 = __out;
+                        }
+                        {
+                            double __inp = __tmp119;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (assign_164_20)
+                            __out = __inp;
+                            ///////////////////
+
+                            hcf = __out;
+                        }
+                        {
+                            double __in2 = w2;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (3.0 * __in2);
+                            ///////////////////
+
+                            __tmp123 = __out;
+                        }
+                        {
+                            double __in1 = w2;
+                            double __in2 = __tmp_90_47_r;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp120 = __out;
+                        }
+                        {
+                            double __in1 = __tmp120;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Pow_)
+                            __out = (dace::math::ipow(__in1, 3));
+                            ///////////////////
+
+                            __tmp121 = __out;
+                        }
+                        {
+                            double __in2 = __tmp121;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (4.0 * __in2);
+                            ///////////////////
+
+                            __tmp122 = __out;
+                        }
+                        {
+                            double __in1 = __tmp123;
+                            double __in2 = __tmp_90_47_r;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp124 = __out;
+                        }
+                        {
+                            double __in1 = w2;
+                            double __in2 = __tmp_90_47_r;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp132 = __out;
+                        }
+                        {
+                            double __in1 = __tmp132;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Pow_)
+                            __out = (dace::math::ipow(__in1, 2));
+                            ///////////////////
+
+                            __tmp133 = __out;
+                        }
+                        {
+                            double __in2 = __tmp133;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (3.0 * __in2);
+                            ///////////////////
+
+                            __tmp134 = __out;
+                        }
+                        {
+                            double __in1 = criaut;
+                            double __in2 = __tmp_103_53_r;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp125 = __out;
+                        }
+                        {
+                            double __in1 = __tmp125;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Pow_)
+                            __out = (dace::math::ipow(__in1, 2));
+                            ///////////////////
+
+                            __tmp126 = __out;
+                        }
+                        {
+                            double __in2 = __tmp126;
+                            double __in1 = __tmp124;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp127 = __out;
+                        }
+                        {
+                            double __in2 = __tmp127;
+                            double __in1 = __tmp122;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Sub_)
+                            __out = (__in1 - __in2);
+                            ///////////////////
+
+                            __tmp128 = __out;
+                        }
+                        {
+                            double __in1 = criaut;
+                            double __in2 = __tmp_103_53_r;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Mult_)
+                            __out = (__in1 * __in2);
+                            ///////////////////
+
+                            __tmp129 = __out;
+                        }
+                        {
+                            double __in1 = __tmp129;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Pow_)
+                            __out = (dace::math::ipow(__in1, 3));
+                            ///////////////////
+
+                            __tmp130 = __out;
+                        }
+                        {
+                            double __in2 = __tmp130;
+                            double __in1 = __tmp128;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Add_)
+                            __out = (__in1 + __in2);
+                            ///////////////////
+
+                            __tmp131 = __out;
+                        }
+                        {
+                            double __in2 = __tmp134;
+                            double __in1 = __tmp131;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (_Div_)
+                            __out = (__in1 / __in2);
+                            ///////////////////
+
+                            __tmp135 = __out;
+                        }
+                        {
+                            double __inp = __tmp135;
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (assign_167_20)
+                            __out = __inp;
+                            ///////////////////
+
+                            hri = __out;
+                        }
+
+                    }
+
+                } else {
+                    {
+
+                        {
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (assign_160_20)
+                            __out = 0.0;
+                            ///////////////////
+
+                            hcf = __out;
+                        }
+                        {
+                            double __out;
+
+                            ///////////////////
+                            // Tasklet code (assign_161_20)
+                            __out = 0.0;
+                            ///////////////////
+
+                            hri = __out;
+                        }
+
+                    }
+
+                }
+
+
+            }
+            {
+                double __tmp136;
+                double __tmp137;
+
+                {
+                    double __in2 = __tmp_103_53_r;
+                    double __in1 = hcf;
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (augassign_173_16)
+                    __out = (__in1 * __in2);
+                    ///////////////////
+
+                    hcf = __out;
+                }
+                {
+                    double __in1 = __tmp_151_20_w;
+                    double __in2 = hcf;
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (_Add_)
+                    __out = (__in1 + __in2);
+                    ///////////////////
+
+                    __tmp136 = __out;
+                }
+                {
+                    double __in_b = __tmp136;
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (__min2)
+                    __out = min(1, __in_b);
+                    ///////////////////
+
+                    __tmp137 = __out;
+                }
+                {
+                    double __inp = __tmp137;
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (assign_174_16)
+                    __out = __inp;
+                    ///////////////////
+
+                    __tmp_151_20_w = __out;
+                }
+                {
+                    double __inp = hri;
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (assign_175_16)
+                    __out = __inp;
+                    ///////////////////
+
+                    dace::wcr_fixed<dace::ReductionType::Sum, double>::reduce(&__tmp_150_20_w, __out);
+                }
+
+            }
+
+        }
+
+
+    } else {
+        {
+            double __tmp2;
+
+            {
+                double __in1 = __tmp_90_16_r;
+                double __in2 = __tmp_90_32_r;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Add_)
+                __out = (__in1 + __in2);
+                ///////////////////
+
+                __tmp2 = __out;
+            }
+            {
+                double __in2 = __tmp_90_47_r;
+                double __in1 = __tmp2;
+                double __out;
+
+                ///////////////////
+                // Tasklet code (_Mult_)
+                __out = (__in1 * __in2);
+                ///////////////////
+
+                __tmp3 = __out;
+            }
+
+        }
+        __tmp4 = (__tmp3 > 1e-12);
+
+        if ((! __tmp4)) {
+            {
+
+                {
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (assign_93_16)
+                    __out = 0.0;
+                    ///////////////////
+
+                    __tmp_91_16_w = __out;
+                }
+
+            }
+
+        } else {
+            {
+
+                {
+                    double __out;
+
+                    ///////////////////
+                    // Tasklet code (assign_91_16)
+                    __out = 1.0;
+                    ///////////////////
+
+                    __tmp_91_16_w = __out;
+                }
+
+            }
+
+        }
+
+
+    }
+
+}
+
+void __program_cloud_fraction_2_internal(cloud_fraction_2_state_t*__state, double * __restrict__ cf_mf, double * __restrict__ cldfr, double * __restrict__ cph, double * __restrict__ exnref, double * __restrict__ hlc_hcf, double * __restrict__ hlc_hrc, double * __restrict__ hli_hcf, double * __restrict__ hli_hri, double * __restrict__ ls, double * __restrict__ lv, double * __restrict__ rc_mf, double * __restrict__ rcs1, double * __restrict__ rhodref, double * __restrict__ ri_mf, double * __restrict__ ris1, double * __restrict__ rvs1, double * __restrict__ t, double * __restrict__ ths1, double ACRIAUTI, double BCRIAUTI, double CRIAUTC, double CRIAUTI, int I, int J, int K, bool LSUBG_COND, int SUBG_MF_PDF, double TT, double dt)
+{
+
+    {
+
+        {
+            #pragma omp parallel for
+            for (auto i = 0; i < I; i += 1) {
+                for (auto j = 0; j < J; j += 1) {
+                    for (auto k = 0; k < K; k += 1) {
+                        cloud_fraction_2_87_4_0_0_2(__state, cf_mf[((((J * K) * i) + (K * j)) + k)], lv[((((J * K) * i) + (K * j)) + k)], ls[((((J * K) * i) + (K * j)) + k)], cph[((((J * K) * i) + (K * j)) + k)], exnref[((((J * K) * i) + (K * j)) + k)], CRIAUTC, rhodref[((((J * K) * i) + (K * j)) + k)], hlc_hcf[((((J * K) * i) + (K * j)) + k)], CRIAUTI, ACRIAUTI, t[((((J * K) * i) + (K * j)) + k)], TT, BCRIAUTI, hli_hcf[((((J * K) * i) + (K * j)) + k)], LSUBG_COND, rcs1[((((J * K) * i) + (K * j)) + k)], ris1[((((J * K) * i) + (K * j)) + k)], dt, rc_mf[((((J * K) * i) + (K * j)) + k)], ri_mf[((((J * K) * i) + (K * j)) + k)], rvs1[((((J * K) * i) + (K * j)) + k)], rcs1[((((J * K) * i) + (K * j)) + k)], ris1[((((J * K) * i) + (K * j)) + k)], rvs1[((((J * K) * i) + (K * j)) + k)], ths1[((((J * K) * i) + (K * j)) + k)], hlc_hrc[((((J * K) * i) + (K * j)) + k)], hlc_hcf[((((J * K) * i) + (K * j)) + k)], hli_hri[((((J * K) * i) + (K * j)) + k)], hli_hcf[((((J * K) * i) + (K * j)) + k)], cldfr[((((J * K) * i) + (K * j)) + k)], SUBG_MF_PDF);
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+DACE_EXPORTED void __program_cloud_fraction_2(cloud_fraction_2_state_t *__state, double * __restrict__ cf_mf, double * __restrict__ cldfr, double * __restrict__ cph, double * __restrict__ exnref, double * __restrict__ hlc_hcf, double * __restrict__ hlc_hrc, double * __restrict__ hli_hcf, double * __restrict__ hli_hri, double * __restrict__ ls, double * __restrict__ lv, double * __restrict__ rc_mf, double * __restrict__ rcs1, double * __restrict__ rhodref, double * __restrict__ ri_mf, double * __restrict__ ris1, double * __restrict__ rvs1, double * __restrict__ t, double * __restrict__ ths1, double ACRIAUTI, double BCRIAUTI, double CRIAUTC, double CRIAUTI, int I, int J, int K, bool LSUBG_COND, int SUBG_MF_PDF, double TT, double dt)
+{
+    __program_cloud_fraction_2_internal(__state, cf_mf, cldfr, cph, exnref, hlc_hcf, hlc_hrc, hli_hcf, hli_hri, ls, lv, rc_mf, rcs1, rhodref, ri_mf, ris1, rvs1, t, ths1, ACRIAUTI, BCRIAUTI, CRIAUTC, CRIAUTI, I, J, K, LSUBG_COND, SUBG_MF_PDF, TT, dt);
+}
+
+DACE_EXPORTED cloud_fraction_2_state_t *__dace_init_cloud_fraction_2(int I, int J, int K, int SUBG_MF_PDF)
+{
+    int __result = 0;
+    cloud_fraction_2_state_t *__state = new cloud_fraction_2_state_t;
+
+
+
+    if (__result) {
+        delete __state;
+        return nullptr;
+    }
+    return __state;
+}
+
+DACE_EXPORTED int __dace_exit_cloud_fraction_2(cloud_fraction_2_state_t *__state)
+{
+    int __err = 0;
+    delete __state;
+    return __err;
+}

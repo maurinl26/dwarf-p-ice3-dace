@@ -4,7 +4,7 @@ import numpy as np
 
 from dace.dtypes import float64, compiletime
 from ice3.stencils.condensation_split import condensation
-from ice3.stencils.cloud_fraction_split import cloud_fraction_1, cloud_fraction_2
+from ice3.stencils.cloud_fraction_split import cloud_fraction_1
 from ice3.stencils.thermo import thermodynamic_fields
 
 from ice3.utils.typingx import dtype_float, dtype_int
@@ -72,20 +72,16 @@ class IceAdjustState:
 @dace.program
 def ice_adjust(
     sigqsat: dtype_float[I, J, K],
-    rhodref: dtype_float[I, J, K],
     exn: dtype_float[I, J, K],
     pabs: dtype_float[I, J, K],
     sigs: dtype_float[I, J, K],
-    rc_mf: dtype_float[I, J, K],
-    ri_mf: dtype_float[I, J, K],
-    cf_mf: dtype_float[I, J, K],
-    th: dtype_float[I, J, K],
-    rv: dtype_float[I, J, K],
-    rc: dtype_float[I, J, K],
-    rr: dtype_float[I, J, K],
-    ri: dtype_float[I, J, K],
-    rs: dtype_float[I, J, K],
-    rg: dtype_float[I, J, K],
+    th0: dtype_float[I, J, K],
+    rv0: dtype_float[I, J, K],
+    rc0: dtype_float[I, J, K],
+    rr0: dtype_float[I, J, K],
+    ri0: dtype_float[I, J, K],
+    rs0: dtype_float[I, J, K],
+    rg0: dtype_float[I, J, K],
     ths0: dtype_float[I, J, K],
     rvs0: dtype_float[I, J, K],
     rcs0: dtype_float[I, J, K],
@@ -96,11 +92,6 @@ def ice_adjust(
     ris1: dtype_float[I, J, K],
     cldfr: dtype_float[I, J, K],
     sigrc: dtype_float[I, J, K],
-    hlc_hrc: dtype_float[I, J, K],
-    hlc_hcf: dtype_float[I, J, K],
-    hli_hri: dtype_float[I, J, K],
-    hli_hcf: dtype_float[I, J, K],
-    NRR: dtype_int,
     CPD: dtype_float,
     CPV: dtype_float,
     CL: dtype_float,
@@ -108,7 +99,6 @@ def ice_adjust(
     LVTT: dtype_float,
     LSTT: dtype_float,
     OCND2: dace.bool,
-    FRAC_ICE_ADJUST: dace.bool,
     RD: dtype_float,
     RV: dtype_float,
     TMAXMIX: dtype_float,
@@ -121,15 +111,8 @@ def ice_adjust(
     ALPI: dtype_float,
     BETAI: dtype_float,
     GAMI: dtype_float,
-    LAMBDA3: dace.bool,
-    LSUBG_COND: dace.bool,
-    CRIAUTC: dtype_float,
-    SUBG_MF_PDF: dtype_int,
-    CRIAUTI: dtype_float,
-    ACRIAUTI: dtype_float,
-    BCRIAUTI: dtype_float,
     TT: dtype_float,
-    dt: dtype_float
+    dt: dtype_float,
 ):
 
     cph = np.ndarray([I, J, K], dtype=dtype_float)
@@ -142,19 +125,19 @@ def ice_adjust(
     ri_out = np.ndarray([I, J, K], dtype=dtype_float)
 
     thermodynamic_fields(
-        th,
-        exn,
-        rv,
-        rc,
-        rr,
-        ri,
-        rs,
-        rg,
-        cph,
-        lv,
-        ls,
-        t,
-        nrr=6,
+        th=th0,
+        exn=exn,
+        rv=rv0,
+        rc=rc0,
+        rr=rr0,
+        ri=ri0,
+        rs=rs0,
+        rg=rg0,
+        cph=cph,
+        lv=lv,
+        ls=ls,
+        t=t,
+        NRR=6,
         CPD=CPD,
         CPV=CPV,
         CL=CL,
@@ -169,9 +152,9 @@ def ice_adjust(
         pabs=pabs,
         sigs=sigs,
         t=t,
-        rv=rv,
-        ri=ri,
-        rc=rc,
+        rv=rv0,
+        ri=ri0,
+        rc=rc0,
         rv_out=rv_out,
         rc_out=rc_out,
         ri_out=ri_out,
@@ -181,7 +164,7 @@ def ice_adjust(
         ls=ls,
         sigrc=sigrc,
         OCND2=OCND2,
-        FRAC_ICE_ADJUST=FRAC_ICE_ADJUST,
+        FRAC_ICE_ADJUST=True,
         RD=RD,
         RV=RV,
         TMAXMIX=TMAXMIX,
@@ -194,7 +177,7 @@ def ice_adjust(
         ALPI=ALPI,
         BETAI=BETAI,
         GAMI=GAMI,
-        LAMBDA3=LAMBDA3,
+        LAMBDA3=True,
     )
 
     cloud_fraction_1(
@@ -202,8 +185,8 @@ def ice_adjust(
         ls=ls,
         cph=cph,
         exnref=exn,
-        rc=rc,
-        ri=ri,
+        rc=rc0,
+        ri=ri0,
         rc_tmp=rc_out,
         ri_tmp=ri_out,
         ths0=ths0,
@@ -214,36 +197,7 @@ def ice_adjust(
         rvs1=rvs1,
         rcs1=rcs1,
         ris1=ris1,
-        dt=50.0,
-    )
-
-    cloud_fraction_2(
-        rhodref=rhodref,
-        exnref=exn,
-        t=t,
-        cph=cph,
-        lv=lv,
-        ls=ls,
-    ths1=ths1,
-    rvs1=rvs1,
-    rcs1=rcs1,
-    ris1=ris1,
-    rc_mf=rc_mf,
-    ri_mf=ri_mf,
-    cf_mf=cf_mf,
-    cldfr=cldfr,
-    hlc_hrc=hlc_hrc,
-    hlc_hcf=hlc_hcf,
-    hli_hri=hli_hri,
-    hli_hcf=hli_hcf,
-    dt=dt,
-    LSUBG_COND=LSUBG_COND,
-    CRIAUTC=CRIAUTC,
-    subg_mf_pdf=SUBG_MF_PDF,
-    CRIAUTI=CRIAUTI,
-    ACRIAUTI=ACRIAUTI,
-    BCRIAUTI=BCRIAUTI,
-    TT=TT,
+        dt=dt
     )
 
 
@@ -270,13 +224,13 @@ if __name__ == "__main__":
     "rc_mf",
     "ri_mf",
     "cf_mf",
-    "th",
-    "rv",
-    "rc",
-    "rr",
-    "ri",
-    "rs",
-    "rg",
+    "th0",
+    "rv0",
+    "rc0",
+    "rr0",
+    "ri0",
+    "rs0",
+    "rg0",
     "ths0",
     "rvs0",
     "rcs0",
@@ -319,7 +273,9 @@ if __name__ == "__main__":
     FRAC_ICE_ADJUST=True,
     RD=1.0,
     RV=1.0,
-    condens=1,
+    # condens=1,
+        LSTT=1.0,
+        LVTT=1.0,
     TMAXMIX=1.0,
     TMINMIX=1.0,
     LSIGMAS=True,
@@ -333,15 +289,18 @@ if __name__ == "__main__":
     LAMBDA3=True,
     LSUBG_COND=True,
     CRIAUTC=1.0,
-    subg_mf_pdf=1,
+    SUBG_MF_PDF=1,
     CRIAUTI=1.0,
     ACRIAUTI=1.0,
     BCRIAUTI=1.0,
     TT=1.0,
-    dt=50.0
+    dt=50.0,
+        I=I,
+        J=J,
+        K=K
     )
 
-    print(outputs["rv_out"].mean())
+    print(outputs["hlc_hrc"].mean())
 
 
 

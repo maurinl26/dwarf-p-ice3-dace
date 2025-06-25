@@ -2,8 +2,8 @@ import dace
 
 from ice3.utils.dims import I, J, K
 from ice3.utils.typingx import dtype_float, dtype_int
-from ice3.functions.ice_adjust import vaporisation_latent_heat, sublimation_latent_heat
 
+NRR = dace.symbol("NRR", dtype=dace.int32)
 
 @dace.program
 def thermodynamic_fields(
@@ -19,7 +19,6 @@ def thermodynamic_fields(
     ls: dtype_float[I, J, K],
     cph: dtype_float[I, J, K],
     t: dtype_float[I, J, K],
-    nrr: dtype_int,
     CPD: dtype_float,
     CPV: dtype_float,
     CL: dtype_float,
@@ -32,18 +31,18 @@ def thermodynamic_fields(
     # 2.3 Compute the variation of mixing ratio
     for i, j, k in dace.map[0:I, 0:J, 0:K]:
         t[i, j, k] = exn[i, j, k] * th[i, j, k]
-        vaporisation_latent_heat(lv[i, j, k], t[i, j, k], LVTT=LVTT, CPV=CPV, CL=CL, TT=TT)
-        sublimation_latent_heat(ls[i, j, k], t[i, j, k],  LSTT=LSTT, CPV=CPV, CI=CI, TT=TT)
+        lv[i, j, k] = LVTT + (CPV - CL) * (t[i, j, k] - TT)
+        ls[i, j, k] = LSTT + (CPV - CI) * (t[i, j, k] - TT)
 
     # 2.4 specific heat for moist air at t+1
     for i, j, k in dace.map[0:I, 0:J, 0:K]:
-        if nrr == 6:
+        if NRR == 6:
             cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * (rc[i, j, k] + rr[i, j, k]) + CI * (ri[i, j, k] + rs[i, j, k] + rg[i, j, k])
-        if nrr == 5:
+        if NRR == 5:
             cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * (rc[i, j, k] + rr[i, j, k]) + CI * (ri[i, j, k] + rs[i, j, k])
-        if nrr == 4:
+        if NRR == 4:
             cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * (rc[i, j, k] + rr[i, j, k])
-        if nrr == 2:
+        if NRR == 2:
             cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * rc[i, j, k] + CI * ri[i, j, k]
 
 if __name__ == "__main__":
@@ -92,7 +91,7 @@ if __name__ == "__main__":
     csdfg(
         **state,
         **outputs,
-        nrr=6,
+        NRR=6,
         CPD=1.0,
         CPV=1.0,
         CL=1.0,

@@ -1,0 +1,1 @@
+#define __HASH_sigrc_computation "e551dccb569ef2ae4feb216805a0ea0ac10b21d890124d8ad353fe4859149c04"
