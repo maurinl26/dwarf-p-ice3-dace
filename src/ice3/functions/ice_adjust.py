@@ -8,7 +8,10 @@ from ice3.utils.typingx import dtype_float
 def vaporisation_latent_heat(
     t: dtype_float,
     lv: dtype_float,
-    ext: dace.compiletime
+    LVTT: dtype_float,
+    CPV: dtype_float,
+    CL: dtype_float,
+    TT: dtype_float
 ):
     """Computes latent heat of vaporisation
 
@@ -19,13 +22,16 @@ def vaporisation_latent_heat(
         Field[float]: point wise vaporisation latent heat
     """
 
-    lv = ext.LVTT + (ext.CPV - ext.CL) * (t - ext.TT)
+    lv = LVTT + (CPV - CL) * (t - TT)
 
 @dace.program
 def sublimation_latent_heat(
     t: dtype_float,
     ls: dtype_float,
-    ext: dace.compiletime
+    LSTT: dtype_float,
+    CPV: dtype_float,
+    CI: dtype_float,
+    TT: dtype_float
 ):
     """Computes latent heat of sublimation
 
@@ -36,7 +42,7 @@ def sublimation_latent_heat(
         Field[float]: point wise sublimation latent heat
     """
 
-    ls = ext.LSTT + (ext.CPV - ext.CI) * (t - ext.TT)
+    ls = LSTT + (CPV - CI) * (t - TT)
 
 
 @dace.program
@@ -48,7 +54,10 @@ def constant_pressure_heat_capacity(
     rs: dtype_float,
     rg: dtype_float,
     cph: dtype_float,
-    ext: dace.compiletime
+    CPD: dtype_float,
+    CPV: dtype_float,
+    CL: dtype_float,
+    CI: dtype_float
 ):
     """Compute specific heat at constant pressure for a
     moist parcel given mixing ratios
@@ -56,5 +65,5 @@ def constant_pressure_heat_capacity(
     Returns:
         Field[float]: specific heat of parcel
     """
-    cph = ext.CPD + ext.CPV * rv + ext.CL * (rc + rr) + ext.CI * (ri + rs + rg)
+    cph = CPD + CPV * rv + CL * (rc + rr) + CI * (ri + rs + rg)
 

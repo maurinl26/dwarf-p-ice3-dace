@@ -1,8 +1,9 @@
 import dace
 
-from ice3.functions.ice_adjust import vaporisation_latent_heat, sublimation_latent_heat
 from ice3.utils.dims import I, J, K
 from ice3.utils.typingx import dtype_float, dtype_int
+from ice3.functions.ice_adjust import vaporisation_latent_heat, sublimation_latent_heat
+
 
 @dace.program
 def thermodynamic_fields(
@@ -18,7 +19,7 @@ def thermodynamic_fields(
     ls: dtype_float[I, J, K],
     cph: dtype_float[I, J, K],
     t: dtype_float[I, J, K],
-    NRR: dtype_float,
+    nrr: dtype_int,
     CPD: dtype_float,
     CPV: dtype_float,
     CL: dtype_float,
@@ -32,17 +33,17 @@ def thermodynamic_fields(
     for i, j, k in dace.map[0:I, 0:J, 0:K]:
         t[i, j, k] = exn[i, j, k] * th[i, j, k]
         vaporisation_latent_heat(lv[i, j, k], t[i, j, k], LVTT=LVTT, CPV=CPV, CL=CL, TT=TT)
-        sublimation_latent_heat(ls[i, j, k], t[i, j, k],  LSTT=LVTT, CPV=CPV, CI=CI, TT=TT)
+        sublimation_latent_heat(ls[i, j, k], t[i, j, k],  LSTT=LSTT, CPV=CPV, CI=CI, TT=TT)
 
     # 2.4 specific heat for moist air at t+1
     for i, j, k in dace.map[0:I, 0:J, 0:K]:
-        if NRR == 6:
+        if nrr == 6:
             cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * (rc[i, j, k] + rr[i, j, k]) + CI * (ri[i, j, k] + rs[i, j, k] + rg[i, j, k])
-        if NRR == 5:
+        if nrr == 5:
             cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * (rc[i, j, k] + rr[i, j, k]) + CI * (ri[i, j, k] + rs[i, j, k])
-        if NRR == 4:
+        if nrr == 4:
             cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * (rc[i, j, k] + rr[i, j, k])
-        if NRR == 2:
+        if nrr == 2:
             cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * rc[i, j, k] + CI * ri[i, j, k]
 
 if __name__ == "__main__":
@@ -58,7 +59,7 @@ if __name__ == "__main__":
     csdfg = sdfg.compile()
 
     state = {
-        name: dace.ndarray(shape=[I, J, K], dtype=dace.float64)
+        name: dace.ndarray(shape=[I, J, K], dtype=dtype_float)
         for name in [
             "th",
             "exn",
@@ -72,7 +73,7 @@ if __name__ == "__main__":
     }
 
     outputs = {
-        name: dace.ndarray(shape=[I, J, K], dtype=dace.float64)
+        name: dace.ndarray(shape=[I, J, K], dtype=dtype_float)
         for name in [
             "cph",
             "lv",
@@ -91,7 +92,7 @@ if __name__ == "__main__":
     csdfg(
         **state,
         **outputs,
-        NRR=6,
+        nrr=6,
         CPD=1.0,
         CPV=1.0,
         CL=1.0,
