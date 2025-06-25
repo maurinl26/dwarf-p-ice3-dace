@@ -3,6 +3,8 @@ import dace
 from ice3.utils.dims import I, J, K
 from ice3.utils.typingx import dtype_float, dtype_int
 
+SUBG_MF_PDF = dace.symbol("SUBG_MF_PDF")
+
 
 @dace.program
 def cloud_fraction_1(
@@ -75,7 +77,6 @@ def cloud_fraction_2(
     dt: dtype_float,
     LSUBG_COND: dace.bool,
     CRIAUTC: dtype_float,
-    subg_mf_pdf: dtype_int,
     CRIAUTI:  dtype_float,
     ACRIAUTI: dtype_float,
     BCRIAUTI: dtype_float,
@@ -107,12 +108,12 @@ def cloud_fraction_2(
 
             criaut = CRIAUTC / rhodref[i, j, k]
 
-            if subg_mf_pdf == 0:
+            if SUBG_MF_PDF == 0:
                 if w1 * dt > cf_mf[i, j, k] * criaut:
                     hlc_hrc[i, j, k] += w1 * dt
                     hlc_hcf[i, j, k] = min(1.0, hlc_hcf[i, j, k] + cf_mf[i, j, k])
 
-            if subg_mf_pdf == 1:
+            if SUBG_MF_PDF == 1:
                 if w1 * dt > cf_mf[i, j, k] * criaut:
                     hcf = 1.0 - 0.5 * (criaut * cf_mf[i, j, k] / max(1e-20, w1 * dt)) ** 2
                     hr = w1 * dt - (criaut * cf_mf[i, j, k]) ** 3 / (
@@ -144,13 +145,13 @@ def cloud_fraction_2(
             )
 
             # LLNONE in ice_adjust.F90
-            if subg_mf_pdf == 0:
+            if SUBG_MF_PDF == 0:
                 if w2 * dt > cf_mf[i, j, k] * criaut:
                     hli_hri[i, j, k] += w2 * dt
                     hli_hcf[i, j, k] = min(1.0, hli_hcf[i, j, k] + cf_mf[i, j, k])
 
             # LLTRIANGLE in ice_adjust.F90
-            if subg_mf_pdf == 1:
+            if SUBG_MF_PDF == 1:
                 if w2 * dt > cf_mf[i, j, k] * criaut:
                     hcf = 1.0 - 0.5 * ((criaut * cf_mf[i, j, k]) / (w2 * dt)) ** 2
                     hri = w2 * dt - (criaut * cf_mf[i, j, k]) ** 3 / (3 * (w2 * dt) ** 2)
@@ -284,7 +285,7 @@ if __name__ == "__main__":
         dt=50.0,
         LSUBG_COND=True,
     CRIAUTC=1.0,
-    subg_mf_pdf=0,
+    SUBG_MF_PDF=0,
     CRIAUTI=1.0,
     ACRIAUTI=1.0,
     BCRIAUTI=1.0,

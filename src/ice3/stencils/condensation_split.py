@@ -7,6 +7,9 @@ from ice3.utils.dims import I, J, K
 from ice3.utils.typingx import dtype_int, dtype_float
 
 
+FRAC_ICE_ADJUST = dace.symbol("FRAC_ICE_ADJUST", dtype=dace.bool)
+LAMBDA3 = dace.symbol("LAMBDA3", dtype=dace.bool)
+
 @dace.program
 def condensation(
     sigqsat: dtype_float[I, J, K],
@@ -25,7 +28,6 @@ def condensation(
     ls: dtype_float[I, J, K],
     sigrc: dtype_float[I, J, K],
     OCND2: dace.bool,
-    FRAC_ICE_ADJUST: dace.bool,
     RD: dtype_float,
     RV: dtype_float,
     TMAXMIX: dtype_float,
@@ -38,7 +40,6 @@ def condensation(
     ALPI: dtype_float,
     BETAI: dtype_float,
     GAMI: dtype_float,
-    LAMBDA3: dace.bool
 ):
     """Microphysical adjustments for specific contents due to condensation."""
 

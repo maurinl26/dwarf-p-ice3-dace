@@ -154,7 +154,7 @@ def ice_adjust(
         lv,
         ls,
         t,
-        nrr=6,
+        NRR=6,
         CPD=CPD,
         CPV=CPV,
         CL=CL,
@@ -181,7 +181,7 @@ def ice_adjust(
         ls=ls,
         sigrc=sigrc,
         OCND2=OCND2,
-        FRAC_ICE_ADJUST=FRAC_ICE_ADJUST,
+        FRAC_ICE_ADJUST=True,
         RD=RD,
         RV=RV,
         TMAXMIX=TMAXMIX,
@@ -194,7 +194,7 @@ def ice_adjust(
         ALPI=ALPI,
         BETAI=BETAI,
         GAMI=GAMI,
-        LAMBDA3=LAMBDA3,
+        LAMBDA3=True,
     )
 
     cloud_fraction_1(
@@ -239,7 +239,7 @@ def ice_adjust(
     dt=dt,
     LSUBG_COND=LSUBG_COND,
     CRIAUTC=CRIAUTC,
-    subg_mf_pdf=SUBG_MF_PDF,
+    SUBG_MF_PDF=SUBG_MF_PDF,
     CRIAUTI=CRIAUTI,
     ACRIAUTI=ACRIAUTI,
     BCRIAUTI=BCRIAUTI,
@@ -319,7 +319,9 @@ if __name__ == "__main__":
     FRAC_ICE_ADJUST=True,
     RD=1.0,
     RV=1.0,
-    condens=1,
+    # condens=1,
+        LSTT=1.0,
+        LVTT=1.0,
     TMAXMIX=1.0,
     TMINMIX=1.0,
     LSIGMAS=True,
@@ -333,15 +335,18 @@ if __name__ == "__main__":
     LAMBDA3=True,
     LSUBG_COND=True,
     CRIAUTC=1.0,
-    subg_mf_pdf=1,
+    SUBG_MF_PDF=1,
     CRIAUTI=1.0,
     ACRIAUTI=1.0,
     BCRIAUTI=1.0,
     TT=1.0,
-    dt=50.0
+    dt=50.0,
+        I=I,
+        J=J,
+        K=K
     )
 
-    print(outputs["rv_out"].mean())
+    print(outputs["hlc_hrc"].mean())
 
 
 
