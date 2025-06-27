@@ -9,18 +9,18 @@ NRR = dace.symbol("NRR", dtype=dace.int32)
 
 @dace.program
 def thermodynamic_fields(
-    th: dtype_float[I, J, K],
-    exn: dtype_float[I, J, K],
-    rv: dtype_float[I, J, K],
-    rc: dtype_float[I, J, K],
-    rr: dtype_float[I, J, K],
-    ri: dtype_float[I, J, K],
-    rs: dtype_float[I, J, K],
-    rg: dtype_float[I, J, K],
-    lv: dtype_float[I, J, K],
-    ls: dtype_float[I, J, K],
-    cph: dtype_float[I, J, K],
-    t: dtype_float[I, J, K],
+    th: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    exn: dtype_float[I, J, K]  @ StorageType.GPU_Global,
+    rv: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rc: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rr: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    ri: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rs: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rg: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    lv: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    ls: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    cph: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    t: dtype_float[I, J, K] @ StorageType.GPU_Global,
     CPD: dtype_float,
     CPV: dtype_float,
     CL: dtype_float,
@@ -31,13 +31,13 @@ def thermodynamic_fields(
 ):
 
     # 2.3 Compute the variation of mixing ratio
-    for i, j, k in dace.map[0:I, 0:J, 0:K]:
+    for i, j, k in dace.map[0:I, 0:J, 0:K] @ ScheduleType.GPU_Device:
         t[i, j, k] = exn[i, j, k] * th[i, j, k]
         vaporisation_latent_heat(lv[i, j, k], t[i, j, k], LVTT=LVTT, CPV=CPV, CL=CL, TT=TT)
         sublimation_latent_heat(ls[i, j, k], t[i, j, k],  LSTT=LSTT, CPV=CPV, CI=CI, TT=TT)
 
     # 2.4 specific heat for moist air at t+1
-    for i, j, k in dace.map[0:I, 0:J, 0:K]:
+    for i, j, k in dace.map[0:I, 0:J, 0:K]  @ StorageType.GPU_Global:
         if NRR == 6:
             cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * (rc[i, j, k] + rr[i, j, k]) + CI * (ri[i, j, k] + rs[i, j, k] + rg[i, j, k])
         if NRR == 5:
@@ -48,7 +48,7 @@ def thermodynamic_fields(
             cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * rc[i, j, k] + CI * ri[i, j, k]
 
 if __name__ == "__main__":
-    import numpy as np
+    import cupy as cp
 
     domain = 50, 50, 15
     I = domain[0]
@@ -85,9 +85,9 @@ if __name__ == "__main__":
 
     print("Allocation \n")
     for key, storage in state.items():
-        storage[:,:,:] = np.ones(domain, dtype=np.float64)
+        storage[:,:,:] = cp.ones(domain, dtype=np.float64)
     for key, storage in outputs.items():
-        storage[:,:,:] = np.zeros(domain, dtype=np.float64)
+        storage[:,:,:] = cp.zeros(domain, dtype=np.float64)
 
     print("Call ")
     csdfg(

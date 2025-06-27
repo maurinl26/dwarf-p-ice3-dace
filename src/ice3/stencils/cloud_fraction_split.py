@@ -1,4 +1,5 @@
 import dace
+from dace.dtypes import StorageType, ScheduleType
 
 from ice3.utils.dims import I, J, K
 from ice3.utils.typingx import dtype_float, dtype_int
@@ -8,28 +9,28 @@ SUBG_MF_PDF = dace.symbol("SUBG_MF_PDF")
 
 @dace.program
 def cloud_fraction_1(
-    lv: dtype_float[I, J, K],
-    ls: dtype_float[I, J, K],
-    cph: dtype_float[I, J, K],
-    exnref: dtype_float[I, J, K],
-    rc: dtype_float[I, J, K],
-    ri: dtype_float[I, J, K],
-    rc_tmp: dtype_float[I, J, K],
-    ri_tmp: dtype_float[I, J, K],
-    ths0: dtype_float[I, J, K],
-    rvs0: dtype_float[I, J, K],
-    rcs0: dtype_float[I, J, K],
-    ris0: dtype_float[I, J, K],
-    ths1: dtype_float[I, J, K],
-    rvs1: dtype_float[I, J, K],
-    rcs1: dtype_float[I, J, K],
-    ris1: dtype_float[I, J, K],
+    lv: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    ls: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    cph: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    exnref: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rc: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    ri: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rc_tmp: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    ri_tmp: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    ths0: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rvs0: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rcs0: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    ris0: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    ths1: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rvs1: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rcs1: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    ris1: dtype_float[I, J, K] @ StorageType.GPU_Global,
     dt: dtype_float,
 ):
     """Cloud fraction computation (after condensation loop)"""
 
     ##### 5.     COMPUTE THE SOURCES AND STORES THE CLOUD FRACTION #####
-    for i, j, k in dace.map[0:I, 0:J, 0:K]:
+    for i, j, k in dace.map[0:I, 0:J, 0:K] @ ScheduleType.GPU_Device:
         # 5.0 compute the variation of mixing ratio
         w1 = (rc_tmp[i, j, k] - rc[i, j, k]) / dt
         w2 = (ri_tmp[i, j, k] - ri[i, j, k]) / dt
@@ -56,24 +57,24 @@ def cloud_fraction_1(
 
 @dace.program
 def cloud_fraction_2(
-    rhodref: dtype_float[I, J, K],
-    exnref: dtype_float[I, J, K],
-    t: dtype_float[I, J, K],
-    cph: dtype_float[I, J, K],
-    lv: dtype_float[I, J, K],
-    ls: dtype_float[I, J, K],
-    ths1: dtype_float[I, J, K],
-    rvs1: dtype_float[I, J, K],
-    rcs1: dtype_float[I, J, K],
-    ris1: dtype_float[I, J, K],
-    rc_mf: dtype_float[I, J, K],
-    ri_mf: dtype_float[I, J, K],
-    cf_mf: dtype_float[I, J, K],
-    cldfr: dtype_float[I, J, K],
-    hlc_hrc: dtype_float[I, J, K],
-    hlc_hcf: dtype_float[I, J, K],
-    hli_hri: dtype_float[I, J, K],
-    hli_hcf: dtype_float[I, J, K],
+    rhodref: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    exnref: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    t: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    cph: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    lv: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    ls: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    ths1: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rvs1: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rcs1: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    ris1: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rc_mf: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    ri_mf: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    cf_mf: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    cldfr: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    hlc_hrc: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    hlc_hcf: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    hli_hri: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    hli_hcf: dtype_float[I, J, K] @ StorageType.GPU_Global,
     dt: dtype_float,
     LSUBG_COND: dace.bool,
     CRIAUTC: dtype_float,
@@ -84,7 +85,7 @@ def cloud_fraction_2(
 ):
 
     # 5.2  compute the cloud fraction cldfr
-    for i, j, k in dace.map[0:I, 0:J, 0:K]:
+    for i, j, k in dace.map[0:I, 0:J, 0:K] @ ScheduleType.GPU_Device:
 
         if not LSUBG_COND:
             if (rcs1[i, j, k] + ris1[i, j, k])*dt > 1e-12:
@@ -175,7 +176,7 @@ def cloud_fraction_2(
                 hli_hri[i, j, k] += hri
 
 if __name__ == "__main__":
-    import numpy as np
+    import cupy as cp
 
     domain = 50, 50, 15
     I = domain[0]
@@ -218,9 +219,9 @@ if __name__ == "__main__":
 
     print("Allocation \n")
     for key, storage in state.items():
-        storage[:, :, :] = np.ones(domain, dtype=np.float64)
+        storage[:, :, :] = cp.ones(domain, dtype=np.float64)
     for key, storage in outputs.items():
-        storage[:, :, :] = np.zeros(domain, dtype=np.float64)
+        storage[:, :, :] = cp.zeros(domain, dtype=np.float64)
 
     print("Call ")
     csdfg1(
@@ -274,9 +275,9 @@ if __name__ == "__main__":
 
     print("Allocation \n")
     for key, storage in state.items():
-        storage[:, :, :] = np.ones(domain, dtype=np.float64)
+        storage[:, :, :] = cp.ones(domain, dtype=np.float64)
     for key, storage in outputs.items():
-        storage[:, :, :] = np.zeros(domain, dtype=np.float64)
+        storage[:, :, :] = cp.zeros(domain, dtype=np.float64)
 
     print("Call ")
     csdfg2(

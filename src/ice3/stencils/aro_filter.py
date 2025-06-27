@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import annotations
-
 import dace
 from dace.dtypes import ScheduleType, StorageType
 import numpy as np
@@ -113,6 +111,47 @@ def aro_filter(
         rgs[i,j,k]  = rgs[i,j,k]  * 2 * dt
 
     # (Call ice_adjust - saturation adjustment - handled by AroAdjust ImplicitTendencyComponent + ice_adjust stencil)
+
+if __name__ == "__main__":
+    import cupy as cp
+
+    domain = 50, 50, 15
+    I = domain[0]
+    J = domain[1]
+    K = domain[2]
+
+    sdfg = aro_filter.to_sdfg()
+    sdfg.save("aro_filter.sdfg")
+    csdfg = sdfg.compile()
+
+    state = {
+        name: dace.ndarray(shape=[I, J, K], dtype=dace.float64)
+        for name in [
+            "exnref",
+            "cph",
+            "tht",
+            "ths",
+            "rcs",
+            "rrs",
+            "ris",
+            "rvs",
+            "rgs",
+            "rss",
+        ]
+    }
+
+    print("Allocation \n")
+    for key, storage in state.items():
+        storage[:, :, :] = cp.ones(domain, dtype=np.float64)
+
+
+    print("Call ")
+    csdfg(
+        **state,
+        dt=50.0
+    )
+
+    print(outputs["rv_out"].mean())
 
 
 

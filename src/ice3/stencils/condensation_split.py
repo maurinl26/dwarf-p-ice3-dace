@@ -12,21 +12,21 @@ LAMBDA3 = dace.symbol("LAMBDA3", dtype=dace.bool)
 
 @dace.program
 def condensation(
-    sigqsat: dtype_float[I, J, K],
-    pabs: dtype_float[I, J, K],
-    sigs: dtype_float[I, J, K],
-    t: dtype_float[I, J, K],
-    rv: dtype_float[I, J, K],
-    ri: dtype_float[I, J, K],
-    rc: dtype_float[I, J, K],
-    rv_out: dtype_float[I, J, K],
-    rc_out: dtype_float[I, J, K],
-    ri_out: dtype_float[I, J, K],
-    cldfr: dtype_float[I, J, K],
-    cph: dtype_float[I, J, K],
-    lv: dtype_float[I, J, K],
-    ls: dtype_float[I, J, K],
-    sigrc: dtype_float[I, J, K],
+    sigqsat: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    pabs: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    sigs: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    t: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rv: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    ri: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rc: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rv_out: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    rc_out: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    ri_out: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    cldfr: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    cph: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    lv: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    ls: dtype_float[I, J, K] @ StorageType.GPU_Global,
+    sigrc: dtype_float[I, J, K] @ StorageType.GPU_Global,
     OCND2: dace.bool,
     RD: dtype_float,
     RV: dtype_float,
@@ -48,14 +48,14 @@ def condensation(
     piv = np.ndarray(shape=[I, J, K], dtype=dtype_float)
 
     # initialize values
-    for i, j, k in dace.map[0:I, 0:J, 0:K]:
+    for i, j, k in dace.map[0:I, 0:J, 0:K] @ ScheduleType.GPU_Device:
         cldfr[i, j, k] = 0.0
         rv_out[i, j, k] = 0.0
         rc_out[i, j, k] = 0.0
         ri_out[i, j, k] = 0.0
 
     # 3. subgrid condensation scheme
-    for i, j, k in dace.map[0:I, 0:J, 0:K]:
+    for i, j, k in dace.map[0:I, 0:J, 0:K] @ ScheduleType.GPU_Device:
         prifact = 1
         frac_tmp = 0
 
@@ -164,7 +164,7 @@ def condensation(
 
 
 if __name__ == "__main__":
-    import numpy as np
+    import cupy as cp
 
     domain = 50, 50, 15
     I = domain[0]
@@ -204,9 +204,9 @@ if __name__ == "__main__":
 
     print("Allocation \n")
     for key, storage in state.items():
-        storage[:, :, :] = np.ones(domain, dtype=np.float64)
+        storage[:, :, :] = cp.ones(domain, dtype=np.float64)
     for key, storage in outputs.items():
-        storage[:, :, :] = np.zeros(domain, dtype=np.float64)
+        storage[:, :, :] = cp.zeros(domain, dtype=np.float64)
 
     print("Call ")
     csdfg(
