@@ -3879,7 +3879,7 @@ inline void ice3_stencils_cloud_fraction_split_cloud_fraction_2_87_4_0_2_2(ice_a
 
 }
 
-void __program_ice_adjust_internal(ice_adjust_state_t*__state, double * __restrict__ cf_mf, double * __restrict__ cldfr, double * __restrict__ exn, double * __restrict__ hlc_hcf, double * __restrict__ hlc_hrc, double * __restrict__ hli_hcf, double * __restrict__ hli_hri, double * __restrict__ pabs, double * __restrict__ rc, double * __restrict__ rc_mf, double * __restrict__ rcs0, double * __restrict__ rcs1, double * __restrict__ rg, double * __restrict__ rhodref, double * __restrict__ ri, double * __restrict__ ri_mf, double * __restrict__ ris0, double * __restrict__ ris1, double * __restrict__ rr, double * __restrict__ rs, double * __restrict__ rv, double * __restrict__ rvs0, double * __restrict__ rvs1, double * __restrict__ sigqsat, double * __restrict__ sigrc, double * __restrict__ sigs, double * __restrict__ th, double * __restrict__ ths0, double * __restrict__ ths1, double ACRIAUTI, double ALPI, double ALPW, double BCRIAUTI, double BETAI, double BETAW, double CI, double CL, double CPD, double CPV, double CRIAUTC, double CRIAUTI, bool FRAC_ICE_ADJUST, double GAMI, double GAMW, int I, int J, int K, bool LAMBDA3, bool LSIGMAS, bool LSTATNW, double LSTT, bool LSUBG_COND, double LVTT, int64_t NRR, bool OCND2, double RD, double RV, int64_t SUBG_MF_PDF, double TMAXMIX, double TMINMIX, double TT, double dt)
+void __program_ice_adjust_internal(ice_adjust_state_t*__state, double * __restrict__ cf_mf, double * __restrict__ cldfr, double * __restrict__ exn, double * __restrict__ hlc_hcf, double * __restrict__ hlc_hrc, double * __restrict__ hli_hcf, double * __restrict__ hli_hri, double * __restrict__ pabs, double * __restrict__ rc0, double * __restrict__ rc_mf, double * __restrict__ rcs0, double * __restrict__ rcs1, double * __restrict__ rg0, double * __restrict__ rhodref, double * __restrict__ ri0, double * __restrict__ ri_mf, double * __restrict__ ris0, double * __restrict__ ris1, double * __restrict__ rr0, double * __restrict__ rs0, double * __restrict__ rv0, double * __restrict__ rvs0, double * __restrict__ rvs1, double * __restrict__ sigqsat, double * __restrict__ sigrc, double * __restrict__ sigs, double * __restrict__ th0, double * __restrict__ ths0, double * __restrict__ ths1, double ACRIAUTI, double ALPI, double ALPW, double BCRIAUTI, double BETAI, double BETAW, double CI, double CL, double CPD, double CPV, double CRIAUTC, double CRIAUTI, bool FRAC_ICE_ADJUST, double GAMI, double GAMW, int I, int J, int K, bool LAMBDA3, bool LSIGMAS, bool LSTATNW, double LSTT, bool LSUBG_COND, double LVTT, int64_t NRR, bool OCND2, double RD, double RV, int64_t SUBG_MF_PDF, double TMAXMIX, double TMINMIX, double TT, double dt)
 {
     double *cph;
     cph = new double DACE_ALIGN(64)[((I * J) * K)];
@@ -3902,7 +3902,7 @@ void __program_ice_adjust_internal(ice_adjust_state_t*__state, double * __restri
             for (auto i = 0; i < I; i += 1) {
                 for (auto j = 0; j < J; j += 1) {
                     for (auto k = 0; k < K; k += 1) {
-                        ice3_stencils_thermo_thermodynamic_fields_34_4_0_0_2(__state, exn[((((J * K) * i) + (K * j)) + k)], th[((((J * K) * i) + (K * j)) + k)], cph[((((J * K) * i) + (K * j)) + k)], LVTT, CPV, CL, TT, lv[((((J * K) * i) + (K * j)) + k)], LSTT, CI, t[((((J * K) * i) + (K * j)) + k)]);
+                        ice3_stencils_thermo_thermodynamic_fields_34_4_0_0_2(__state, exn[((((J * K) * i) + (K * j)) + k)], th0[((((J * K) * i) + (K * j)) + k)], cph[((((J * K) * i) + (K * j)) + k)], LVTT, CPV, CL, TT, lv[((((J * K) * i) + (K * j)) + k)], LSTT, CI, t[((((J * K) * i) + (K * j)) + k)]);
                     }
                 }
             }
@@ -3923,7 +3923,7 @@ void __program_ice_adjust_internal(ice_adjust_state_t*__state, double * __restri
                         double __tmp9;
                         {
                             double __in1 = CPV;
-                            double __in2 = rv[((((J * K) * i) + (K * j)) + k)];
+                            double __in2 = rv0[((((J * K) * i) + (K * j)) + k)];
                             double __out;
 
                             ///////////////////
@@ -3946,8 +3946,8 @@ void __program_ice_adjust_internal(ice_adjust_state_t*__state, double * __restri
                             __tmp2 = __out;
                         }
                         {
-                            double __in1 = rc[((((J * K) * i) + (K * j)) + k)];
-                            double __in2 = rr[((((J * K) * i) + (K * j)) + k)];
+                            double __in1 = rc0[((((J * K) * i) + (K * j)) + k)];
+                            double __in2 = rr0[((((J * K) * i) + (K * j)) + k)];
                             double __out;
 
                             ///////////////////
@@ -3982,8 +3982,8 @@ void __program_ice_adjust_internal(ice_adjust_state_t*__state, double * __restri
                             __tmp5 = __out;
                         }
                         {
-                            double __in1 = ri[((((J * K) * i) + (K * j)) + k)];
-                            double __in2 = rs[((((J * K) * i) + (K * j)) + k)];
+                            double __in1 = ri0[((((J * K) * i) + (K * j)) + k)];
+                            double __in2 = rs0[((((J * K) * i) + (K * j)) + k)];
                             double __out;
 
                             ///////////////////
@@ -3995,7 +3995,7 @@ void __program_ice_adjust_internal(ice_adjust_state_t*__state, double * __restri
                         }
                         {
                             double __in1 = __tmp6;
-                            double __in2 = rg[((((J * K) * i) + (K * j)) + k)];
+                            double __in2 = rg0[((((J * K) * i) + (K * j)) + k)];
                             double __out;
 
                             ///////////////////
@@ -4086,7 +4086,7 @@ void __program_ice_adjust_internal(ice_adjust_state_t*__state, double * __restri
 
     }
     {
-        double __tmp54;
+        double __tmp42;
         double *pv;
         pv = new double DACE_ALIGN(64)[((I * J) * K)];
         double *piv;
@@ -4097,27 +4097,27 @@ void __program_ice_adjust_internal(ice_adjust_state_t*__state, double * __restri
             for (auto i = 0; i < I; i += 1) {
                 for (auto j = 0; j < J; j += 1) {
                     for (auto k = 0; k < K; k += 1) {
-                        ice3_stencils_condensation_split_condensation_58_4_0_1_2(__state, RD, RV, lv[((((J * K) * i) + (K * j)) + k)], ls[((((J * K) * i) + (K * j)) + k)], cph[((((J * K) * i) + (K * j)) + k)], LSIGMAS, LSTATNW, sigs[((((J * K) * i) + (K * j)) + k)], sigqsat[((((J * K) * i) + (K * j)) + k)], rv[((((J * K) * i) + (K * j)) + k)], rc[((((J * K) * i) + (K * j)) + k)], ri[((((J * K) * i) + (K * j)) + k)], OCND2, pv[((((J * K) * i) + (K * j)) + k)], ALPW, BETAW, GAMW, pabs[((((J * K) * i) + (K * j)) + k)], piv[((((J * K) * i) + (K * j)) + k)], ALPI, BETAI, GAMI, TMAXMIX, TMINMIX, cldfr[((((J * K) * i) + (K * j)) + k)], rc_out[((((J * K) * i) + (K * j)) + k)], ri_out[((((J * K) * i) + (K * j)) + k)], sigrc[((((J * K) * i) + (K * j)) + k)], t[((((J * K) * i) + (K * j)) + k)], pv[((((J * K) * i) + (K * j)) + k)], piv[((((J * K) * i) + (K * j)) + k)]);
+                        ice3_stencils_condensation_split_condensation_58_4_0_1_2(__state, RD, RV, lv[((((J * K) * i) + (K * j)) + k)], ls[((((J * K) * i) + (K * j)) + k)], cph[((((J * K) * i) + (K * j)) + k)], LSIGMAS, LSTATNW, sigs[((((J * K) * i) + (K * j)) + k)], sigqsat[((((J * K) * i) + (K * j)) + k)], rv0[((((J * K) * i) + (K * j)) + k)], rc0[((((J * K) * i) + (K * j)) + k)], ri0[((((J * K) * i) + (K * j)) + k)], OCND2, pv[((((J * K) * i) + (K * j)) + k)], ALPW, BETAW, GAMW, pabs[((((J * K) * i) + (K * j)) + k)], piv[((((J * K) * i) + (K * j)) + k)], ALPI, BETAI, GAMI, TMAXMIX, TMINMIX, cldfr[((((J * K) * i) + (K * j)) + k)], rc_out[((((J * K) * i) + (K * j)) + k)], ri_out[((((J * K) * i) + (K * j)) + k)], sigrc[((((J * K) * i) + (K * j)) + k)], t[((((J * K) * i) + (K * j)) + k)], pv[((((J * K) * i) + (K * j)) + k)], piv[((((J * K) * i) + (K * j)) + k)]);
                     }
                 }
             }
         }
         {
-            double __tmp53;
+            double __tmp41;
 
             ///////////////////
             // Tasklet code (scalar)
-            __tmp53 = 50.0;
+            __tmp41 = 50.0;
             ///////////////////
 
-            __tmp54 = __tmp53;
+            __tmp42 = __tmp41;
         }
         {
             #pragma omp parallel for
             for (auto i = 0; i < I; i += 1) {
                 for (auto j = 0; j < J; j += 1) {
                     for (auto k = 0; k < K; k += 1) {
-                        ice3_stencils_cloud_fraction_split_cloud_fraction_1_32_4_0_1_38(__state, rc_out[((((J * K) * i) + (K * j)) + k)], rc[((((J * K) * i) + (K * j)) + k)], __tmp54, ri_out[((((J * K) * i) + (K * j)) + k)], ri[((((J * K) * i) + (K * j)) + k)], rcs0[((((J * K) * i) + (K * j)) + k)], rvs0[((((J * K) * i) + (K * j)) + k)], lv[((((J * K) * i) + (K * j)) + k)], cph[((((J * K) * i) + (K * j)) + k)], exn[((((J * K) * i) + (K * j)) + k)], ris0[((((J * K) * i) + (K * j)) + k)], ths0[((((J * K) * i) + (K * j)) + k)], ls[((((J * K) * i) + (K * j)) + k)], rvs1[((((J * K) * i) + (K * j)) + k)], rcs1[((((J * K) * i) + (K * j)) + k)], ths1[((((J * K) * i) + (K * j)) + k)], ris1[((((J * K) * i) + (K * j)) + k)]);
+                        ice3_stencils_cloud_fraction_split_cloud_fraction_1_32_4_0_1_38(__state, rc_out[((((J * K) * i) + (K * j)) + k)], rc0[((((J * K) * i) + (K * j)) + k)], __tmp42, ri_out[((((J * K) * i) + (K * j)) + k)], ri0[((((J * K) * i) + (K * j)) + k)], rcs0[((((J * K) * i) + (K * j)) + k)], rvs0[((((J * K) * i) + (K * j)) + k)], lv[((((J * K) * i) + (K * j)) + k)], cph[((((J * K) * i) + (K * j)) + k)], exn[((((J * K) * i) + (K * j)) + k)], ris0[((((J * K) * i) + (K * j)) + k)], ths0[((((J * K) * i) + (K * j)) + k)], ls[((((J * K) * i) + (K * j)) + k)], rvs1[((((J * K) * i) + (K * j)) + k)], rcs1[((((J * K) * i) + (K * j)) + k)], ths1[((((J * K) * i) + (K * j)) + k)], ris1[((((J * K) * i) + (K * j)) + k)]);
                     }
                 }
             }
@@ -4149,9 +4149,9 @@ void __program_ice_adjust_internal(ice_adjust_state_t*__state, double * __restri
     delete[] ri_out;
 }
 
-DACE_EXPORTED void __program_ice_adjust(ice_adjust_state_t *__state, double * __restrict__ cf_mf, double * __restrict__ cldfr, double * __restrict__ exn, double * __restrict__ hlc_hcf, double * __restrict__ hlc_hrc, double * __restrict__ hli_hcf, double * __restrict__ hli_hri, double * __restrict__ pabs, double * __restrict__ rc, double * __restrict__ rc_mf, double * __restrict__ rcs0, double * __restrict__ rcs1, double * __restrict__ rg, double * __restrict__ rhodref, double * __restrict__ ri, double * __restrict__ ri_mf, double * __restrict__ ris0, double * __restrict__ ris1, double * __restrict__ rr, double * __restrict__ rs, double * __restrict__ rv, double * __restrict__ rvs0, double * __restrict__ rvs1, double * __restrict__ sigqsat, double * __restrict__ sigrc, double * __restrict__ sigs, double * __restrict__ th, double * __restrict__ ths0, double * __restrict__ ths1, double ACRIAUTI, double ALPI, double ALPW, double BCRIAUTI, double BETAI, double BETAW, double CI, double CL, double CPD, double CPV, double CRIAUTC, double CRIAUTI, bool FRAC_ICE_ADJUST, double GAMI, double GAMW, int I, int J, int K, bool LAMBDA3, bool LSIGMAS, bool LSTATNW, double LSTT, bool LSUBG_COND, double LVTT, int64_t NRR, bool OCND2, double RD, double RV, int64_t SUBG_MF_PDF, double TMAXMIX, double TMINMIX, double TT, double dt)
+DACE_EXPORTED void __program_ice_adjust(ice_adjust_state_t *__state, double * __restrict__ cf_mf, double * __restrict__ cldfr, double * __restrict__ exn, double * __restrict__ hlc_hcf, double * __restrict__ hlc_hrc, double * __restrict__ hli_hcf, double * __restrict__ hli_hri, double * __restrict__ pabs, double * __restrict__ rc0, double * __restrict__ rc_mf, double * __restrict__ rcs0, double * __restrict__ rcs1, double * __restrict__ rg0, double * __restrict__ rhodref, double * __restrict__ ri0, double * __restrict__ ri_mf, double * __restrict__ ris0, double * __restrict__ ris1, double * __restrict__ rr0, double * __restrict__ rs0, double * __restrict__ rv0, double * __restrict__ rvs0, double * __restrict__ rvs1, double * __restrict__ sigqsat, double * __restrict__ sigrc, double * __restrict__ sigs, double * __restrict__ th0, double * __restrict__ ths0, double * __restrict__ ths1, double ACRIAUTI, double ALPI, double ALPW, double BCRIAUTI, double BETAI, double BETAW, double CI, double CL, double CPD, double CPV, double CRIAUTC, double CRIAUTI, bool FRAC_ICE_ADJUST, double GAMI, double GAMW, int I, int J, int K, bool LAMBDA3, bool LSIGMAS, bool LSTATNW, double LSTT, bool LSUBG_COND, double LVTT, int64_t NRR, bool OCND2, double RD, double RV, int64_t SUBG_MF_PDF, double TMAXMIX, double TMINMIX, double TT, double dt)
 {
-    __program_ice_adjust_internal(__state, cf_mf, cldfr, exn, hlc_hcf, hlc_hrc, hli_hcf, hli_hri, pabs, rc, rc_mf, rcs0, rcs1, rg, rhodref, ri, ri_mf, ris0, ris1, rr, rs, rv, rvs0, rvs1, sigqsat, sigrc, sigs, th, ths0, ths1, ACRIAUTI, ALPI, ALPW, BCRIAUTI, BETAI, BETAW, CI, CL, CPD, CPV, CRIAUTC, CRIAUTI, FRAC_ICE_ADJUST, GAMI, GAMW, I, J, K, LAMBDA3, LSIGMAS, LSTATNW, LSTT, LSUBG_COND, LVTT, NRR, OCND2, RD, RV, SUBG_MF_PDF, TMAXMIX, TMINMIX, TT, dt);
+    __program_ice_adjust_internal(__state, cf_mf, cldfr, exn, hlc_hcf, hlc_hrc, hli_hcf, hli_hri, pabs, rc0, rc_mf, rcs0, rcs1, rg0, rhodref, ri0, ri_mf, ris0, ris1, rr0, rs0, rv0, rvs0, rvs1, sigqsat, sigrc, sigs, th0, ths0, ths1, ACRIAUTI, ALPI, ALPW, BCRIAUTI, BETAI, BETAW, CI, CL, CPD, CPV, CRIAUTC, CRIAUTI, FRAC_ICE_ADJUST, GAMI, GAMW, I, J, K, LAMBDA3, LSIGMAS, LSTATNW, LSTT, LSUBG_COND, LVTT, NRR, OCND2, RD, RV, SUBG_MF_PDF, TMAXMIX, TMINMIX, TT, dt);
 }
 
 DACE_EXPORTED ice_adjust_state_t *__dace_init_ice_adjust(int I, int J, int K)

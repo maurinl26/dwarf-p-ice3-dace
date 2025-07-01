@@ -1,7 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/ice_adjust.dir/link.d"
-  "CMakeFiles/ice_adjust.dir/home/maurinl/maurinl26/dyn/dwarf-p-ice3-dace/.dacecache/ice_adjust/src/cpu/ice_adjust.cpp.o"
-  "CMakeFiles/ice_adjust.dir/home/maurinl/maurinl26/dyn/dwarf-p-ice3-dace/.dacecache/ice_adjust/src/cpu/ice_adjust.cpp.o.d"
+  "CMakeFiles/ice_adjust.dir/home/maurinl/maurinl26/dwarf-p-ice3-dace/.dacecache/ice_adjust/src/cpu/ice_adjust.cpp.o"
+  "CMakeFiles/ice_adjust.dir/home/maurinl/maurinl26/dwarf-p-ice3-dace/.dacecache/ice_adjust/src/cpu/ice_adjust.cpp.o.d"
   "libice_adjust.pdb"
   "libice_adjust.so"
 )
