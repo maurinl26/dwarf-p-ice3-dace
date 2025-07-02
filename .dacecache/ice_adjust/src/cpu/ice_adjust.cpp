@@ -3902,7 +3902,7 @@ void __program_ice_adjust_internal(ice_adjust_state_t*__state, double * __restri
             for (auto i = 0; i < I; i += 1) {
                 for (auto j = 0; j < J; j += 1) {
                     for (auto k = 0; k < K; k += 1) {
-                        ice3_stencils_thermo_thermodynamic_fields_34_4_0_0_2(__state, exn[((((J * K) * i) + (K * j)) + k)], th0[((((J * K) * i) + (K * j)) + k)], cph[((((J * K) * i) + (K * j)) + k)], LVTT, CPV, CL, TT, lv[((((J * K) * i) + (K * j)) + k)], LSTT, CI, t[((((J * K) * i) + (K * j)) + k)]);
+                        ice3_stencils_thermo_thermodynamic_fields_34_4_0_0_2(__state, exn[((((J * K) * i) + (K * j)) + k)], th0[((((J * K) * i) + (K * j)) + k)], lv[((((J * K) * i) + (K * j)) + k)], LVTT, CPV, CL, TT, ls[((((J * K) * i) + (K * j)) + k)], LSTT, CI, t[((((J * K) * i) + (K * j)) + k)]);
                     }
                 }
             }
@@ -4038,7 +4038,7 @@ void __program_ice_adjust_internal(ice_adjust_state_t*__state, double * __restri
                             __out = __inp;
                             ///////////////////
 
-                            ls[((((J * K) * i) + (K * j)) + k)] = __out;
+                            cph[((((J * K) * i) + (K * j)) + k)] = __out;
                         }
                     }
                 }
