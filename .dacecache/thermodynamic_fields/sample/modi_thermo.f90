@@ -15,7 +15,7 @@ module modi_thermo
         end function c_dace_init_thermodynamic_fields
 
         subroutine c_program_thermodynamic_fields(handle, cph, exn, ls, lv, rc, rg, ri, rr, rs, rv, t, th, CI, CL, CPD,&
-                &CPV, I, J, K, LSTT, LVTT, NRR, TT) bind(c, name='__program_ice_adjust')
+                &CPV, I, J, K, LSTT, LVTT, NRR, TT) bind(c, name='__program_thermodynamic_fields')
 
             use, intrinsic :: iso_c_binding, only: c_funptr, c_ptr, c_float, c_int, c_bool, c_double
 
@@ -38,12 +38,12 @@ module modi_thermo
             real(c_double), intent(in) :: CL
             real(c_double), intent(in) :: CPD
             real(c_double), intent(in) :: CPV
-            real(c_int), intent(in) :: I
-            real(c_int), intent(in) :: J
-            real(c_int), intent(in) :: K
+            integer(c_int), intent(in) :: I
+            integer(c_int), intent(in) :: J
+            integer(c_int), intent(in) :: K
             real(c_double), intent(in) :: LSTT
             real(c_double), intent(in) :: LVTT
-            real(c_int), intent(in) :: NRR
+            integer(c_int), intent(in) :: NRR
             real(c_double), intent(in) :: TT
 
         end subroutine c_program_thermodynamic_fields
