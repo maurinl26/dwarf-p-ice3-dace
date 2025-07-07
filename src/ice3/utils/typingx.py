@@ -26,13 +26,13 @@ import dace
 from ice3.utils.dims import I, J, K
 
 try:
-    precision = os.environ["PRECISION"]
+    precision = os.environ["FP_PRECISION"]
 except KeyError as ke:
     logging.error(f"{ke}")
     precision = "double"
 
 match precision:
-    case "simple":
+    case "single":
         dtype_float = dace.float32
         dtype_int32 = dace.int32
         FloatFieldIJK = dace.float32[I, J, K]
