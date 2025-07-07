@@ -2,7 +2,7 @@
 
 program main
 
-    use modi_thermo
+    use modi_cloud_fraction_1
     use, intrinsic :: iso_c_binding
 
     integer(c_int) :: I, J, K

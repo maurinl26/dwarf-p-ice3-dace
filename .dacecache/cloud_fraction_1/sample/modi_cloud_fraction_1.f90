@@ -1,6 +1,6 @@
 ! Created by  on 02/07/2025.
 
-module modi_thermo
+module modi_cloud_fraction_1
 
     use, intrinsic :: iso_c_binding
     implicit none
@@ -54,4 +54,4 @@ module modi_thermo
 
     end interface
 
-end module modi_thermo
+end module modi_cloud_fraction_1
