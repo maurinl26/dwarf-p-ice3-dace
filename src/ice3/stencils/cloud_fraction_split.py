@@ -12,8 +12,8 @@ def cloud_fraction_1(
     ls: dtype_float[I, J, K],
     cph: dtype_float[I, J, K],
     exnref: dtype_float[I, J, K],
-    rc: dtype_float[I, J, K],
-    ri: dtype_float[I, J, K],
+    rc0: dtype_float[I, J, K],
+    ri0: dtype_float[I, J, K],
     rc_tmp: dtype_float[I, J, K],
     ri_tmp: dtype_float[I, J, K],
     ths0: dtype_float[I, J, K],
@@ -31,8 +31,8 @@ def cloud_fraction_1(
     ##### 5.     COMPUTE THE SOURCES AND STORES THE CLOUD FRACTION #####
     for i, j, k in dace.map[0:I, 0:J, 0:K]:
         # 5.0 compute the variation of mixing ratio
-        w1 = (rc_tmp[i, j, k] - rc[i, j, k]) / dt
-        w2 = (ri_tmp[i, j, k] - ri[i, j, k]) / dt
+        w1 = (rc_tmp[i, j, k] - rc0[i, j, k]) / dt
+        w2 = (ri_tmp[i, j, k] - ri0[i, j, k]) / dt
 
         # 5.1 compute the sources
         if w1 < 0.0:
@@ -192,27 +192,27 @@ if __name__ == "__main__":
         name: dace.ndarray(shape=[I, J, K], dtype=dtype_float)
         for name in [
             "lv",
-    "ls",
-    "cph",
-    "exnref",
-    "rc",
-    "ri",
-    "rc_tmp",
-    "ri_tmp",
-    "ths0",
-    "rvs0",
-    "rcs0",
-    "ris0",
+            "ls",
+            "cph",
+            "exnref",
+            "rc0",
+            "ri0",
+            "rc_tmp",
+            "ri_tmp",
+            "ths0",
+            "rvs0",
+            "rcs0",
+            "ris0",
            ]
     }
 
     outputs = {
         name: dace.ndarray(shape=[I, J, K], dtype=dtype_float)
         for name in [
-             "ths1",
-    "rvs1",
-    "rcs1",
-    "ris1",
+            "ths1",
+            "rvs1",
+            "rcs1",
+            "ris1",
         ]
     }
 
