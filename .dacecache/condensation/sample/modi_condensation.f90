@@ -15,49 +15,49 @@ module modi_condensation
             logical(c_bool), intent(in) :: LAMBDA3
         end function c_dace_init_condensation
 
-        subroutine c_program_condensation(handle, cldfr, cph, ls, lv, pabs, rc, &
-                &rc_out, ri, ri_out, rv, rv_out, sigqsat, sigrc, sigs, t,&
-                &ALPI, ALPW, BETAI, BETAW, FRAC_ICE_ADJUST, GAMI, GAMW, I, J, K,&
-                &LAMBDA3, LSIGMAS, LSTATNW, OCND2, RD, RV, TMAXMIX, TMINMIX) bind(c, name='__program_condensation')
+        subroutine c_program_condensation(handle, cldfr, cph, ls, lv, pabs, rc0, rc_out, ri0, ri_out,&
+                &rv0, rv_out, sigqsat, sigrc, sigs, t,&
+                &ALPI, ALPW, BETAI, BETAW, FRAC_ICE_ADJUST, GAMI, GAMW, I, J, K, LAMBDA3, LSIGMAS, LSTATNW, OCND2,&
+                &RD, RV, TMAXMIX, TMINMIX) bind(c, name='__program_condensation')
 
             use, intrinsic :: iso_c_binding, only: c_funptr, c_ptr, c_float, c_int, c_bool, c_double
 
             type(c_funptr), intent(in) :: handle
 
-            real(c_double), dimension(I, J, K), intent(in) :: cldfr
-            real(c_double), dimension(I, J, K), intent(in) :: cph
-            real(c_double), dimension(I, J, K), intent(in) :: ls
-            real(c_double), dimension(I, J, K), intent(in) :: lv
-            real(c_double), dimension(I, J, K), intent(in) :: pabs
-            real(c_double), dimension(I, J, K), intent(in) :: rc
-            real(c_double), dimension(I, J, K), intent(in) :: rc_out
-            real(c_double), dimension(I, J, K), intent(in) :: ri
-            real(c_double), dimension(I, J, K), intent(in) :: ri_out
-            real(c_double), dimension(I, J, K), intent(in) :: rv
-            real(c_double), dimension(I, J, K), intent(in) :: rv_out
-            real(c_double), dimension(I, J, K), intent(in) :: sigqsat
-            real(c_double), dimension(I, J, K), intent(in) :: sigrc
-            real(c_double), dimension(I, J, K), intent(in) :: sigs
-            real(c_double), dimension(I, J, K), intent(in) :: t
+            real(c_double) :: cldfr(*)
+            real(c_double) :: cph(*)
+            real(c_double) :: ls(*)
+            real(c_double) :: lv(*)
+            real(c_double) :: pabs(*)
+            real(c_double) :: rc0(*)
+            real(c_double) :: rc_out(*)
+            real(c_double) :: ri0(*)
+            real(c_double) :: ri_out(*)
+            real(c_double) :: rv0(*)
+            real(c_double) :: rv_out(*)
+            real(c_double) :: sigqsat(*)
+            real(c_double) :: sigrc(*)
+            real(c_double) :: sigs(*)
+            real(c_double) :: t(*)
 
-            real(c_double) :: ALPI
-            real(c_double) :: ALPW
-            real(c_double) :: BETAI
-            real(c_double) :: BETAW
-            logical(c_bool) :: FRAC_ICE_ADJUST
-            real(c_double) :: GAMI
-            real(c_double) :: GAMW
-            integer(c_int) :: I
-            integer(c_int) :: J
-            integer(c_int) :: K
-            logical(c_bool) :: LAMBDA3
-            logical(c_bool) :: LSIGMAS
-            logical(c_bool) :: LSTATNW
-            logical(c_bool) :: OCND2
-            real(c_double) :: RD
-            real(c_double) :: RV
-            real(c_double) :: TMAXMIX
-            real(c_double) :: TMINMIX
+            real(c_double), value :: ALPI
+            real(c_double), value :: ALPW
+            real(c_double), value :: BETAI
+            real(c_double), value :: BETAW
+            logical(c_bool), value :: FRAC_ICE_ADJUST
+            real(c_double), value :: GAMI
+            real(c_double), value :: GAMW
+            integer(c_int), value :: I
+            integer(c_int), value :: J
+            integer(c_int), value :: K
+            logical(c_bool), value :: LAMBDA3
+            logical(c_bool), value :: LSIGMAS
+            logical(c_bool), value :: LSTATNW
+            logical(c_bool), value :: OCND2
+            real(c_double), value :: RD
+            real(c_double), value :: RV
+            real(c_double), value :: TMAXMIX
+            real(c_double), value :: TMINMIX
 
         end subroutine c_program_condensation
 

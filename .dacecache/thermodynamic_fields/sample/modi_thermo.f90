@@ -19,7 +19,7 @@ module modi_thermo
 
             use, intrinsic :: iso_c_binding, only: c_funptr, c_ptr, c_float, c_int, c_bool, c_double
 
-            type(c_funptr), intent(in) :: handle
+            type(c_funptr), value :: handle
 
             real(c_double):: cph(*)
             real(c_double):: exn(*)

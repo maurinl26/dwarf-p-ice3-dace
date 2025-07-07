@@ -27,11 +27,11 @@ int main(int argc, char **argv) {
     double * __restrict__ ls = (double*) calloc(((I * J) * K), sizeof(double));
     double * __restrict__ lv = (double*) calloc(((I * J) * K), sizeof(double));
     double * __restrict__ pabs = (double*) calloc(((I * J) * K), sizeof(double));
-    double * __restrict__ rc = (double*) calloc(((I * J) * K), sizeof(double));
+    double * __restrict__ rc0 = (double*) calloc(((I * J) * K), sizeof(double));
     double * __restrict__ rc_out = (double*) calloc(((I * J) * K), sizeof(double));
-    double * __restrict__ ri = (double*) calloc(((I * J) * K), sizeof(double));
+    double * __restrict__ ri0 = (double*) calloc(((I * J) * K), sizeof(double));
     double * __restrict__ ri_out = (double*) calloc(((I * J) * K), sizeof(double));
-    double * __restrict__ rv = (double*) calloc(((I * J) * K), sizeof(double));
+    double * __restrict__ rv0 = (double*) calloc(((I * J) * K), sizeof(double));
     double * __restrict__ rv_out = (double*) calloc(((I * J) * K), sizeof(double));
     double * __restrict__ sigqsat = (double*) calloc(((I * J) * K), sizeof(double));
     double * __restrict__ sigrc = (double*) calloc(((I * J) * K), sizeof(double));
@@ -40,7 +40,7 @@ int main(int argc, char **argv) {
 
 
     handle = __dace_init_condensation(FRAC_ICE_ADJUST, I, J, K, LAMBDA3);
-    __program_condensation(handle, cldfr, cph, ls, lv, pabs, rc, rc_out, ri, ri_out, rv, rv_out, sigqsat, sigrc, sigs, t, ALPI, ALPW, BETAI, BETAW, FRAC_ICE_ADJUST, GAMI, GAMW, I, J, K, LAMBDA3, LSIGMAS, LSTATNW, OCND2, RD, RV, TMAXMIX, TMINMIX);
+    __program_condensation(handle, cldfr, cph, ls, lv, pabs, rc0, rc_out, ri0, ri_out, rv0, rv_out, sigqsat, sigrc, sigs, t, ALPI, ALPW, BETAI, BETAW, FRAC_ICE_ADJUST, GAMI, GAMW, I, J, K, LAMBDA3, LSIGMAS, LSTATNW, OCND2, RD, RV, TMAXMIX, TMINMIX);
     err = __dace_exit_condensation(handle);
 
     free(cldfr);
@@ -48,11 +48,11 @@ int main(int argc, char **argv) {
     free(ls);
     free(lv);
     free(pabs);
-    free(rc);
+    free(rc0);
     free(rc_out);
-    free(ri);
+    free(ri0);
     free(ri_out);
-    free(rv);
+    free(rv0);
     free(rv_out);
     free(sigqsat);
     free(sigrc);

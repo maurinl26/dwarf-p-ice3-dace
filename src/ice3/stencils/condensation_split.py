@@ -16,9 +16,9 @@ def condensation(
     pabs: dtype_float[I, J, K],
     sigs: dtype_float[I, J, K],
     t: dtype_float[I, J, K],
-    rv: dtype_float[I, J, K],
-    ri: dtype_float[I, J, K],
-    rc: dtype_float[I, J, K],
+    rv0: dtype_float[I, J, K],
+    ri0: dtype_float[I, J, K],
+    rc0: dtype_float[I, J, K],
     rv_out: dtype_float[I, J, K],
     rc_out: dtype_float[I, J, K],
     ri_out: dtype_float[I, J, K],
@@ -60,7 +60,7 @@ def condensation(
         frac_tmp = 0
 
         # store total water mixing ratio (244 -> 248)
-        rt[i, j, k] = rv[i, j, k] + rc[i, j, k] + ri[i, j, k] * prifact
+        rt[i, j, k] = rv0[i, j, k] + rc0[i, j, k] + ri0[i, j, k] * prifact
 
         # l334 to l337
         if not OCND2:
@@ -77,8 +77,8 @@ def condensation(
             )
 
         if not OCND2:
-            if rc[i, j, k] + ri[i, j, k] > 1e-20:
-                frac_tmp = rc[i, j, k] / (rc[i, j, k] + ri[i, j, k])
+            if rc0[i, j, k] + ri0[i, j, k] > 1e-20:
+                frac_tmp = rc0[i, j, k] / (rc0[i, j, k] + ri0[i, j, k])
             else:
                 frac_tmp = 0
 
@@ -109,8 +109,9 @@ def condensation(
         ah = lvs * qsl / (RV * t[i, j, k]**2) * (1 + RV * qsl / RD)
         a = 1 / (1 + lvs / cph[i, j, k] * ah)
         b = ah * a
-        sbar = a * (rt[i, j, k] - qsl + ah * lvs * (rc[i, j, k] + ri[i, j, k] * prifact) / cph[i, j, k])
+        sbar = a * (rt[i, j, k] - qsl + ah * lvs * (rc0[i, j, k] + ri0[i, j, k] * prifact) / cph[i, j, k])
 
+        q1 = 0
         if LSIGMAS and not LSTATNW:
             sigma = max(
                 1e-10,
@@ -121,8 +122,8 @@ def condensation(
             )
 
 
-        # Translation note : l407 - l411
-        q1 = sbar / sigma
+            # Translation note : l407 - l411
+            q1 = sbar / sigma
 
         # 9.2.3 Fractional cloudiness and cloud condensate
         # HCONDENS = 0 is CB02 option
@@ -153,7 +154,7 @@ def condensation(
         if not OCND2:
                 rc_out[i, j, k] = (1 - frac_tmp) * cond_tmp  # liquid condensate
                 ri_out[i, j, k] = frac_tmp * cond_tmp  # solid condensate
-                t[i, j, k] += ((rc_out[i, j, k] - rc[i, j, k]) * lv[i, j, k] + (ri_out[i, j, k] - ri[i, j, k]) * ls[i, j, k]) / cph[i, j, k]
+                t[i, j, k] += ((rc_out[i, j, k] - rc0[i, j, k]) * lv[i, j, k] + (ri_out[i, j, k] - ri0[i, j, k]) * ls[i, j, k]) / cph[i, j, k]
                 rv_out[i, j, k] = rt[i, j, k] - rc_out[i, j, k] - ri_out[i, j, k] * prifact
 
         # Translation note : end jiter
@@ -182,9 +183,9 @@ if __name__ == "__main__":
             "pabs",
             "sigs",
             "t",
-            "rv",
-            "ri",
-            "rc",
+            "rv0",
+            "ri0",
+            "rc0",
             "cldfr",
             "cph",
             "lv",

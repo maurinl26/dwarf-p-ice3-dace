@@ -1,5 +1,5 @@
 {
-    "/home/maurinl/maurinl26/dyn/dwarf-p-ice3-dace/src/ice3/stencils/condensation_split.py": {
+    "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/condensation_split.py": {
         "51": [
             {
                 "cfg_id": 0,
@@ -870,7 +870,7 @@
                 "node_id": 11
             }
         ],
-        "118": [
+        "119": [
             {
                 "cfg_id": 1,
                 "state_id": 16,
@@ -897,7 +897,7 @@
                 "node_id": 4
             }
         ],
-        "119": [
+        "120": [
             {
                 "cfg_id": 1,
                 "state_id": 16,
@@ -969,7 +969,24 @@
                 "node_id": 18
             }
         ],
-        "138": [
+        "126": [
+            {
+                "cfg_id": 1,
+                "state_id": 16,
+                "node_id": 20
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 16,
+                "node_id": 21
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 16,
+                "node_id": 22
+            }
+        ],
+        "139": [
             {
                 "cfg_id": 1,
                 "state_id": 17,
@@ -1001,7 +1018,7 @@
                 "node_id": 5
             }
         ],
-        "133": [
+        "134": [
             {
                 "cfg_id": 1,
                 "state_id": 19,
@@ -1063,7 +1080,7 @@
                 "node_id": 11
             }
         ],
-        "147": [
+        "148": [
             {
                 "cfg_id": 1,
                 "state_id": 21,
@@ -1075,7 +1092,7 @@
                 "node_id": 1
             }
         ],
-        "144": [
+        "145": [
             {
                 "cfg_id": 1,
                 "state_id": 22,
@@ -1127,7 +1144,7 @@
                 "node_id": 10
             }
         ],
-        "143": [
+        "144": [
             {
                 "cfg_id": 1,
                 "state_id": 22,
@@ -1139,7 +1156,7 @@
                 "node_id": 13
             }
         ],
-        "154": [
+        "155": [
             {
                 "cfg_id": 1,
                 "state_id": 23,
@@ -1161,7 +1178,7 @@
                 "node_id": 3
             }
         ],
-        "155": [
+        "156": [
             {
                 "cfg_id": 1,
                 "state_id": 23,
@@ -1183,7 +1200,7 @@
                 "node_id": 7
             }
         ],
-        "156": [
+        "157": [
             {
                 "cfg_id": 1,
                 "state_id": 23,
@@ -1280,7 +1297,7 @@
                 "node_id": 26
             }
         ],
-        "157": [
+        "158": [
             {
                 "cfg_id": 1,
                 "state_id": 23,
@@ -1327,7 +1344,7 @@
                 "node_id": 35
             }
         ],
-        "163": [
+        "164": [
             {
                 "cfg_id": 1,
                 "state_id": 24,
@@ -1337,26 +1354,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "13": [
@@ -1369,26 +1366,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "14": [
@@ -1401,26 +1378,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "15": [
@@ -1433,26 +1390,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "16": [
@@ -1465,26 +1402,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "17": [
@@ -1497,26 +1414,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "18": [
@@ -1529,26 +1426,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "19": [
@@ -1561,26 +1438,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "20": [
@@ -1593,26 +1450,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "21": [
@@ -1625,26 +1462,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "22": [
@@ -1657,26 +1474,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "23": [
@@ -1689,26 +1486,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "24": [
@@ -1721,26 +1498,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "25": [
@@ -1753,26 +1510,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "26": [
@@ -1785,26 +1522,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "27": [
@@ -1817,26 +1534,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "28": [
@@ -1849,26 +1546,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "29": [
@@ -1881,26 +1558,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "30": [
@@ -1913,26 +1570,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "31": [
@@ -1945,26 +1582,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "32": [
@@ -1977,26 +1594,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "33": [
@@ -2009,26 +1606,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "34": [
@@ -2041,26 +1618,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "35": [
@@ -2073,26 +1630,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "36": [
@@ -2105,26 +1642,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "37": [
@@ -2137,26 +1654,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "38": [
@@ -2169,26 +1666,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "39": [
@@ -2201,26 +1678,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "40": [
@@ -2233,26 +1690,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "41": [
@@ -2265,26 +1702,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "42": [
@@ -2297,26 +1714,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "43": [
@@ -2329,26 +1726,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "44": [
@@ -2361,26 +1738,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "45": [
@@ -2393,26 +1750,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "46": [
@@ -2425,26 +1762,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "47": [
@@ -2457,26 +1774,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "48": [
@@ -2489,26 +1786,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "49": [
@@ -2521,26 +1798,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "50": [
@@ -2553,26 +1810,6 @@
                 "cfg_id": 1,
                 "state_id": 24,
                 "node_id": 1
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 24,
-                "node_id": 7
             }
         ],
         "56": [
@@ -5139,76 +4376,101 @@
                 "node_id": 81
             }
         ],
-        "120": [
+        "118": [
             {
                 "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 5
+                "state_id": 1,
+                "node_id": 63
             },
             {
                 "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 6
+                "state_id": 1,
+                "node_id": 64
             },
             {
                 "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 7
+                "state_id": 1,
+                "node_id": 65
             },
             {
                 "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 8
+                "state_id": 1,
+                "node_id": 66
             },
             {
                 "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 9
+                "state_id": 1,
+                "node_id": 67
             },
             {
                 "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 10
+                "state_id": 1,
+                "node_id": 68
             },
             {
                 "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 11
+                "state_id": 1,
+                "node_id": 69
             },
             {
                 "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 12
+                "state_id": 1,
+                "node_id": 70
             },
             {
                 "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 13
+                "state_id": 1,
+                "node_id": 71
             },
             {
                 "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 14
+                "state_id": 1,
+                "node_id": 72
             },
             {
                 "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 15
+                "state_id": 1,
+                "node_id": 73
             },
             {
                 "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 16
+                "state_id": 1,
+                "node_id": 74
             },
             {
                 "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 17
+                "state_id": 1,
+                "node_id": 75
             },
             {
                 "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 18
+                "state_id": 1,
+                "node_id": 76
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 1,
+                "node_id": 77
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 1,
+                "node_id": 78
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 1,
+                "node_id": 79
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 1,
+                "node_id": 80
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 1,
+                "node_id": 81
             }
         ],
         "121": [
@@ -5571,570 +4833,123 @@
                 "node_id": 18
             }
         ],
-        "126": [
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 5
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 7
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 8
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 9
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 10
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 11
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 12
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 13
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 14
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 15
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 16
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 17
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 18
-            }
-        ],
         "127": [
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 5
+                "node_id": 20
             },
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 6
+                "node_id": 21
             },
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 7
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 8
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 9
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 10
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 11
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 12
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 13
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 14
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 15
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 16
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 17
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 18
+                "node_id": 22
             }
         ],
         "128": [
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 5
+                "node_id": 20
             },
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 6
+                "node_id": 21
             },
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 7
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 8
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 9
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 10
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 11
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 12
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 13
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 14
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 15
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 16
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 17
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 18
+                "node_id": 22
             }
         ],
         "129": [
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 5
+                "node_id": 20
             },
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 6
+                "node_id": 21
             },
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 7
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 8
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 9
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 10
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 11
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 12
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 13
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 14
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 15
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 16
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 17
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 18
+                "node_id": 22
             }
         ],
         "130": [
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 5
+                "node_id": 20
             },
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 6
+                "node_id": 21
             },
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 7
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 8
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 9
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 10
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 11
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 12
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 13
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 14
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 15
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 16
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 17
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 18
+                "node_id": 22
             }
         ],
         "131": [
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 5
+                "node_id": 20
             },
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 6
+                "node_id": 21
             },
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 7
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 8
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 9
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 10
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 11
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 12
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 13
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 14
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 15
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 16
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 17
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 18
+                "node_id": 22
             }
         ],
         "132": [
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 5
+                "node_id": 20
             },
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 6
+                "node_id": 21
             },
             {
                 "cfg_id": 1,
                 "state_id": 16,
-                "node_id": 7
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 8
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 9
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 10
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 11
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 12
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 13
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 14
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 15
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 16
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 17
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 16,
-                "node_id": 18
+                "node_id": 22
             }
         ],
-        "134": [
+        "133": [
             {
                 "cfg_id": 1,
-                "state_id": 19,
-                "node_id": 0
+                "state_id": 16,
+                "node_id": 20
             },
             {
                 "cfg_id": 1,
-                "state_id": 19,
-                "node_id": 1
+                "state_id": 16,
+                "node_id": 21
             },
             {
                 "cfg_id": 1,
-                "state_id": 19,
-                "node_id": 2
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 19,
-                "node_id": 3
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 19,
-                "node_id": 4
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 19,
-                "node_id": 5
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 19,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 19,
-                "node_id": 7
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 19,
-                "node_id": 8
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 19,
-                "node_id": 9
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 19,
-                "node_id": 10
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 19,
-                "node_id": 11
+                "state_id": 16,
+                "node_id": 22
             }
         ],
         "135": [
@@ -6323,36 +5138,66 @@
                 "node_id": 11
             }
         ],
-        "139": [
+        "138": [
             {
                 "cfg_id": 1,
-                "state_id": 17,
+                "state_id": 19,
                 "node_id": 0
             },
             {
                 "cfg_id": 1,
-                "state_id": 17,
+                "state_id": 19,
                 "node_id": 1
             },
             {
                 "cfg_id": 1,
-                "state_id": 17,
+                "state_id": 19,
                 "node_id": 2
             },
             {
                 "cfg_id": 1,
-                "state_id": 17,
+                "state_id": 19,
                 "node_id": 3
             },
             {
                 "cfg_id": 1,
-                "state_id": 17,
+                "state_id": 19,
                 "node_id": 4
             },
             {
                 "cfg_id": 1,
-                "state_id": 17,
+                "state_id": 19,
                 "node_id": 5
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 19,
+                "node_id": 6
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 19,
+                "node_id": 7
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 19,
+                "node_id": 8
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 19,
+                "node_id": 9
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 19,
+                "node_id": 10
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 19,
+                "node_id": 11
             }
         ],
         "140": [
@@ -6451,56 +5296,36 @@
                 "node_id": 5
             }
         ],
-        "145": [
+        "143": [
             {
                 "cfg_id": 1,
-                "state_id": 22,
+                "state_id": 17,
                 "node_id": 0
             },
             {
                 "cfg_id": 1,
-                "state_id": 22,
+                "state_id": 17,
                 "node_id": 1
             },
             {
                 "cfg_id": 1,
-                "state_id": 22,
+                "state_id": 17,
                 "node_id": 2
             },
             {
                 "cfg_id": 1,
-                "state_id": 22,
+                "state_id": 17,
                 "node_id": 3
             },
             {
                 "cfg_id": 1,
-                "state_id": 22,
+                "state_id": 17,
                 "node_id": 4
             },
             {
                 "cfg_id": 1,
-                "state_id": 22,
+                "state_id": 17,
                 "node_id": 5
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 22,
-                "node_id": 6
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 22,
-                "node_id": 7
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 22,
-                "node_id": 8
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 22,
-                "node_id": 10
             }
         ],
         "146": [
@@ -6555,16 +5380,56 @@
                 "node_id": 10
             }
         ],
-        "148": [
+        "147": [
             {
                 "cfg_id": 1,
-                "state_id": 21,
+                "state_id": 22,
                 "node_id": 0
             },
             {
                 "cfg_id": 1,
-                "state_id": 21,
+                "state_id": 22,
                 "node_id": 1
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 22,
+                "node_id": 2
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 22,
+                "node_id": 3
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 22,
+                "node_id": 4
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 22,
+                "node_id": 5
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 22,
+                "node_id": 6
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 22,
+                "node_id": 7
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 22,
+                "node_id": 8
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 22,
+                "node_id": 10
             }
         ],
         "149": [
@@ -6627,51 +5492,16 @@
                 "node_id": 1
             }
         ],
-        "158": [
+        "154": [
             {
                 "cfg_id": 1,
-                "state_id": 23,
-                "node_id": 27
+                "state_id": 21,
+                "node_id": 0
             },
             {
                 "cfg_id": 1,
-                "state_id": 23,
-                "node_id": 28
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 23,
-                "node_id": 29
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 23,
-                "node_id": 30
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 23,
-                "node_id": 31
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 23,
-                "node_id": 32
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 23,
-                "node_id": 33
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 23,
-                "node_id": 34
-            },
-            {
-                "cfg_id": 1,
-                "state_id": 23,
-                "node_id": 35
+                "state_id": 21,
+                "node_id": 1
             }
         ],
         "159": [
@@ -6861,9 +5691,56 @@
                 "state_id": 23,
                 "node_id": 35
             }
+        ],
+        "163": [
+            {
+                "cfg_id": 1,
+                "state_id": 23,
+                "node_id": 27
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 23,
+                "node_id": 28
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 23,
+                "node_id": 29
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 23,
+                "node_id": 30
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 23,
+                "node_id": 31
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 23,
+                "node_id": 32
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 23,
+                "node_id": 33
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 23,
+                "node_id": 34
+            },
+            {
+                "cfg_id": 1,
+                "state_id": 23,
+                "node_id": 35
+            }
         ]
     },
-    "/home/maurinl/maurinl26/dyn/dwarf-p-ice3-dace/src/ice3/functions/tiwmx.py": {
+    "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/functions/tiwmx.py": {
         "44": [
             {
                 "cfg_id": 1,

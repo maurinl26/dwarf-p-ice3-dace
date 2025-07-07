@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/dacestub_condensation.dir/link.d"
   "CMakeFiles/dacestub_condensation.dir/tools/dacestub.cpp.o"
   "CMakeFiles/dacestub_condensation.dir/tools/dacestub.cpp.o.d"
   "libdacestub_condensation.pdb"
