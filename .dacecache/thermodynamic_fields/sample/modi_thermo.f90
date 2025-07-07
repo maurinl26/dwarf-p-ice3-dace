@@ -21,30 +21,30 @@ module modi_thermo
 
             type(c_funptr), intent(in) :: handle
 
-            real(c_double), dimension(I, J, K), intent(in) :: cph
-            real(c_double), dimension(I, J, K), intent(in) :: exn
-            real(c_double), dimension(I, J, K), intent(in) :: ls
-            real(c_double), dimension(I, J, K), intent(in) :: lv
-            real(c_double), dimension(I, J, K), intent(in) :: rc
-            real(c_double), dimension(I, J, K), intent(in) :: rg
-            real(c_double), dimension(I, J, K), intent(in) :: ri
-            real(c_double), dimension(I, J, K), intent(in) :: rr
-            real(c_double), dimension(I, J, K), intent(in) :: rs
-            real(c_double), dimension(I, J, K), intent(in) :: rv
-            real(c_double), dimension(I, J, K), intent(in) :: t
-            real(c_double), dimension(I, J, K), intent(in) :: th
+            real(c_double):: cph(*)
+            real(c_double):: exn(*)
+            real(c_double):: ls(*)
+            real(c_double):: lv(*)
+            real(c_double):: rc(*)
+            real(c_double):: rg(*)
+            real(c_double):: ri(*)
+            real(c_double):: rr(*)
+            real(c_double):: rs(*)
+            real(c_double):: rv(*)
+            real(c_double):: t(*)
+            real(c_double):: th(*)
 
-            real(c_double), intent(in) :: CI
-            real(c_double), intent(in) :: CL
-            real(c_double), intent(in) :: CPD
-            real(c_double), intent(in) :: CPV
-            integer(c_int), intent(in) :: I
-            integer(c_int), intent(in) :: J
-            integer(c_int), intent(in) :: K
-            real(c_double), intent(in) :: LSTT
-            real(c_double), intent(in) :: LVTT
-            integer(c_int), intent(in) :: NRR
-            real(c_double), intent(in) :: TT
+            real(c_double), value :: CI
+            real(c_double), value :: CL
+            real(c_double), value :: CPD
+            real(c_double), value :: CPV
+            integer(c_int), value :: I
+            integer(c_int), value :: J
+            integer(c_int), value :: K
+            real(c_double), value :: LSTT
+            real(c_double), value :: LVTT
+            integer(c_int), value :: NRR
+            real(c_double), value :: TT
 
         end subroutine c_program_thermodynamic_fields
 

@@ -12,11 +12,13 @@ module modi_condensation
             integer(c_int), intent(in) :: I
             integer(c_int), intent(in) :: J
             integer(c_int), intent(in) :: K
-            integer(c_bool), intent(in) :: LAMBDA3
+            logical(c_bool), intent(in) :: LAMBDA3
         end function c_dace_init_condensation
 
-        subroutine c_program_condensation(handle, cph, exn, ls, lv, rc, rg, ri, rr, rs, rv, t, th, CI, CL, CPD,&
-                &CPV, I, J, K, LSTT, LVTT, NRR, TT) bind(c, name='__program_condensation')
+        subroutine c_program_condensation(handle, cldfr, cph, ls, lv, pabs, rc, &
+                &rc_out, ri, ri_out, rv, rv_out, sigqsat, sigrc, sigs, t,&
+                &ALPI, ALPW, BETAI, BETAW, FRAC_ICE_ADJUST, GAMI, GAMW, I, J, K,&
+                &LAMBDA3, LSIGMAS, LSTATNW, OCND2, RD, RV, TMAXMIX, TMINMIX) bind(c, name='__program_condensation')
 
             use, intrinsic :: iso_c_binding, only: c_funptr, c_ptr, c_float, c_int, c_bool, c_double
 

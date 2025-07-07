@@ -23,70 +23,70 @@ module modi_ice_adjust
             use, intrinsic :: iso_c_binding, only: c_funptr, c_ptr, c_float, c_int, c_bool, c_double
 
             type(c_funptr), intent(in) :: handle
-            integer(c_int), intent(in) :: I
-            integer(c_int), intent(in) :: J
-            integer(c_int), intent(in) :: K
+            integer(c_int), value :: I
+            integer(c_int), value :: J
+            integer(c_int), value :: K
 
-            real(c_double), dimension(I, J, K), intent(in) :: cf_mf
-            real(c_double), dimension(I, J, K), intent(in) :: cldfr
-            real(c_double), dimension(I, J, K), intent(in) :: exn
-            real(c_double), dimension(I, J, K), intent(in) :: hlc_hcf
-            real(c_double), dimension(I, J, K), intent(in) :: hlc_hrc
-            real(c_double), dimension(I, J, K), intent(in) :: hli_hcf
-            real(c_double), dimension(I, J, K), intent(in) :: hli_hri
-            real(c_double), dimension(I, J, K), intent(in) :: pabs
-            real(c_double), dimension(I, J, K), intent(in) :: rc0
-            real(c_double), dimension(I, J, K), intent(in) :: rc_mf
-            real(c_double), dimension(I, J, K), intent(in) :: rcs0
-            real(c_double), dimension(I, J, K), intent(in) :: rcs1
-            real(c_double), dimension(I, J, K), intent(in) :: rg0
-            real(c_double), dimension(I, J, K), intent(in) :: rhodref
-            real(c_double), dimension(I, J, K), intent(in) :: ri0
-            real(c_double), dimension(I, J, K), intent(in) :: ri_mf
-            real(c_double), dimension(I, J, K), intent(in) :: ris0
-            real(c_double), dimension(I, J, K), intent(in) :: ris1
-            real(c_double), dimension(I, J, K), intent(in) :: rr0
-            real(c_double), dimension(I, J, K), intent(in) :: rs0
-            real(c_double), dimension(I, J, K), intent(in) :: rv0
-            real(c_double), dimension(I, J, K), intent(in) :: rvs0
-            real(c_double), dimension(I, J, K), intent(in) :: rvs1
-            real(c_double), dimension(I, J, K), intent(in) :: sigqsat
-            real(c_double), dimension(I, J, K), intent(in) :: sigrc
-            real(c_double), dimension(I, J, K), intent(in) :: sigs
-            real(c_double), dimension(I, J, K), intent(in) :: th0
-            real(c_double), dimension(I, J, K), intent(in) :: ths0
-            real(c_double), dimension(I, J, K), intent(in) :: ths1
+            real(c_double):: cf_mf(*)
+            real(c_double):: cldfr(*)
+            real(c_double):: exn(*)
+            real(c_double):: hlc_hcf(*)
+            real(c_double):: hlc_hrc(*)
+            real(c_double):: hli_hcf(*)
+            real(c_double):: hli_hri(*)
+            real(c_double):: pabs(*)
+            real(c_double):: rc0(*)
+            real(c_double):: rc_mf(*)
+            real(c_double):: rcs0(*)
+            real(c_double):: rcs1(*)
+            real(c_double):: rg0(*)
+            real(c_double):: rhodref(*)
+            real(c_double):: ri0(*)
+            real(c_double):: ri_mf(*)
+            real(c_double):: ris0(*)
+            real(c_double):: ris1(*)
+            real(c_double):: rr0(*)
+            real(c_double):: rs0(*)
+            real(c_double):: rv0(*)
+            real(c_double):: rvs0(*)
+            real(c_double):: rvs1(*)
+            real(c_double):: sigqsat(*)
+            real(c_double):: sigrc(*)
+            real(c_double):: sigs(*)
+            real(c_double):: th0(*)
+            real(c_double):: ths0(*)
+            real(c_double):: ths1(*)
 
-            real(c_double), intent(in):: ACRIAUTI
-            real(c_double), intent(in):: ALPI
-            real(c_double), intent(in):: ALPW
-            real(c_double), intent(in):: BCRIAUTI
-            real(c_double), intent(in):: BETAI
-            real(c_double), intent(in):: BETAW
-            real(c_double), intent(in):: CI
-            real(c_double), intent(in):: CL
-            real(c_double), intent(in):: CPD
-            real(c_double), intent(in):: CPV
-            real(c_double), intent(in):: CRIAUTC
-            real(c_double), intent(in):: CRIAUTI
-            logical(c_bool), intent(in):: FRAC_ICE_ADJUST
-            real(c_double), intent(in):: GAMI
-            real(c_double), intent(in):: GAMW
-            logical(c_bool), intent(in):: LAMBDA3
-            logical(c_bool), intent(in):: LSIGMAS
-            logical(c_bool), intent(in):: LSTATNW
-            real(c_double), intent(in):: LSTT
-            logical(c_bool), intent(in):: LSUBG_COND
-            real(c_double), intent(in)::  LVTT
-            integer(c_int), intent(in):: NRR
-            logical(c_bool), intent(in):: OCND2
-            real(c_double), intent(in):: RD
-            real(c_double), intent(in):: RV
-            integer(c_int), intent(in):: SUBG_MF_PDF
-            real(c_double), intent(in):: TMAXMIX
-            real(c_double), intent(in):: TMINMIX
-            real(c_double), intent(in):: TT
-            real(c_double), intent(in):: dt
+            real(c_double), value:: ACRIAUTI
+            real(c_double), value:: ALPI
+            real(c_double), value:: ALPW
+            real(c_double), value:: BCRIAUTI
+            real(c_double), value:: BETAI
+            real(c_double), value:: BETAW
+            real(c_double), value:: CI
+            real(c_double), value:: CL
+            real(c_double), value:: CPD
+            real(c_double), value:: CPV
+            real(c_double), value:: CRIAUTC
+            real(c_double), value:: CRIAUTI
+            logical(c_bool), value:: FRAC_ICE_ADJUST
+            real(c_double), value:: GAMI
+            real(c_double), value:: GAMW
+            logical(c_bool), value:: LAMBDA3
+            logical(c_bool), value:: LSIGMAS
+            logical(c_bool), value:: LSTATNW
+            real(c_double), value:: LSTT
+            logical(c_bool), value:: LSUBG_COND
+            real(c_double), value::  LVTT
+            integer(c_int), value:: NRR
+            logical(c_bool), value:: OCND2
+            real(c_double), value:: RD
+            real(c_double), value:: RV
+            integer(c_int), value:: SUBG_MF_PDF
+            real(c_double), value:: TMAXMIX
+            real(c_double), value:: TMINMIX
+            real(c_double), value:: TT
+            real(c_double), value:: dt
         end subroutine c_program_ice_adjust
 
         subroutine c_dace_exit_ice_adjust(handle, err) bind(c, name='__dace_exit_ice_adjust')

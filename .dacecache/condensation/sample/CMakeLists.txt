@@ -17,7 +17,7 @@ add_library(condensation_module STATIC)
 
 target_sources(condensation_module
     PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/modi_ice_adjust.f90
+    ${CMAKE_CURRENT_SOURCE_DIR}/modi_condensation.f90
 )
 
 target_link_libraries(condensation_module condensation)
