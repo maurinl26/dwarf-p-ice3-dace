@@ -65,7 +65,7 @@ program main
     handle = c_dace_init_cloud_fraction_1(I, J, K)
 
     call c_program_cloud_fraction_1(handle, cph, exnref, ls, lv,&
-            &rc, rc_tmp, rcs0, rcs1, ri, ri_tmp, ris0,&
+            &rc0, rc_tmp, rcs0, rcs1, ri0, ri_tmp, ris0,&
             &ris1, rvs0, rvs1, ths0, ths1, I, J, K, &
             &dt)
 
