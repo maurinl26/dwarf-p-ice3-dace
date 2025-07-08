@@ -1,1 +1,1 @@
-#define __HASH_cloud_fraction_2 "130312d52a183e1bb13939f3ef6a00c789eb1005976ccecc1a7561bc78b12d4b"
+#define __HASH_cloud_fraction_2 "26489f96fbd951dfc4e3dbb9d947df8edb43b42dff9f357a6d7a27c30a59ec7e"
