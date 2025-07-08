@@ -111,7 +111,9 @@ def condensation(
         b = ah * a
         sbar = a * (rt[i, j, k] - qsl + ah * lvs * (rc0[i, j, k] + ri0[i, j, k] * prifact) / cph[i, j, k])
 
+        # handle else case
         q1 = 0
+        sigma = 1
         if LSIGMAS and not LSTATNW:
             sigma = max(
                 1e-10,
@@ -122,8 +124,8 @@ def condensation(
             )
 
 
-            # Translation note : l407 - l411
-            q1 = sbar / sigma
+        # Translation note : l407 - l411
+        q1 = sbar / sigma
 
         # 9.2.3 Fractional cloudiness and cloud condensate
         # HCONDENS = 0 is CB02 option

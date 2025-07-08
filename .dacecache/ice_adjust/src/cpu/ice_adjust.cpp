@@ -497,7 +497,7 @@ inline void ice3_stencils_condensation_split_condensation_58_4_0_1_2(ice_adjust_
         __tmp56 = (1 - 0);
         __tmp60 = (1 - 0);
         q1 = 0;
-        sigma = 0;
+        sigma = 1;
         __tmp87 = (! __tmp_117_27_r);
 
     } else {
@@ -612,7 +612,7 @@ inline void ice3_stencils_condensation_split_condensation_58_4_0_1_2(ice_adjust_
         __tmp56 = (1 - frac_tmp);
         __tmp60 = (1 - frac_tmp);
         q1 = 0;
-        sigma = 0;
+        sigma = 1;
         __tmp87 = (! __tmp_117_27_r);
 
     }
