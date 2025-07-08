@@ -6,7 +6,7 @@ struct cloud_fraction_1_state_t {
 
 };
 
-inline void cloud_fraction_1_32_4_0_0_2(cloud_fraction_1_state_t *__state, const double&  __tmp_34_14_r, const double&  __tmp_34_32_r, const double&  __tmp_34_47_r, const double&  __tmp_35_14_r, const double&  __tmp_35_32_r, const double&  __tmp_39_26_r, const double&  __tmp_41_25_r, const double&  __tmp_44_30_r, const double&  __tmp_44_45_r, const double&  __tmp_44_60_r, const double&  __tmp_47_26_r, const double&  __tmp_52_24_r, const double&  __tmp_52_45_r, double&  __tmp_42_8_w, double&  __tmp_43_8_w, double&  __tmp_44_8_w, double&  __tmp_51_8_w) {
+inline void cloud_fraction_1_32_4_0_0_2(cloud_fraction_1_state_t *__state, const double&  __tmp_34_14_r, const double&  __tmp_34_32_r, const double&  __tmp_34_48_r, const double&  __tmp_35_14_r, const double&  __tmp_35_32_r, const double&  __tmp_39_26_r, const double&  __tmp_41_25_r, const double&  __tmp_44_30_r, const double&  __tmp_44_45_r, const double&  __tmp_44_60_r, const double&  __tmp_47_26_r, const double&  __tmp_52_24_r, const double&  __tmp_52_45_r, double&  __tmp_42_8_w, double&  __tmp_43_8_w, double&  __tmp_44_8_w, double&  __tmp_51_8_w) {
     double __tmp6;
     double __tmp12;
     double __tmp1;
@@ -19,10 +19,10 @@ inline void cloud_fraction_1_32_4_0_0_2(cloud_fraction_1_state_t *__state, const
 
     __tmp1 = (__tmp_34_14_r - __tmp_34_32_r);
 
-    w1 = (__tmp1 / __tmp_34_47_r);
+    w1 = (__tmp1 / __tmp_34_48_r);
     __tmp3 = (__tmp_35_14_r - __tmp_35_32_r);
 
-    w2 = (__tmp3 / __tmp_34_47_r);
+    w2 = (__tmp3 / __tmp_34_48_r);
 
     if ((w1 < 0.0)) {
         {
@@ -285,7 +285,7 @@ inline void cloud_fraction_1_32_4_0_0_2(cloud_fraction_1_state_t *__state, const
     }
 }
 
-void __program_cloud_fraction_1_internal(cloud_fraction_1_state_t*__state, double * __restrict__ cph, double * __restrict__ exnref, double * __restrict__ ls, double * __restrict__ lv, double * __restrict__ rc, double * __restrict__ rc_tmp, double * __restrict__ rcs0, double * __restrict__ rcs1, double * __restrict__ ri, double * __restrict__ ri_tmp, double * __restrict__ ris0, double * __restrict__ ris1, double * __restrict__ rvs0, double * __restrict__ rvs1, double * __restrict__ ths0, double * __restrict__ ths1, int I, int J, int K, double dt)
+void __program_cloud_fraction_1_internal(cloud_fraction_1_state_t*__state, double * __restrict__ cph, double * __restrict__ exnref, double * __restrict__ ls, double * __restrict__ lv, double * __restrict__ rc0, double * __restrict__ rc_tmp, double * __restrict__ rcs0, double * __restrict__ rcs1, double * __restrict__ ri0, double * __restrict__ ri_tmp, double * __restrict__ ris0, double * __restrict__ ris1, double * __restrict__ rvs0, double * __restrict__ rvs1, double * __restrict__ ths0, double * __restrict__ ths1, int I, int J, int K, double dt)
 {
 
     {
@@ -295,7 +295,7 @@ void __program_cloud_fraction_1_internal(cloud_fraction_1_state_t*__state, doubl
             for (auto i = 0; i < I; i += 1) {
                 for (auto j = 0; j < J; j += 1) {
                     for (auto k = 0; k < K; k += 1) {
-                        cloud_fraction_1_32_4_0_0_2(__state, rc_tmp[((((J * K) * i) + (K * j)) + k)], rc[((((J * K) * i) + (K * j)) + k)], dt, ri_tmp[((((J * K) * i) + (K * j)) + k)], ri[((((J * K) * i) + (K * j)) + k)], rcs0[((((J * K) * i) + (K * j)) + k)], rvs0[((((J * K) * i) + (K * j)) + k)], lv[((((J * K) * i) + (K * j)) + k)], cph[((((J * K) * i) + (K * j)) + k)], exnref[((((J * K) * i) + (K * j)) + k)], ris0[((((J * K) * i) + (K * j)) + k)], ths0[((((J * K) * i) + (K * j)) + k)], ls[((((J * K) * i) + (K * j)) + k)], rvs1[((((J * K) * i) + (K * j)) + k)], rcs1[((((J * K) * i) + (K * j)) + k)], ths1[((((J * K) * i) + (K * j)) + k)], ris1[((((J * K) * i) + (K * j)) + k)]);
+                        cloud_fraction_1_32_4_0_0_2(__state, rc_tmp[((((J * K) * i) + (K * j)) + k)], rc0[((((J * K) * i) + (K * j)) + k)], dt, ri_tmp[((((J * K) * i) + (K * j)) + k)], ri0[((((J * K) * i) + (K * j)) + k)], rcs0[((((J * K) * i) + (K * j)) + k)], rvs0[((((J * K) * i) + (K * j)) + k)], lv[((((J * K) * i) + (K * j)) + k)], cph[((((J * K) * i) + (K * j)) + k)], exnref[((((J * K) * i) + (K * j)) + k)], ris0[((((J * K) * i) + (K * j)) + k)], ths0[((((J * K) * i) + (K * j)) + k)], ls[((((J * K) * i) + (K * j)) + k)], rvs1[((((J * K) * i) + (K * j)) + k)], rcs1[((((J * K) * i) + (K * j)) + k)], ths1[((((J * K) * i) + (K * j)) + k)], ris1[((((J * K) * i) + (K * j)) + k)]);
                     }
                 }
             }
@@ -304,9 +304,9 @@ void __program_cloud_fraction_1_internal(cloud_fraction_1_state_t*__state, doubl
     }
 }
 
-DACE_EXPORTED void __program_cloud_fraction_1(cloud_fraction_1_state_t *__state, double * __restrict__ cph, double * __restrict__ exnref, double * __restrict__ ls, double * __restrict__ lv, double * __restrict__ rc, double * __restrict__ rc_tmp, double * __restrict__ rcs0, double * __restrict__ rcs1, double * __restrict__ ri, double * __restrict__ ri_tmp, double * __restrict__ ris0, double * __restrict__ ris1, double * __restrict__ rvs0, double * __restrict__ rvs1, double * __restrict__ ths0, double * __restrict__ ths1, int I, int J, int K, double dt)
+DACE_EXPORTED void __program_cloud_fraction_1(cloud_fraction_1_state_t *__state, double * __restrict__ cph, double * __restrict__ exnref, double * __restrict__ ls, double * __restrict__ lv, double * __restrict__ rc0, double * __restrict__ rc_tmp, double * __restrict__ rcs0, double * __restrict__ rcs1, double * __restrict__ ri0, double * __restrict__ ri_tmp, double * __restrict__ ris0, double * __restrict__ ris1, double * __restrict__ rvs0, double * __restrict__ rvs1, double * __restrict__ ths0, double * __restrict__ ths1, int I, int J, int K, double dt)
 {
-    __program_cloud_fraction_1_internal(__state, cph, exnref, ls, lv, rc, rc_tmp, rcs0, rcs1, ri, ri_tmp, ris0, ris1, rvs0, rvs1, ths0, ths1, I, J, K, dt);
+    __program_cloud_fraction_1_internal(__state, cph, exnref, ls, lv, rc0, rc_tmp, rcs0, rcs1, ri0, ri_tmp, ris0, ris1, rvs0, rvs1, ths0, ths1, I, J, K, dt);
 }
 
 DACE_EXPORTED cloud_fraction_1_state_t *__dace_init_cloud_fraction_1(int I, int J, int K)

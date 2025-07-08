@@ -12,11 +12,11 @@ int main(int argc, char **argv) {
     double * __restrict__ exnref = (double*) calloc(((I * J) * K), sizeof(double));
     double * __restrict__ ls = (double*) calloc(((I * J) * K), sizeof(double));
     double * __restrict__ lv = (double*) calloc(((I * J) * K), sizeof(double));
-    double * __restrict__ rc = (double*) calloc(((I * J) * K), sizeof(double));
+    double * __restrict__ rc0 = (double*) calloc(((I * J) * K), sizeof(double));
     double * __restrict__ rc_tmp = (double*) calloc(((I * J) * K), sizeof(double));
     double * __restrict__ rcs0 = (double*) calloc(((I * J) * K), sizeof(double));
     double * __restrict__ rcs1 = (double*) calloc(((I * J) * K), sizeof(double));
-    double * __restrict__ ri = (double*) calloc(((I * J) * K), sizeof(double));
+    double * __restrict__ ri0 = (double*) calloc(((I * J) * K), sizeof(double));
     double * __restrict__ ri_tmp = (double*) calloc(((I * J) * K), sizeof(double));
     double * __restrict__ ris0 = (double*) calloc(((I * J) * K), sizeof(double));
     double * __restrict__ ris1 = (double*) calloc(((I * J) * K), sizeof(double));
@@ -27,18 +27,18 @@ int main(int argc, char **argv) {
 
 
     handle = __dace_init_cloud_fraction_1(I, J, K);
-    __program_cloud_fraction_1(handle, cph, exnref, ls, lv, rc, rc_tmp, rcs0, rcs1, ri, ri_tmp, ris0, ris1, rvs0, rvs1, ths0, ths1, I, J, K, dt);
+    __program_cloud_fraction_1(handle, cph, exnref, ls, lv, rc0, rc_tmp, rcs0, rcs1, ri0, ri_tmp, ris0, ris1, rvs0, rvs1, ths0, ths1, I, J, K, dt);
     err = __dace_exit_cloud_fraction_1(handle);
 
     free(cph);
     free(exnref);
     free(ls);
     free(lv);
-    free(rc);
+    free(rc0);
     free(rc_tmp);
     free(rcs0);
     free(rcs1);
-    free(ri);
+    free(ri0);
     free(ri_tmp);
     free(ris0);
     free(ris1);

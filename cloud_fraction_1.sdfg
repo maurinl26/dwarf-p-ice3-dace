@@ -43,7 +43,6 @@
             "J",
             "K"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       },
@@ -68,7 +67,6 @@
             "J",
             "K"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       },
@@ -93,7 +91,6 @@
             "J",
             "K"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       },
@@ -118,7 +115,6 @@
             "J",
             "K"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       },
@@ -143,7 +139,6 @@
             "J",
             "K"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       },
@@ -168,7 +163,6 @@
             "J",
             "K"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       },
@@ -193,7 +187,6 @@
             "J",
             "K"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       },
@@ -218,7 +211,6 @@
             "J",
             "K"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       },
@@ -243,7 +235,6 @@
             "J",
             "K"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       },
@@ -268,7 +259,6 @@
             "J",
             "K"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       },
@@ -293,7 +283,6 @@
             "J",
             "K"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       },
@@ -318,7 +307,6 @@
             "J",
             "K"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       },
@@ -343,7 +331,6 @@
             "J",
             "K"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       },
@@ -368,7 +355,6 @@
             "J",
             "K"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       },
@@ -393,7 +379,6 @@
             "J",
             "K"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       },
@@ -418,7 +403,6 @@
             "J",
             "K"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       },
@@ -429,7 +413,6 @@
           "shape": [
             "1"
           ],
-          "storage": "CPU_Heap",
           "debuginfo": null
         }
       }
@@ -466,7 +449,7 @@
       "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
     },
     "guid": "d5edaee1-77ad-4811-b7af-dccf7d9c4c77",
-    "hash": "4ef5306bb5d6b56d4d528db13f52204fbcfe35afb6f1b576144437184fe772ff"
+    "hash": "bb032115704e6eb2c93bb1a6ec5db034a2733cee312618cd979109989503375f"
   },
   "nodes": [
     {
@@ -534,7 +517,6 @@
                 }
               ]
             },
-            "schedule": "CPU_Multicore",
             "debuginfo": {
               "type": "DebugInfo",
               "start_line": 32,
@@ -544,79 +526,34 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "in_connectors": {
-              "IN_cph": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "IN_dt": "float64",
-              "IN_exnref": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "IN_ls": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "IN_lv": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "IN_rc0": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "IN_rc_tmp": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "IN_rcs0": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "IN_ri0": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "IN_ri_tmp": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "IN_ris0": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "IN_rvs0": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "IN_ths0": {
-                "type": "pointer",
-                "dtype": "float64"
-              }
+              "IN_cph": null,
+              "IN_dt": null,
+              "IN_exnref": null,
+              "IN_ls": null,
+              "IN_lv": null,
+              "IN_rc0": null,
+              "IN_rc_tmp": null,
+              "IN_rcs0": null,
+              "IN_ri0": null,
+              "IN_ri_tmp": null,
+              "IN_ris0": null,
+              "IN_rvs0": null,
+              "IN_ths0": null
             },
             "out_connectors": {
-              "OUT_cph": "float64",
-              "OUT_dt": "float64",
-              "OUT_exnref": "float64",
-              "OUT_ls": "float64",
-              "OUT_lv": "float64",
-              "OUT_rc0": "float64",
-              "OUT_rc_tmp": "float64",
-              "OUT_rcs0": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "OUT_ri0": "float64",
-              "OUT_ri_tmp": "float64",
-              "OUT_ris0": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "OUT_rvs0": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "OUT_ths0": "float64"
+              "OUT_cph": null,
+              "OUT_dt": null,
+              "OUT_exnref": null,
+              "OUT_ls": null,
+              "OUT_lv": null,
+              "OUT_rc0": null,
+              "OUT_rc_tmp": null,
+              "OUT_rcs0": null,
+              "OUT_ri0": null,
+              "OUT_ri_tmp": null,
+              "OUT_ris0": null,
+              "OUT_rvs0": null,
+              "OUT_ths0": null
             },
             "guid": "adb76c33-eb96-4181-8cce-a2f6a9e8f983"
           },
@@ -629,28 +566,16 @@
           "label": "cloud_fraction_1_32[i=0:I, j=0:J, k=0:K]",
           "attributes": {
             "in_connectors": {
-              "IN_rcs1": "float64",
-              "IN_ris1": "float64",
-              "IN_rvs1": "float64",
-              "IN_ths1": "float64"
+              "IN_rcs1": null,
+              "IN_ris1": null,
+              "IN_rvs1": null,
+              "IN_ths1": null
             },
             "out_connectors": {
-              "OUT_rcs1": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "OUT_ris1": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "OUT_rvs1": {
-                "type": "pointer",
-                "dtype": "float64"
-              },
-              "OUT_ths1": {
-                "type": "pointer",
-                "dtype": "float64"
-              }
+              "OUT_rcs1": null,
+              "OUT_ris1": null,
+              "OUT_rvs1": null,
+              "OUT_ths1": null
             },
             "guid": "cff0048f-bc28-4cef-8384-f9fc26719c5f"
           },
@@ -674,7 +599,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -685,7 +609,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -696,7 +619,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -707,7 +629,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -718,7 +639,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -729,7 +649,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -741,7 +660,6 @@
                         "1"
                       ],
                       "transient": true,
-                      "storage": "Register",
                       "debuginfo": null
                     }
                   },
@@ -753,7 +671,6 @@
                         "1"
                       ],
                       "transient": true,
-                      "storage": "Register",
                       "debuginfo": null
                     }
                   },
@@ -764,7 +681,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -775,7 +691,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -786,7 +701,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -797,7 +711,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -809,7 +722,6 @@
                         "1"
                       ],
                       "transient": true,
-                      "storage": "Register",
                       "debuginfo": null
                     }
                   },
@@ -820,7 +732,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -831,7 +742,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -843,7 +753,6 @@
                         "1"
                       ],
                       "transient": true,
-                      "storage": "Register",
                       "debuginfo": null
                     }
                   },
@@ -855,7 +764,6 @@
                         "1"
                       ],
                       "transient": true,
-                      "storage": "Register",
                       "debuginfo": null
                     }
                   },
@@ -866,7 +774,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -877,7 +784,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -889,7 +795,6 @@
                         "1"
                       ],
                       "transient": true,
-                      "storage": "Register",
                       "debuginfo": null
                     }
                   },
@@ -901,7 +806,6 @@
                         "1"
                       ],
                       "transient": true,
-                      "storage": "Register",
                       "debuginfo": null
                     }
                   },
@@ -913,7 +817,6 @@
                         "1"
                       ],
                       "transient": true,
-                      "storage": "Register",
                       "debuginfo": null
                     }
                   },
@@ -925,7 +828,6 @@
                         "1"
                       ],
                       "transient": true,
-                      "storage": "Register",
                       "debuginfo": null
                     }
                   },
@@ -936,7 +838,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -947,7 +848,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -958,7 +858,6 @@
                       "shape": [
                         "1"
                       ],
-                      "storage": "CPU_Heap",
                       "debuginfo": null
                     }
                   },
@@ -970,7 +869,6 @@
                         "1"
                       ],
                       "transient": true,
-                      "storage": "Register",
                       "debuginfo": null
                     }
                   },
@@ -982,7 +880,6 @@
                         "1"
                       ],
                       "transient": true,
-                      "storage": "Register",
                       "debuginfo": null
                     }
                   },
@@ -994,7 +891,6 @@
                         "1"
                       ],
                       "transient": true,
-                      "storage": "Register",
                       "debuginfo": null
                     }
                   },
@@ -1006,7 +902,6 @@
                         "1"
                       ],
                       "transient": true,
-                      "storage": "Register",
                       "debuginfo": null
                     }
                   }
@@ -1036,14 +931,6 @@
                     "string_data": "",
                     "language": "CPP"
                   }
-                },
-                "debuginfo": {
-                  "type": "DebugInfo",
-                  "start_line": 0,
-                  "end_line": 0,
-                  "start_column": 0,
-                  "end_column": 0,
-                  "filename": null
                 },
                 "guid": "7320c315-f262-4b73-a8cc-5b13df283049"
               },
@@ -1118,7 +1005,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_42_8_w",
-                        "guid": "1b22ae1b-94c6-4c20-bda9-14ca103abcdb"
+                        "guid": "8028921c-bfb0-4b9f-b501-83ecaf7409bf"
                       },
                       "id": 0,
                       "scope_entry": null,
@@ -1142,7 +1029,7 @@
                         },
                         "label": "assign_42_8",
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "becb5e6d-b83d-4a87-9d3c-4dfea8cc841e"
                       },
@@ -1163,7 +1050,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_43_8_w",
-                        "guid": "5c800ba2-1b2a-4c26-b7d2-cd6c906241ed"
+                        "guid": "580e8b1c-a6e6-4261-840c-01faedfc4684"
                       },
                       "id": 2,
                       "scope_entry": null,
@@ -1187,7 +1074,7 @@
                         },
                         "label": "assign_43_8",
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "6670fedf-63eb-46b9-a557-fe2a215c44df"
                       },
@@ -1213,10 +1100,10 @@
                         },
                         "label": "_Mult_",
                         "in_connectors": {
-                          "__in2": "float64"
+                          "__in2": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "5eab1a8b-611b-4908-a804-852e9867107e"
                       },
@@ -1237,7 +1124,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_44_30_r",
-                        "guid": "d0a77943-7f30-4755-96a5-f10af78906fd"
+                        "guid": "8262ce24-d229-4ddc-b6ae-25bc3178158c"
                       },
                       "id": 5,
                       "scope_entry": null,
@@ -1256,7 +1143,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp8",
-                        "guid": "30bd0654-4842-464a-8daa-dd17b9eaa288"
+                        "guid": "9820e1d9-c12c-4ebe-9520-33e9fdb05054"
                       },
                       "id": 6,
                       "scope_entry": null,
@@ -1280,11 +1167,11 @@
                         },
                         "label": "_Mult_",
                         "in_connectors": {
-                          "__in1": "float64",
-                          "__in2": "float64"
+                          "__in1": null,
+                          "__in2": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "5c991110-cc33-443b-813a-a995d583ae6c"
                       },
@@ -1305,7 +1192,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_44_45_r",
-                        "guid": "104ac574-a90f-4825-bfb2-a32beb355512"
+                        "guid": "9a533876-853a-4123-83a4-b81d9ba78735"
                       },
                       "id": 8,
                       "scope_entry": null,
@@ -1324,7 +1211,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_44_60_r",
-                        "guid": "fffa8882-af00-49f1-a33c-3694488c27ae"
+                        "guid": "3fa66620-88ef-4fab-9730-5c86536d2659"
                       },
                       "id": 9,
                       "scope_entry": null,
@@ -1343,7 +1230,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp9",
-                        "guid": "13336678-3196-40e3-9c30-00967e6327b9"
+                        "guid": "bad65e40-5e44-457f-96d4-4f6d9450fea7"
                       },
                       "id": 10,
                       "scope_entry": null,
@@ -1367,11 +1254,11 @@
                         },
                         "label": "_Div_",
                         "in_connectors": {
-                          "__in1": "float64",
-                          "__in2": "float64"
+                          "__in1": null,
+                          "__in2": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "67a708a2-2c8d-4939-8ef4-af3d0d3a23c6"
                       },
@@ -1392,7 +1279,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp10",
-                        "guid": "c9746b5d-1602-4912-8eb4-3454eb3e64d0"
+                        "guid": "06e2d62c-1dcf-4020-b0ac-640fbe3d3439"
                       },
                       "id": 12,
                       "scope_entry": null,
@@ -1411,7 +1298,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_44_8_w",
-                        "guid": "91e6936a-5b01-4c0d-aace-387bdfdb4479"
+                        "guid": "ce6c7dc9-88aa-4ea9-8fd6-d1ce1cfce60e"
                       },
                       "id": 13,
                       "scope_entry": null,
@@ -1435,10 +1322,10 @@
                         },
                         "label": "assign_44_8",
                         "in_connectors": {
-                          "__inp": "float64"
+                          "__inp": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "db473fef-e23e-443f-b0f4-de71e7d8c507"
                       },
@@ -1468,7 +1355,7 @@
                             },
                             "data": "__tmp_44_45_r",
                             "debuginfo": null,
-                            "guid": "6be7590b-873d-4659-84fd-d539cd396e7a",
+                            "guid": "7875dbf8-07bd-43ea-a611-03e8a4b85329",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -1511,7 +1398,7 @@
                             },
                             "data": "__tmp8",
                             "debuginfo": null,
-                            "guid": "cbfee495-81b5-443c-923e-b0120c9a7631",
+                            "guid": "38650428-bb8f-4df9-b845-94968b3bbf1b",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -1554,7 +1441,7 @@
                             },
                             "data": "__tmp_44_30_r",
                             "debuginfo": null,
-                            "guid": "9d25ae51-bfbe-41a5-9a2a-3a21f50a569d",
+                            "guid": "9c6d7fdc-7ab9-42ca-a704-cb2893a9469e",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -1597,7 +1484,7 @@
                             },
                             "data": "__tmp_44_60_r",
                             "debuginfo": null,
-                            "guid": "ab3c0b15-3da2-4492-a8fc-f2a5aafecd69",
+                            "guid": "81bb4aa8-28b4-429f-8264-8b4947a60420",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -1640,7 +1527,7 @@
                             },
                             "data": "__tmp9",
                             "debuginfo": null,
-                            "guid": "950c6c63-95ec-4ae3-8fd8-68d98179317f",
+                            "guid": "41a6dbb0-f287-4ce3-9c9c-badcf9b096be",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -1683,7 +1570,7 @@
                             },
                             "data": "__tmp10",
                             "debuginfo": null,
-                            "guid": "f4aed232-131e-4db9-a7f7-3ce200ae1901",
+                            "guid": "6233c11b-4426-4856-b6e3-7c49a7291e33",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -1727,7 +1614,7 @@
                             "data": "__tmp_42_8_w",
                             "wcr": "(lambda x, y: (x - y))",
                             "debuginfo": null,
-                            "guid": "2e8c68ea-03a3-4333-99f8-f83763c8a53a",
+                            "guid": "c865a5a3-8dc5-4ca3-9f02-6f40b2ab550e",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -1771,7 +1658,7 @@
                             "data": "__tmp_43_8_w",
                             "wcr": "(lambda x, y: (x + y))",
                             "debuginfo": null,
-                            "guid": "e22b8ba0-10a5-4e55-9cbe-b7c5673759ce",
+                            "guid": "b6905b6f-420f-44dd-9ad2-98015f992322",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -1814,7 +1701,7 @@
                             },
                             "data": "__tmp8",
                             "debuginfo": null,
-                            "guid": "516eb39a-768f-44e6-b253-e959a7e48951",
+                            "guid": "369e835f-538c-49a5-beee-e8f7fd33f495",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -1857,7 +1744,7 @@
                             },
                             "data": "__tmp9",
                             "debuginfo": null,
-                            "guid": "ef1eefd2-7c63-4247-b6a1-f8df67aebdee",
+                            "guid": "6cb1b680-9fc0-44db-9b4e-08f6da2ee364",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -1900,7 +1787,7 @@
                             },
                             "data": "__tmp10",
                             "debuginfo": null,
-                            "guid": "9b7ac3b9-bd9e-4acc-a052-555ad90744bf",
+                            "guid": "c96e01bb-f62a-474f-a622-8228e8d64d8f",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -1944,7 +1831,7 @@
                             "data": "__tmp_44_8_w",
                             "wcr": "(lambda x, y: (x + y))",
                             "debuginfo": null,
-                            "guid": "7a9cb91d-346c-48f4-8ac7-90ffc4dde0da",
+                            "guid": "c6601478-0dfc-400c-ab1a-769769c2e4c2",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -2026,10 +1913,10 @@
                         },
                         "label": "_Add_",
                         "in_connectors": {
-                          "__in1": "float64"
+                          "__in1": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "8b1fbb03-d7e6-4ee2-ba96-54c551c920d7"
                       },
@@ -2050,7 +1937,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_41_25_r",
-                        "guid": "25557aa8-8883-4066-85b3-612d89edc9e0"
+                        "guid": "5914d484-6cea-4137-a046-b134ca621b5d"
                       },
                       "id": 1,
                       "scope_entry": null,
@@ -2069,7 +1956,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp14",
-                        "guid": "4da80574-bf8f-452e-8760-a565224c4ce4"
+                        "guid": "4aa90625-8563-48e5-8ebd-314527cbed0e"
                       },
                       "id": 2,
                       "scope_entry": null,
@@ -2088,7 +1975,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_42_8_w",
-                        "guid": "952b543b-3eab-4c01-8fb7-ecbe768ec596"
+                        "guid": "d0139531-4d42-4e1a-8c53-04c2c988537f"
                       },
                       "id": 3,
                       "scope_entry": null,
@@ -2112,10 +1999,10 @@
                         },
                         "label": "assign_50_8",
                         "in_connectors": {
-                          "__inp": "float64"
+                          "__inp": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "72434765-3ac9-44c9-a56a-1379de630b57"
                       },
@@ -2141,10 +2028,10 @@
                         },
                         "label": "_Add_",
                         "in_connectors": {
-                          "__in1": "float64"
+                          "__in1": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "12c21e1a-5c53-482c-b158-fd3ec6a3f9fa"
                       },
@@ -2165,7 +2052,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_47_26_r",
-                        "guid": "cb9efcbd-0b41-475b-b089-6380ab1a849a"
+                        "guid": "3162e2f7-79e3-4ccb-8cba-6ff0db7e9a54"
                       },
                       "id": 6,
                       "scope_entry": null,
@@ -2184,7 +2071,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp15",
-                        "guid": "2c164075-34c8-4ecc-9d3b-28c0cb087df2"
+                        "guid": "975527cd-c2c2-45cc-aefd-b4f24d635674"
                       },
                       "id": 7,
                       "scope_entry": null,
@@ -2203,7 +2090,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_51_8_w",
-                        "guid": "e88ea4ec-4dba-499a-bfd9-a8fe1a916f32"
+                        "guid": "25edf860-0a87-4d4f-bccf-7f5b63f09d02"
                       },
                       "id": 8,
                       "scope_entry": null,
@@ -2227,10 +2114,10 @@
                         },
                         "label": "assign_51_8",
                         "in_connectors": {
-                          "__inp": "float64"
+                          "__inp": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "9a1833cb-ca5f-44f9-bac8-519397e9bfaa"
                       },
@@ -2256,10 +2143,10 @@
                         },
                         "label": "_Mult_",
                         "in_connectors": {
-                          "__in2": "float64"
+                          "__in2": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "379f8280-efa7-4412-8cbe-49960cf6ef52"
                       },
@@ -2280,7 +2167,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_52_45_r",
-                        "guid": "d599310a-bc1d-4084-8b16-8c73c9715e70"
+                        "guid": "61a9b114-b173-43e1-9305-8adc31f45746"
                       },
                       "id": 11,
                       "scope_entry": null,
@@ -2299,7 +2186,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp16",
-                        "guid": "7a097515-36f5-41d9-be56-8171dd9959b2"
+                        "guid": "5c41d22a-5a0c-404d-88b0-0840a9770c4d"
                       },
                       "id": 12,
                       "scope_entry": null,
@@ -2323,11 +2210,11 @@
                         },
                         "label": "_Mult_",
                         "in_connectors": {
-                          "__in1": "float64",
-                          "__in2": "float64"
+                          "__in1": null,
+                          "__in2": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "4a9f84ca-3e68-4324-beb2-2d6363684bf3"
                       },
@@ -2348,7 +2235,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_44_45_r",
-                        "guid": "beb53f2b-6bdd-4469-b3ba-7b2a127edce6"
+                        "guid": "efa8fbd8-5974-45f5-94c6-8e06ecd77200"
                       },
                       "id": 14,
                       "scope_entry": null,
@@ -2367,7 +2254,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_44_60_r",
-                        "guid": "7da76e0c-9cd8-400a-9592-44ce0f7e7e1d"
+                        "guid": "1d50e1ce-489e-4733-a954-2b39155b4fca"
                       },
                       "id": 15,
                       "scope_entry": null,
@@ -2386,7 +2273,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp17",
-                        "guid": "4a7c3fd8-b15c-42e1-9701-7fcb1188810a"
+                        "guid": "e0c153db-6cb0-4b18-a8da-112a4ac66ca2"
                       },
                       "id": 16,
                       "scope_entry": null,
@@ -2410,11 +2297,11 @@
                         },
                         "label": "_Div_",
                         "in_connectors": {
-                          "__in1": "float64",
-                          "__in2": "float64"
+                          "__in1": null,
+                          "__in2": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "426d4a89-5451-41f4-b59b-32a25ecf2759"
                       },
@@ -2435,7 +2322,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp18",
-                        "guid": "986a1b17-786b-4f90-b867-9e098208d4bf"
+                        "guid": "be8afabe-ecdb-4be6-a957-2ece5cb9d1dd"
                       },
                       "id": 18,
                       "scope_entry": null,
@@ -2459,11 +2346,11 @@
                         },
                         "label": "_Add_",
                         "in_connectors": {
-                          "__in1": "float64",
-                          "__in2": "float64"
+                          "__in1": null,
+                          "__in2": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "0472e9a8-3cb2-40d5-9da7-e7349de12afa"
                       },
@@ -2484,7 +2371,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_52_24_r",
-                        "guid": "80c344f8-b7ce-4823-af19-24c961a5623f"
+                        "guid": "1af4a1b1-f4b0-428f-81bc-2d2fa9641164"
                       },
                       "id": 20,
                       "scope_entry": null,
@@ -2503,7 +2390,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp19",
-                        "guid": "008b27a5-9828-4689-8255-28b437a903e1"
+                        "guid": "6f5211f8-75b4-4823-ab13-e154041aa5b6"
                       },
                       "id": 21,
                       "scope_entry": null,
@@ -2522,7 +2409,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_44_8_w",
-                        "guid": "fb160f6d-bea8-45b0-b4f5-f958f98505c0"
+                        "guid": "8d7e6872-c091-4bde-ad9f-65015418b7de"
                       },
                       "id": 22,
                       "scope_entry": null,
@@ -2546,10 +2433,10 @@
                         },
                         "label": "assign_52_8",
                         "in_connectors": {
-                          "__inp": "float64"
+                          "__inp": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "6decff2e-b38a-4e50-80cb-d05d38c59c36"
                       },
@@ -2579,7 +2466,7 @@
                             },
                             "data": "__tmp_41_25_r",
                             "debuginfo": null,
-                            "guid": "5c3b2a46-e141-41ba-ae8a-6fa413626e38",
+                            "guid": "617fc3cc-fd7a-4268-b5d9-2450fe3d1d4e",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -2622,7 +2509,7 @@
                             },
                             "data": "__tmp_47_26_r",
                             "debuginfo": null,
-                            "guid": "1afeb294-f4d3-4a2a-8c96-a18efe19db75",
+                            "guid": "4ecdbdb8-20e6-426e-a059-f68f3f2e0f67",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -2665,7 +2552,7 @@
                             },
                             "data": "__tmp_44_45_r",
                             "debuginfo": null,
-                            "guid": "4b675280-5120-420e-8bd4-0e31b3d09c8d",
+                            "guid": "bad7dc9b-de37-4af1-bfad-8246f136d15e",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -2708,7 +2595,7 @@
                             },
                             "data": "__tmp_52_24_r",
                             "debuginfo": null,
-                            "guid": "aefb72b2-719b-45ad-be90-3831df611c2f",
+                            "guid": "4d4441b1-f980-499a-b76f-7ecd29e6d67b",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -2751,7 +2638,7 @@
                             },
                             "data": "__tmp16",
                             "debuginfo": null,
-                            "guid": "4c633d8b-d2c4-4d4e-9d4c-9eaf90491200",
+                            "guid": "7f4f767b-8fc8-4e4d-82b7-ca55f4ddf089",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -2794,7 +2681,7 @@
                             },
                             "data": "__tmp_52_45_r",
                             "debuginfo": null,
-                            "guid": "db9cc4dd-bd81-41de-a100-3707fa66652c",
+                            "guid": "2b444da6-6c91-4cef-b35c-6dad7cd12a6d",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -2837,7 +2724,7 @@
                             },
                             "data": "__tmp_44_60_r",
                             "debuginfo": null,
-                            "guid": "a80e2d95-1397-4f23-b877-886771668d51",
+                            "guid": "9d974ef9-bc87-44c7-bd8e-4a05ee8bed95",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -2880,7 +2767,7 @@
                             },
                             "data": "__tmp18",
                             "debuginfo": null,
-                            "guid": "350865da-47ff-4552-b92e-68f0972675fb",
+                            "guid": "465a115e-9781-4361-abba-2506ea233100",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -2923,7 +2810,7 @@
                             },
                             "data": "__tmp17",
                             "debuginfo": null,
-                            "guid": "ea1040c0-7ab8-410e-b942-6d7ca1e4be27",
+                            "guid": "d5f7acfe-bde5-4fe9-9734-30ef13a455f5",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -2966,7 +2853,7 @@
                             },
                             "data": "__tmp14",
                             "debuginfo": null,
-                            "guid": "9d276c2b-739b-438e-8d80-b36cac53055d",
+                            "guid": "b85c0015-ca36-4bfb-8c0b-4391151fa981",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -3009,7 +2896,7 @@
                             },
                             "data": "__tmp15",
                             "debuginfo": null,
-                            "guid": "5e63a800-dc5f-4e2f-8820-d110a6f245f1",
+                            "guid": "891fd88b-d521-4fce-bfd3-ecd3b8ff44af",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -3052,7 +2939,7 @@
                             },
                             "data": "__tmp19",
                             "debuginfo": null,
-                            "guid": "cd5c232b-534b-4cc3-95b6-b2152a4ad4c0",
+                            "guid": "aba1a981-cd09-443b-8da8-97aa6ae5b934",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -3095,7 +2982,7 @@
                             },
                             "data": "__tmp14",
                             "debuginfo": null,
-                            "guid": "238c3979-6e15-4e6e-b884-13e10460e2bb",
+                            "guid": "1f91c6f2-e68e-4052-bb6d-aa3e3967e8ac",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -3138,7 +3025,7 @@
                             },
                             "data": "__tmp_42_8_w",
                             "debuginfo": null,
-                            "guid": "2ea75b1c-ea3f-4344-b0c9-e9e3f67c86db",
+                            "guid": "2b3f47c7-ea94-4134-819e-adf01013094b",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -3181,7 +3068,7 @@
                             },
                             "data": "__tmp15",
                             "debuginfo": null,
-                            "guid": "c72204d9-a935-4de6-b174-9fe257ae4812",
+                            "guid": "cdd3325e-d807-4c85-b591-e8cbb4f01180",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -3224,7 +3111,7 @@
                             },
                             "data": "__tmp_51_8_w",
                             "debuginfo": null,
-                            "guid": "30be51d6-5921-4fc0-a1f9-5c6f057a9a80",
+                            "guid": "2e74c918-5b64-4f52-9c65-a089ede2524f",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -3267,7 +3154,7 @@
                             },
                             "data": "__tmp16",
                             "debuginfo": null,
-                            "guid": "3c1cdb2c-1e2e-4257-830e-0550a8cc7a82",
+                            "guid": "38498d30-931c-4359-a2a1-71804f201097",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -3310,7 +3197,7 @@
                             },
                             "data": "__tmp17",
                             "debuginfo": null,
-                            "guid": "76fb56ae-ba2a-4830-b7e7-68c150ab681b",
+                            "guid": "887a24f6-4556-4263-9ada-999c0cd7177b",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -3353,7 +3240,7 @@
                             },
                             "data": "__tmp18",
                             "debuginfo": null,
-                            "guid": "72d3cebb-3540-49a4-9576-b6ff05ccc26b",
+                            "guid": "9a988117-f908-4762-be2d-4f0c00a5bccb",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -3396,7 +3283,7 @@
                             },
                             "data": "__tmp19",
                             "debuginfo": null,
-                            "guid": "ef7ac581-0ae3-446e-9bb3-d88b024e23e9",
+                            "guid": "29a48a1b-d0ea-4e02-830b-1d3c330a64d0",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -3439,7 +3326,7 @@
                             },
                             "data": "__tmp_44_8_w",
                             "debuginfo": null,
-                            "guid": "0106c746-198e-4b2e-a4ed-e701bc29d683",
+                            "guid": "cd7f66a9-91b1-4924-944d-e3bcbbe55719",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -3530,10 +3417,10 @@
                         },
                         "label": "_USub_",
                         "in_connectors": {
-                          "__in": "float64"
+                          "__in": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "5198545e-e8af-472d-83c7-a049de0c6e81"
                       },
@@ -3554,7 +3441,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_39_26_r",
-                        "guid": "16e5fef7-5657-44dc-9a56-e21dd5503d41"
+                        "guid": "08c95a76-197c-499e-a59b-6026068dfd09"
                       },
                       "id": 1,
                       "scope_entry": null,
@@ -3573,7 +3460,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp5",
-                        "guid": "26089a5d-7a63-4f65-8e1a-291ba7933a17"
+                        "guid": "63509e4f-9b86-447f-9eac-21806681b35a"
                       },
                       "id": 2,
                       "scope_entry": null,
@@ -3592,7 +3479,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp6",
-                        "guid": "ace8a367-ddef-464b-9293-24d08610eafe"
+                        "guid": "23ecac64-f14b-4b41-a224-94ec98bab1a7"
                       },
                       "id": 3,
                       "scope_entry": null,
@@ -3609,10 +3496,10 @@
                         "debuginfo": null,
                         "label": "__max2",
                         "in_connectors": {
-                          "__in_b": "float64"
+                          "__in_b": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "e715901d-e6cb-4d99-b920-8f8340509a1c"
                       },
@@ -3642,7 +3529,7 @@
                             },
                             "data": "__tmp_39_26_r",
                             "debuginfo": null,
-                            "guid": "b466ff35-23fe-405e-b8c1-a058a0eff832",
+                            "guid": "2d9f7b8d-920e-428c-a23b-3904bc19913e",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -3685,7 +3572,7 @@
                             },
                             "data": "__tmp5",
                             "debuginfo": null,
-                            "guid": "13acfea1-32d7-4632-8db6-024b69a62504",
+                            "guid": "b8d37fba-dc8e-40b0-b9dc-01a4e097a477",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -3728,7 +3615,7 @@
                             },
                             "data": "__tmp5",
                             "debuginfo": null,
-                            "guid": "56dd47a7-8e2b-4b4b-8359-d6eef27a1ca8",
+                            "guid": "2cb5c752-b58e-4958-bfb9-b1cbe5edd328",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -3771,7 +3658,7 @@
                             },
                             "data": "__tmp6",
                             "debuginfo": null,
-                            "guid": "66738bdd-33f2-4e6b-a067-4cf424054bea",
+                            "guid": "3df7c17f-31db-4e29-95b9-35106e4eaa2f",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -3846,10 +3733,10 @@
                         },
                         "label": "_USub_",
                         "in_connectors": {
-                          "__in": "float64"
+                          "__in": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "a9666e02-c8e9-40d3-8485-0a7b8fdf2e87"
                       },
@@ -3870,7 +3757,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp_47_26_r",
-                        "guid": "9d4da32d-de96-4b97-ae90-40d1bcc29af7"
+                        "guid": "7b9413cd-9cab-4566-94d1-c4d0b7a1e14f"
                       },
                       "id": 1,
                       "scope_entry": null,
@@ -3889,7 +3776,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp11",
-                        "guid": "a547dbc7-3fe7-4ce9-92b9-fec23b174d08"
+                        "guid": "524a2252-8e52-4ead-958a-8af709052d44"
                       },
                       "id": 2,
                       "scope_entry": null,
@@ -3908,7 +3795,7 @@
                           "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
                         },
                         "data": "__tmp12",
-                        "guid": "1ce1e0cf-b3b4-489d-b8ef-2f1da69638ba"
+                        "guid": "f7e0ffbb-e2a8-49dc-9b95-b4a5ae98b494"
                       },
                       "id": 3,
                       "scope_entry": null,
@@ -3925,10 +3812,10 @@
                         "debuginfo": null,
                         "label": "__max2",
                         "in_connectors": {
-                          "__in_b": "float64"
+                          "__in_b": null
                         },
                         "out_connectors": {
-                          "__out": "float64"
+                          "__out": null
                         },
                         "guid": "f54ac600-2a4f-4a82-8196-4203ba89e0df"
                       },
@@ -3958,7 +3845,7 @@
                             },
                             "data": "__tmp_47_26_r",
                             "debuginfo": null,
-                            "guid": "ae08149f-96be-4a09-a48b-e23f8ed2dcde",
+                            "guid": "0f4c6c1e-c7cf-4ff7-88c8-1bd43dbf325d",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -4001,7 +3888,7 @@
                             },
                             "data": "__tmp11",
                             "debuginfo": null,
-                            "guid": "20f4cf22-31a6-4f4b-9e58-7bd4885a80c2",
+                            "guid": "0413e4fe-7613-4297-84d2-b4ab72982fab",
                             "src_subset": {
                               "type": "Range",
                               "ranges": [
@@ -4044,7 +3931,7 @@
                             },
                             "data": "__tmp11",
                             "debuginfo": null,
-                            "guid": "792b93e1-5dab-49da-9445-ef719364c8b7",
+                            "guid": "318f3dc7-af07-4f5d-9fa7-01e84dd65c8b",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -4087,7 +3974,7 @@
                             },
                             "data": "__tmp12",
                             "debuginfo": null,
-                            "guid": "b4504ed9-bbf5-44a2-a41d-ec9132231bd3",
+                            "guid": "1f8835a9-bb1a-442d-8d6d-e5228e86da3d",
                             "src_subset": null,
                             "dst_subset": {
                               "type": "Range",
@@ -4127,34 +4014,6 @@
                   "edges": [],
                   "attributes": {
                     "guid": "061c812d-85c0-4cd9-852d-27761dfb95e7"
-                  }
-                },
-                {
-                  "type": "SDFGState",
-                  "label": "block_0",
-                  "id": 10,
-                  "collapsed": false,
-                  "scope_dict": {
-                    "-1": []
-                  },
-                  "nodes": [],
-                  "edges": [],
-                  "attributes": {
-                    "guid": "a90e0c5e-e97a-496a-b374-8fc200f62180"
-                  }
-                },
-                {
-                  "type": "SDFGState",
-                  "label": "block_1",
-                  "id": 11,
-                  "collapsed": false,
-                  "scope_dict": {
-                    "-1": []
-                  },
-                  "nodes": [],
-                  "edges": [],
-                  "attributes": {
-                    "guid": "93ed6192-864d-497a-ac42-9014efa09d25"
                   }
                 }
               ],
@@ -4321,52 +4180,20 @@
                     "data": {
                       "type": "InterstateEdge",
                       "attributes": {
+                        "assignments": {
+                          "__tmp7": "min(w1, __tmp_41_25_r)"
+                        },
                         "condition": {
                           "string_data": "(not (w1 < 0.0))",
                           "language": "Python"
                         },
-                        "guid": "27199c36-f688-498c-b59e-8db447310efb"
+                        "guid": "1910e44a-e212-4cfc-86af-895a869683c0"
                       },
-                      "label": "(not (w1 < 0.0))"
+                      "label": "(not (w1 < 0.0)); __tmp7=min(w1, __tmp_41_25_r)"
                     }
                   },
                   "src": "4",
-                  "dst": "10"
-                },
-                {
-                  "type": "Edge",
-                  "attributes": {
-                    "data": {
-                      "type": "InterstateEdge",
-                      "attributes": {
-                        "assignments": {
-                          "__tmp7": "min(w1, __tmp_41_25_r)"
-                        },
-                        "guid": "c495a509-3356-428a-92b3-42518c49a2e7"
-                      },
-                      "label": "__tmp7=min(w1, __tmp_41_25_r)"
-                    }
-                  },
-                  "src": "10",
                   "dst": "5"
-                },
-                {
-                  "type": "Edge",
-                  "attributes": {
-                    "data": {
-                      "type": "InterstateEdge",
-                      "attributes": {
-                        "condition": {
-                          "string_data": "(not (w2 < 0.0))",
-                          "language": "Python"
-                        },
-                        "guid": "995bc418-7e32-446d-b3ef-6810f12e0477"
-                      },
-                      "label": "(not (w2 < 0.0))"
-                    }
-                  },
-                  "src": "2",
-                  "dst": "11"
                 },
                 {
                   "type": "Edge",
@@ -4377,12 +4204,16 @@
                         "assignments": {
                           "__tmp13": "min(w2, __tmp_41_25_r)"
                         },
-                        "guid": "208d36f3-dc45-4ace-a542-7f7e2ed2f56c"
+                        "condition": {
+                          "string_data": "(not (w2 < 0.0))",
+                          "language": "Python"
+                        },
+                        "guid": "d4ca6ca4-e144-425b-8811-6ccda7e19432"
                       },
-                      "label": "__tmp13=min(w2, __tmp_41_25_r)"
+                      "label": "(not (w2 < 0.0)); __tmp13=min(w2, __tmp_41_25_r)"
                     }
                   },
-                  "src": "11",
+                  "src": "2",
                   "dst": "7"
                 }
               ],
@@ -4392,7 +4223,6 @@
               "cfg_list_id": 1,
               "start_block": 0
             },
-            "schedule": "Sequential",
             "debuginfo": {
               "type": "DebugInfo",
               "start_line": 32,
@@ -4403,25 +4233,25 @@
             },
             "label": "cloud_fraction_1_32_4",
             "in_connectors": {
-              "__tmp_34_14_r": "float64",
-              "__tmp_34_32_r": "float64",
-              "__tmp_34_48_r": "float64",
-              "__tmp_35_14_r": "float64",
-              "__tmp_35_32_r": "float64",
-              "__tmp_39_26_r": "float64",
-              "__tmp_41_25_r": "float64",
-              "__tmp_44_30_r": "float64",
-              "__tmp_44_45_r": "float64",
-              "__tmp_44_60_r": "float64",
-              "__tmp_47_26_r": "float64",
-              "__tmp_52_24_r": "float64",
-              "__tmp_52_45_r": "float64"
+              "__tmp_34_14_r": null,
+              "__tmp_34_32_r": null,
+              "__tmp_34_48_r": null,
+              "__tmp_35_14_r": null,
+              "__tmp_35_32_r": null,
+              "__tmp_39_26_r": null,
+              "__tmp_41_25_r": null,
+              "__tmp_44_30_r": null,
+              "__tmp_44_45_r": null,
+              "__tmp_44_60_r": null,
+              "__tmp_47_26_r": null,
+              "__tmp_52_24_r": null,
+              "__tmp_52_45_r": null
             },
             "out_connectors": {
-              "__tmp_42_8_w": "float64",
-              "__tmp_43_8_w": "float64",
-              "__tmp_44_8_w": "float64",
-              "__tmp_51_8_w": "float64"
+              "__tmp_42_8_w": null,
+              "__tmp_43_8_w": null,
+              "__tmp_44_8_w": null,
+              "__tmp_51_8_w": null
             },
             "guid": "c78cc114-c5ce-411b-b554-3108f20e4fa8"
           },
@@ -4442,7 +4272,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "rc_tmp",
-            "guid": "470e7d81-bbf7-419c-a745-de870599d699"
+            "guid": "93458623-f949-4578-a47d-4df78b6177f4"
           },
           "id": 3,
           "scope_entry": null,
@@ -4461,7 +4291,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "rc0",
-            "guid": "167a4f12-e9a6-47f8-9fed-e2b39dbd54d6"
+            "guid": "00a1c630-11e0-4eea-be9b-6d890f298655"
           },
           "id": 4,
           "scope_entry": null,
@@ -4480,7 +4310,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "dt",
-            "guid": "a630be7e-6542-4202-8051-ddd6d03cecb0"
+            "guid": "f69b2051-eb5e-4286-a6a6-ab08886809d8"
           },
           "id": 5,
           "scope_entry": null,
@@ -4499,7 +4329,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "ri_tmp",
-            "guid": "e3d08efe-3119-4538-9487-dfe649812c82"
+            "guid": "f6915393-457b-4ab6-b16f-2cdaeb184fee"
           },
           "id": 6,
           "scope_entry": null,
@@ -4518,7 +4348,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "ri0",
-            "guid": "609e07dc-237c-44d6-baf7-152eae51fece"
+            "guid": "07cf8079-46bd-4a4e-adbf-6699f343efe2"
           },
           "id": 7,
           "scope_entry": null,
@@ -4537,7 +4367,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "rcs0",
-            "guid": "c7064157-123c-4ea1-8b1b-5764c751702b"
+            "guid": "fbad794a-6ecc-484f-b761-275794d8200a"
           },
           "id": 8,
           "scope_entry": null,
@@ -4556,7 +4386,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "rvs0",
-            "guid": "c6b3766e-9f41-40ef-accb-4540ceb55d96"
+            "guid": "19326a37-7dca-46c9-ba95-1396b64470ab"
           },
           "id": 9,
           "scope_entry": null,
@@ -4575,7 +4405,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "lv",
-            "guid": "8217c545-25cf-4c98-98f3-9c1a0c98551f"
+            "guid": "7df2d594-fd77-45ea-a819-c5dc5384a529"
           },
           "id": 10,
           "scope_entry": null,
@@ -4594,7 +4424,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "cph",
-            "guid": "a6271716-a415-43f7-9e1d-d676bee3bf69"
+            "guid": "7e65bdc3-35f4-478a-8679-c00496775495"
           },
           "id": 11,
           "scope_entry": null,
@@ -4613,7 +4443,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "exnref",
-            "guid": "7fdef2eb-5b8c-400b-b1f8-fcd47ba8f10b"
+            "guid": "f4c54ebe-ce5b-490a-87fd-483307ebaec0"
           },
           "id": 12,
           "scope_entry": null,
@@ -4632,7 +4462,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "ris0",
-            "guid": "b4d4810b-4389-4af1-8f4d-e3337a687741"
+            "guid": "1e714d7a-41fe-4520-a613-b7ef64c90023"
           },
           "id": 13,
           "scope_entry": null,
@@ -4651,7 +4481,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "ths0",
-            "guid": "261625d9-1302-49c1-b4eb-3eb49f1680a3"
+            "guid": "8fde43f7-7496-4e5d-8831-61b729589e63"
           },
           "id": 14,
           "scope_entry": null,
@@ -4670,7 +4500,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "ls",
-            "guid": "72da7a32-ee50-4bdd-82b1-5d809b59f7d3"
+            "guid": "04fba580-0eeb-42b5-b6fb-83f9a6761f30"
           },
           "id": 15,
           "scope_entry": null,
@@ -4689,7 +4519,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "rvs1",
-            "guid": "b71d660b-e81c-4a88-bd90-fa3f32efb61c"
+            "guid": "0a12f564-72aa-4f3b-a998-37df05642b51"
           },
           "id": 16,
           "scope_entry": null,
@@ -4708,7 +4538,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "rcs1",
-            "guid": "221a2e5c-bd30-428a-b57f-47204ba8d93c"
+            "guid": "8e796599-a3fe-44c7-b470-cc5d2aeff8a8"
           },
           "id": 17,
           "scope_entry": null,
@@ -4727,7 +4557,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "ths1",
-            "guid": "8c91f69e-d5ec-40e5-b151-06e20d7a5a74"
+            "guid": "3324847d-386d-4b23-b594-8afbe9928d1d"
           },
           "id": 18,
           "scope_entry": null,
@@ -4746,7 +4576,7 @@
               "filename": "/home/maurinl/maurinl26/PHYEX/dwarf-p-ice3-dace/src/ice3/stencils/cloud_fraction_split.py"
             },
             "data": "ris1",
-            "guid": "73c5ba50-e995-4c6b-aefc-fe405dc69348"
+            "guid": "702fb319-b710-4f96-9c43-0a6f486411e9"
           },
           "id": 19,
           "scope_entry": null,
@@ -4786,7 +4616,7 @@
                 },
                 "data": "cph",
                 "debuginfo": null,
-                "guid": "74b3e1a0-549b-45ae-a9b6-751f98b9e436",
+                "guid": "d717811e-854b-454b-8d1c-8abf764c7318",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -4841,7 +4671,7 @@
                 },
                 "data": "dt",
                 "debuginfo": null,
-                "guid": "af9fff7a-4879-48d8-996f-a72c74ee547d",
+                "guid": "e31be7fc-88fc-46a8-883e-aa6e54caf0df",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -4896,7 +4726,7 @@
                 },
                 "data": "exnref",
                 "debuginfo": null,
-                "guid": "915743cd-7b0e-406a-824b-1bf138bf1699",
+                "guid": "2decec49-ea7e-4121-b441-a077e08403e4",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -4963,7 +4793,7 @@
                 },
                 "data": "ls",
                 "debuginfo": null,
-                "guid": "2441ca4f-7107-463e-862a-70375ee59064",
+                "guid": "dc137fc9-d0a4-49da-819f-b0feff8f1e00",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -5030,7 +4860,7 @@
                 },
                 "data": "lv",
                 "debuginfo": null,
-                "guid": "1399d113-142c-44b3-8d27-08539a3ccd72",
+                "guid": "5038f744-03d2-4f6e-a40f-f18ecafb05d1",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -5097,7 +4927,7 @@
                 },
                 "data": "rc0",
                 "debuginfo": null,
-                "guid": "f7c6e6d3-8dc5-4e49-9314-127256135db9",
+                "guid": "112c9b7e-46f6-43e2-9f78-e51e1420f2ea",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -5164,7 +4994,7 @@
                 },
                 "data": "rc_tmp",
                 "debuginfo": null,
-                "guid": "a7b65659-bddd-4f0a-bb0a-e59277d1e13e",
+                "guid": "f7b60d9f-1fd7-4661-bde9-8c618d6d3fdc",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -5232,7 +5062,7 @@
                 },
                 "data": "rcs0",
                 "debuginfo": null,
-                "guid": "20828817-f2ea-44cd-a8d6-3471bf497e4b",
+                "guid": "6cf93a7f-a224-4702-a3a9-9cdf811177c4",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -5299,7 +5129,7 @@
                 },
                 "data": "ri0",
                 "debuginfo": null,
-                "guid": "56d6b9da-10de-474a-b121-2c705be94c3f",
+                "guid": "5b9cba29-8621-42c8-98b3-bc65c0098e0d",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -5366,7 +5196,7 @@
                 },
                 "data": "ri_tmp",
                 "debuginfo": null,
-                "guid": "1ae668ae-f193-4dad-942d-2846b87d4328",
+                "guid": "98ec60e2-182f-40e3-8142-3a36286f6639",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -5434,7 +5264,7 @@
                 },
                 "data": "ris0",
                 "debuginfo": null,
-                "guid": "23acd16f-76f4-4585-add1-09ade705d594",
+                "guid": "a8b79d23-02ed-4b33-b1cf-8675c1f2d918",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -5502,7 +5332,7 @@
                 },
                 "data": "rvs0",
                 "debuginfo": null,
-                "guid": "4d0bae1b-d1d6-4090-a483-7a85a4bd41f0",
+                "guid": "e3a4f4d9-4398-47be-b4b3-39745a136e21",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -5569,7 +5399,7 @@
                 },
                 "data": "ths0",
                 "debuginfo": null,
-                "guid": "8997bd12-7464-460a-9d5a-f1b7822688f8",
+                "guid": "04883f4b-8a62-422d-8b81-89dcb65a532c",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -5636,7 +5466,7 @@
                 },
                 "data": "cph",
                 "debuginfo": null,
-                "guid": "4fb42244-bcbd-43fb-bff1-4b80d42ba0db",
+                "guid": "d717811e-854b-454b-8d1c-8abf764c7318",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -5691,7 +5521,7 @@
                 },
                 "data": "dt",
                 "debuginfo": null,
-                "guid": "003b43f5-a249-46f9-8485-56e6b56c373d",
+                "guid": "e31be7fc-88fc-46a8-883e-aa6e54caf0df",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -5746,7 +5576,7 @@
                 },
                 "data": "exnref",
                 "debuginfo": null,
-                "guid": "6297015d-ece9-4598-8461-f2c50e77063f",
+                "guid": "2decec49-ea7e-4121-b441-a077e08403e4",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -5813,7 +5643,7 @@
                 },
                 "data": "ls",
                 "debuginfo": null,
-                "guid": "a26c6b76-42e3-4ffe-8014-8828fa32fc2f",
+                "guid": "dc137fc9-d0a4-49da-819f-b0feff8f1e00",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -5880,7 +5710,7 @@
                 },
                 "data": "lv",
                 "debuginfo": null,
-                "guid": "3aeb9055-97b1-438e-8fdb-cad49dda7fad",
+                "guid": "5038f744-03d2-4f6e-a40f-f18ecafb05d1",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -5947,7 +5777,7 @@
                 },
                 "data": "rc0",
                 "debuginfo": null,
-                "guid": "42105108-9394-4905-8633-951ffdec4505",
+                "guid": "112c9b7e-46f6-43e2-9f78-e51e1420f2ea",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -6014,7 +5844,7 @@
                 },
                 "data": "rc_tmp",
                 "debuginfo": null,
-                "guid": "9308526f-1f1e-4c01-88b3-3f251a0f81d8",
+                "guid": "f7b60d9f-1fd7-4661-bde9-8c618d6d3fdc",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -6082,7 +5912,7 @@
                 },
                 "data": "rcs0",
                 "debuginfo": null,
-                "guid": "99fc7cbe-c967-43ca-9d66-d457008dd206",
+                "guid": "6cf93a7f-a224-4702-a3a9-9cdf811177c4",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -6149,7 +5979,7 @@
                 },
                 "data": "rcs1",
                 "debuginfo": null,
-                "guid": "5db25d37-b358-4a97-9f80-bcf6abf811a7",
+                "guid": "46de504d-79f2-4934-be1a-5b50448e0ec9",
                 "src_subset": null,
                 "dst_subset": {
                   "type": "Range",
@@ -6216,7 +6046,7 @@
                 },
                 "data": "ri0",
                 "debuginfo": null,
-                "guid": "c9778893-e38b-4cf4-9a77-b1ea29a44733",
+                "guid": "5b9cba29-8621-42c8-98b3-bc65c0098e0d",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -6283,7 +6113,7 @@
                 },
                 "data": "ri_tmp",
                 "debuginfo": null,
-                "guid": "77a1d514-2f80-4c4a-84d9-038a7ab15cca",
+                "guid": "98ec60e2-182f-40e3-8142-3a36286f6639",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -6351,7 +6181,7 @@
                 },
                 "data": "ris0",
                 "debuginfo": null,
-                "guid": "6ba418a0-f8b6-4b78-88ef-33d73620ed19",
+                "guid": "a8b79d23-02ed-4b33-b1cf-8675c1f2d918",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -6418,7 +6248,7 @@
                 },
                 "data": "ris1",
                 "debuginfo": null,
-                "guid": "b81a00ba-5f28-4e82-bc6e-7deb06d91ddd",
+                "guid": "40d31dac-2234-4769-ae22-f6d49ba06bae",
                 "src_subset": null,
                 "dst_subset": {
                   "type": "Range",
@@ -6486,7 +6316,7 @@
                 },
                 "data": "rvs0",
                 "debuginfo": null,
-                "guid": "aa4f2fc7-eadb-4fd1-9776-d2b0ac716ae1",
+                "guid": "e3a4f4d9-4398-47be-b4b3-39745a136e21",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -6554,7 +6384,7 @@
                 },
                 "data": "rvs1",
                 "debuginfo": null,
-                "guid": "5a3596ac-c1f6-4b1f-9310-0213c062b7f1",
+                "guid": "c620dbdd-d464-4f4c-b6c4-cb1e6b43423d",
                 "src_subset": null,
                 "dst_subset": {
                   "type": "Range",
@@ -6621,7 +6451,7 @@
                 },
                 "data": "ths0",
                 "debuginfo": null,
-                "guid": "9fe9af70-ed3e-4379-a996-f1fb07856b6c",
+                "guid": "04883f4b-8a62-422d-8b81-89dcb65a532c",
                 "src_subset": {
                   "type": "Range",
                   "ranges": [
@@ -6688,7 +6518,7 @@
                 },
                 "data": "ths1",
                 "debuginfo": null,
-                "guid": "6e4a93eb-88fd-43c5-8a2a-a5dba324c20b",
+                "guid": "d0c35019-907e-4d9d-8a8b-172b8c146ccb",
                 "src_subset": null,
                 "dst_subset": {
                   "type": "Range",
@@ -6756,7 +6586,7 @@
                 },
                 "data": "rvs1",
                 "debuginfo": null,
-                "guid": "105a2e97-0dbd-4386-b576-ba39d4756729",
+                "guid": "c620dbdd-d464-4f4c-b6c4-cb1e6b43423d",
                 "src_subset": null,
                 "dst_subset": {
                   "type": "Range",
@@ -6823,7 +6653,7 @@
                 },
                 "data": "rcs1",
                 "debuginfo": null,
-                "guid": "5cdc185c-f1d7-41af-a6d3-bc1c68478c96",
+                "guid": "46de504d-79f2-4934-be1a-5b50448e0ec9",
                 "src_subset": null,
                 "dst_subset": {
                   "type": "Range",
@@ -6890,7 +6720,7 @@
                 },
                 "data": "ths1",
                 "debuginfo": null,
-                "guid": "dbc3b26c-dd71-408c-89c7-8bc0ba00bbf1",
+                "guid": "d0c35019-907e-4d9d-8a8b-172b8c146ccb",
                 "src_subset": null,
                 "dst_subset": {
                   "type": "Range",
@@ -6957,7 +6787,7 @@
                 },
                 "data": "ris1",
                 "debuginfo": null,
-                "guid": "55d404d3-0410-4f3a-88ef-e0e262788913",
+                "guid": "40d31dac-2234-4769-ae22-f6d49ba06bae",
                 "src_subset": null,
                 "dst_subset": {
                   "type": "Range",
