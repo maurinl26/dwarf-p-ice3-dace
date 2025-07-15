@@ -3,6 +3,8 @@
 program test_ice_adjust
 
     use modi_ice_adjust_dace
+    use, intrinsic :: iso_c_binding, only : c_double, c_int, c_funptr, c_bool
+
     implicit none
 
     integer(c_int) :: I, J, K
@@ -39,36 +41,36 @@ program test_ice_adjust
     real(c_double), allocatable :: pths1(:,:,:)
 
 
-    real(c_double) :: ACRIAUTI = 1.0
-    real(c_double):: ALPI = 1.0
-    real(c_double):: ALPW = 1.0
-    real(c_double):: BCRIAUTI = 1.0
-    real(c_double):: BETAI = 1.0
-    real(c_double):: BETAW = 1.0
-    real(c_double):: CI = 1.0
-    real(c_double):: CL = 1.0
-    real(c_double):: CPD = 1.0
-    real(c_double):: CPV = 1.0
-    real(c_double):: CRIAUTC = 1.0
-    real(c_double):: CRIAUTI = 1.0
-    logical(c_bool):: FRAC_ICE_ADJUST = .true.
-    real(c_double):: GAMI = 1.0
-    real(c_double):: GAMW = 1.0
-    logical(c_bool):: LAMBDA3 = .true.
-    logical(c_bool):: LSIGMAS = .true.
-    logical(c_bool):: LSTATNW = .true.
-    real(c_double):: LSTT = 1.0
-    logical(c_bool):: LSUBG_COND = .true.
-    real(c_double)::  LVTT = 1.0
-    integer(c_int):: NRR = 6
-    logical(c_bool):: OCND2 = .true.
-    real(c_double):: RD = 1.0
-    real(c_double):: RV = 1.0
-    integer(c_int):: SUBG_MF_PDF = 0
-    real(c_double):: TMAXMIX = 1.0
-    real(c_double):: TMINMIX = 1.0
-    real(c_double):: TT = 1.0
-    real(c_double):: dt = 50.0
+    real(c_double), parameter :: ACRIAUTI = 1.0
+    real(c_double), parameter :: ALPI = 1.0
+    real(c_double), parameter :: ALPW = 1.0
+    real(c_double), parameter :: BCRIAUTI = 1.0
+    real(c_double), parameter :: BETAI = 1.0
+    real(c_double), parameter :: BETAW = 1.0
+    real(c_double), parameter :: CI = 1.0
+    real(c_double), parameter :: CL = 1.0
+    real(c_double), parameter :: CPD = 1.0
+    real(c_double), parameter :: CPV = 1.0
+    real(c_double), parameter :: CRIAUTC = 1.0
+    real(c_double), parameter :: CRIAUTI = 1.0
+    logical(c_bool), parameter :: FRAC_ICE_ADJUST = .true.
+    real(c_double), parameter :: GAMI = 1.0
+    real(c_double), parameter :: GAMW = 1.0
+    logical(c_bool), parameter :: LAMBDA3 = .true.
+    logical(c_bool), parameter :: LSIGMAS = .true.
+    logical(c_bool), parameter :: LSTATNW = .true.
+    real(c_double), parameter :: LSTT = 1.0
+    logical(c_bool), parameter :: LSUBG_COND = .true.
+    real(c_double), parameter ::  LVTT = 1.0
+    integer(c_int), parameter :: NRR = 6
+    logical(c_bool), parameter :: OCND2 = .true.
+    real(c_double), parameter :: RD = 1.0
+    real(c_double), parameter :: RV = 1.0
+    integer(c_int), parameter :: SUBG_MF_PDF = 0
+    real(c_double), parameter :: TMAXMIX = 1.0
+    real(c_double), parameter :: TMINMIX = 1.0
+    real(c_double), parameter :: TT = 1.0
+    real(c_double), parameter  :: dt = 50.0
 
     type(c_funptr) :: handle
     integer :: err
@@ -147,12 +149,12 @@ program test_ice_adjust
     handle = c_dace_init_ice_adjust(I, J, K)
 
     print *, "debug : main_ice_adjust.F90 - Call  program"
-    call c_program_ice_adjust(handle, pcf_mf, pcldfr, pexn, phlc_hcf, phlc_hrc, phli_hcf,&
-                &phli_hri, ppabs, prc0, prc_mf, prcs0, prcs1, prg0, prhodref, pri0, pri_mf, pris0, pris1, prr0, prs0, prv0, prvs0,&
-                &prvs1, psigqsat, psigrc, psigs, pth0, pths0, pths1, ACRIAUTI, ALPI, ALPW, BCRIAUTI,  BETAI,  BETAW,&
-                &CI, CL, CPD, CPV, CRIAUTC, CRIAUTI, FRAC_ICE_ADJUST, GAMI, GAMW, I, J, K, LAMBDA3, LSIGMAS,&
-                &LSTATNW, LSTT, LSUBG_COND, LVTT, NRR, OCND2, RD, RV, SUBG_MF_PDF, TMAXMIX, TMINMIX, TT,&
-                &dt)
+    call c_program_ice_adjust(handle=handle, cldfr=pcldfr, exn=pexn, pabs=ppabs, rc0=prc0, rcs0=prcs0, rcs1=prcs1, &
+                &rg0=prg0, ri0=pri0, ris0=pris0, ris1=pris1, rr0=prr0, rs0=prs0, rv0=prv0, rvs0=prvs0, rvs1=prvs1, &
+                &sigqsat=psigqsat, sigrc=psigrc, sigs=psigs, th0=pth0, ths0=pths0, ths1=pths1, ALPI=ALPI, ALPW=ALPW, &
+                &BETAI=BETAI, BETAW=BETAW, CI=CI, CL=CL, CPD=CPD, CPV=CPV, GAMI=GAMI, GAMW=GAMW, I=I, J=J, K=K, &
+                &LSIGMAS=LSIGMAS, LSTATNW=LSTATNW, LSTT=LSTT, LVTT=LVTT, OCND2=OCND2, RD=RD, RV=RV, TMAXMIX=TMAXMIX, &
+                &TMINMIX=TMINMIX, TT=TT)
 
     print *, "handle :", handle
     print *, "error :", err

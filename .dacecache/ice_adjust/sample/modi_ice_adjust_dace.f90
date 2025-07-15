@@ -1,6 +1,6 @@
 ! Created by  on 27/06/2025.
 
-module modi_ice_adjust
+module modi_ice_adjust_dace
 
     use, intrinsic :: iso_c_binding
     implicit none
@@ -8,9 +8,9 @@ module modi_ice_adjust
     interface
         type(c_funptr) function c_dace_init_ice_adjust(I, J, K) bind(c, name='__dace_init_ice_adjust')
             use, intrinsic :: iso_c_binding, only: c_int, c_funptr
-            integer(c_int), intent(in) :: I
-            integer(c_int), intent(in) :: J
-            integer(c_int), intent(in) :: K
+            integer(c_int) :: I
+            integer(c_int) :: J
+            integer(c_int) :: K
         end function c_dace_init_ice_adjust
 
         subroutine c_program_ice_adjust(handle, cldfr, exn, pabs, rc0, rcs0, rcs1, rg0, ri0, ris0, ris1, rr0, rs0, rv0,&
@@ -20,7 +20,7 @@ module modi_ice_adjust
 
             use, intrinsic :: iso_c_binding, only: c_funptr, c_ptr, c_float, c_int, c_bool, c_double
 
-            type(c_funptr), intent(in) :: handle
+            type(c_funptr) :: handle
             integer(c_int), value :: I
             integer(c_int), value :: J
             integer(c_int), value :: K
@@ -47,37 +47,37 @@ module modi_ice_adjust
             real(c_double) :: ths0(*)
             real(c_double) :: ths1(*)
 
-            real(c_double), value:: ALPI
-            real(c_double), value:: ALPW
-            real(c_double), value:: BETAI
-            real(c_double), value:: BETAW
-            real(c_double), value:: CI
-            real(c_double), value:: CL
-            real(c_double), value:: CPD
-            real(c_double), value:: CPV
-            real(c_double), value:: GAMI
-            real(c_double), value:: GAMW
-            logical(c_bool), value:: LSIGMAS
-            logical(c_bool), value:: LSTATNW
-            real(c_double), value:: LSTT
-            logical(c_bool), value:: LSUBG_COND
-            real(c_double), value::  LVTT
-            integer(c_int), value:: NRR
-            logical(c_bool), value:: OCND2
-            real(c_double), value:: RD
-            real(c_double), value:: RV
-            real(c_double), value:: TMAXMIX
-            real(c_double), value:: TMINMIX
-            real(c_double), value:: TT
-            real(c_double), value:: dt
+            real(c_double) :: ALPI
+            real(c_double) :: ALPW
+            real(c_double) :: BETAI
+            real(c_double) :: BETAW
+            real(c_double) :: CI
+            real(c_double) :: CL
+            real(c_double) :: CPD
+            real(c_double) :: CPV
+            real(c_double) :: GAMI
+            real(c_double) :: GAMW
+            logical(c_bool) :: LSIGMAS
+            logical(c_bool) :: LSTATNW
+            real(c_double) :: LSTT
+            logical(c_bool) :: LSUBG_COND
+            real(c_double) ::  LVTT
+            integer(c_int) :: NRR
+            logical(c_bool) :: OCND2
+            real(c_double) :: RD
+            real(c_double) :: RV
+            real(c_double) :: TMAXMIX
+            real(c_double) :: TMINMIX
+            real(c_double) :: TT
+            real(c_double) :: dt
         end subroutine c_program_ice_adjust
 
         subroutine c_dace_exit_ice_adjust(handle, err) bind(c, name='__dace_exit_ice_adjust')
             use, intrinsic :: iso_c_binding, only: c_funptr, c_int
-            type(c_funptr), intent(in) :: handle
-            integer(c_int), intent(out) :: err
+            type(c_funptr) :: handle
+            integer(c_int) :: err
         end subroutine c_dace_exit_ice_adjust
 
     end interface
 
-end module modi_ice_adjust
+end module modi_ice_adjust_dace

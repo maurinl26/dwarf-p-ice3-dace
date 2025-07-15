@@ -13,19 +13,20 @@ target_include_directories(dacestub_ice_adjust
     INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
 
-add_library(ice_adjust_module STATIC)
+add_library(ice-adjust-dace-module STATIC)
 
-target_sources(ice_adjust_module
+target_sources(ice-adjust-dace-module
     PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/modi_ice_adjust.f90
+    ${CMAKE_CURRENT_SOURCE_DIR}/modi_ice_adjust_dace.f90
 )
 
-target_link_libraries(ice_adjust_module ice_adjust)
-target_link_libraries(ice_adjust_module dacestub_ice_adjust)
+target_link_libraries(ice-adjust-dace-module INTERFACE ice_adjust)
+target_link_libraries(ice-adjust-dace-module INTERFACE dacestub_ice_adjust)
 
 add_executable(test_ice_adjust test_ice_adjust.f90)
 
 target_link_libraries(test_ice_adjust
-    PUBLIC
-    ice_adjust_module
+    PRIVATE
+    ice-adjust-dace-module
 )
+
