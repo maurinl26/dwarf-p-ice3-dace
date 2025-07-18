@@ -10,64 +10,6 @@ from ice3.stencils.thermo import thermodynamic_fields
 from ice3.utils.typingx import dtype_float, dtype_int
 from ice3.utils.dims import I, J, K
 
-class IceAdjustState:
-    RD: float
-    RV: float
-
-    FRAC_ICE_ADJUST: int
-    TMAXMIX: float
-    TMINMIX: float
-
-    OCND2: bool
-    LSIGMAS: bool
-    LSTATNW: bool
-    LSUBG_COND: bool
-
-    CONDENS: int
-    NRR: int
-
-    CPV: float
-    CPD: float
-    CL: float
-    CI: float
-
-    SUBG_MF_PDF: int
-    CRIAUTC: float
-    CRIAUTI: float
-    ACRIAUTI: float
-    BCRIAUTI: float
-    TT: float
-    LAMBDA3: bool
-
-    def __init__(self, phyext: dict):
-        self.RD = phyext["RD"]
-        self.RV = phyext["RV"]
-
-        self.FRAC_ICE_ADJUST = phyext["FRAC_ICE_ADJUST"]
-        self.TMAXMIX = phyext["TMAXMIX"]
-        self.TMINMIX = phyext["TMINMIX"]
-
-        self.OCND2 = phyext["OCND2"]
-        self.LSIGMAS = phyext["LSIGMAS"]
-        self.LSTATNW = phyext["LSTATNW"]
-        self.LSUBG_COND = phyext["LSUBG_COND"]
-
-        self.CONDENS = phyext["CONDENS"]
-        self.NRR = phyext["NRR"]
-
-        self.CPV = phyext["CPV"]
-        self.CPD = phyext["CPD"]
-        self.CL = phyext["CL"]
-        self.CI = phyext["CI"]
-
-        self.SUBG_MF_PDF = phyext["SUBG_MF_PDF"]
-        self.CRIAUTC = phyext["CRIAUTC"]
-        self.CRIAUTI = phyext["CRIAUTI"]
-        self.ACRIAUTI = phyext["ACRIAUTI"]
-        self.BCRIAUTI = phyext["BCRIAUTI"]
-        self.TT = phyext["TT"]
-        self.LAMBDA3 = phyext["LAMBDA3"]
-
 
 @dace.program
 def ice_adjust(
