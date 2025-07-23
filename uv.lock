@@ -126,8 +126,8 @@ wheels = [
 
 [[package]]
 name = "dace"
-version = "1.0.2"
-source = { registry = "https://pypi.org/simple" }
+version = "1.0.0"
+source = { git = "https://github.com/spcl/dace.git#3f16c1afbacd89c8b5fdc942576e8b5af4b26a2d" }
 dependencies = [
     { name = "aenum" },
     { name = "astunparse" },
@@ -142,7 +142,6 @@ dependencies = [
     { name = "pyyaml" },
     { name = "sympy" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/53/02/1a2ece00b229710a4db8f301bba6097eacfbc2a9af84d8746089242d1cf5/dace-1.0.2.tar.gz", hash = "sha256:6728f4bcf584b9f5bbb9c9a393fbdd87364af0c6ad9120da0302b8b470f4f71c", size = 5801789 }
 
 [[package]]
 name = "dill"
@@ -154,7 +153,7 @@ wheels = [
 ]
 
 [[package]]
-name = "dwarf-ice3-gt4py"
+name = "dwarf-p-ice3-dace"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
@@ -184,7 +183,7 @@ tests = [
 
 [package.metadata]
 requires-dist = [
-    { name = "dace", specifier = ">=1.0.2" },
+    { name = "dace", git = "https://github.com/spcl/dace.git" },
     { name = "netcdf4", specifier = ">=1.7.2" },
     { name = "numpy", specifier = "<2.0" },
     { name = "scipy", specifier = ">=1.15.3" },

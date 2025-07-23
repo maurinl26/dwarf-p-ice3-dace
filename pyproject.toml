@@ -1,11 +1,11 @@
 [project]
-name = "dwarf-ice3-gt4py"
+name = "dwarf-p-ice3-dace"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "dace>=1.0.2",
+    "dace",
     "netcdf4>=1.7.2",
     "numpy<2.0",
     "scipy>=1.15.3",
@@ -36,3 +36,6 @@ tests = [
 fortran = [
     "fprettify>=0.3.7",
 ]
+
+[tool.uv.sources]
+dace = { git = "https://github.com/spcl/dace.git" }
