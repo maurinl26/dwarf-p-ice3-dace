@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/workspace/dwarf-p-ice3-dace/.dacecache/tests_test_dace_integration_dace_operation/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

@@ -1,0 +1,100 @@
+{
+    "/workspace/dwarf-p-ice3-dace/tests/test_dace_integration.py": {
+        "133": [
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 0
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 1
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 2
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 3
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 4
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 5
+            }
+        ],
+        "131": [
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 0
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 1
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 2
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 3
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 4
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 5
+            }
+        ],
+        "132": [
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 0
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 1
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 2
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 3
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 4
+            },
+            {
+                "cfg_id": 0,
+                "state_id": 0,
+                "node_id": 5
+            }
+        ]
+    }
+}
