@@ -1,7 +1,6 @@
 # ICE3 microphysics on DaCe
 
-dwarf-ice3-dace is a porting of PHYEX microphysics with DaCe Frontend. Original source code can be retrieved on [PHYEX](https://github.com/UMR-CNRM/PHYEX)
-repository or updated as a submodule in this project -via _install.sh_ script.
+dwarf-ice3-dace is a port of PHYEX microphysics with DaCe Frontend. Original source code can be retrieved from the [PHYEX](https://github.com/UMR-CNRM/PHYEX) repository or updated as a submodule in this project via an install script.
 
 Fortran reference is cy48t3 of AROME packages.
 
@@ -9,16 +8,16 @@ Fortran reference is cy48t3 of AROME packages.
 
 ### LUMI
 
-Data must be setup on the scratch.
+Data must be set up on the scratch filesystem.
 
-Run debug :
-
-Run GPU :
+### Running on GPU
 
 - Module load + environment variables
 ```bash
     source ./config/lumi/lumi_env
 ```
+
+See the [LUMI configuration](config/lumi/lumi_env) for environment setup.
 
 - Interactive session
 ```bash
@@ -44,17 +43,17 @@ Run GPU :
 
 #### Warning
 
-It works well with cupy 14.0 and the last versions of gt4py.cartesian (see config _pyproject.toml_) 
+It works well with cupy 14.0 and the latest versions of gt4py.cartesian (see config [pyproject.toml](pyproject.toml)) 
 
 ### Atos ECMWF
 
 ### Leonardo
 
-## Data generation for reproductibility
+## Data generation for reproducibility
 
-Data generation script is made to transform _.dat_ files from PHYEX to netcdf with named fields. _.dat_ files are retrieved from PHYEX reproductibility sets (testprogs_data).
+The data generation script transforms _.dat_ files from PHYEX to NetCDF format with named fields. The _.dat_ files are retrieved from PHYEX reproducibility test sets (testprogs_data).
 
-Load PHYEX testprogs dataset :
+Load PHYEX testprogs dataset:
 
 - ice_adjust
 ```bash
@@ -67,7 +66,7 @@ Load PHYEX testprogs dataset :
 ```
 
 
-Decode files to netcdf :
+Decode files to NetCDF:
 
 ```bash
    uv run testprogs-data extract-data-ice-adjust \
@@ -76,12 +75,14 @@ Decode files to netcdf :
    ./src/testprogs_data/ice_adjust.yaml 
 ```
 
+This uses the configuration file [ice_adjust.yaml](src/testprogs_data/ice_adjust.yaml).
+
 ## Microphysical Adjustments (Ice Adjust)
 
-There are three components available for microphysical adjustments, under _/src/ice3_gt4py/components_ directory:
+There are components available for microphysical adjustments, under the [src/ice3/components](src/ice3/components) directory:
 
-- IceAdjust (ice_adjust.py) : performs condensation and adjustements following supersaturation, and is the mirror of PHYEX's ice_adjust.F90,
-- AroAdjust (aro_adjust.py) : combines both stencil collections to reproduce aro_adjust.F90.
+- IceAdjust ([ice_adjust.py](src/ice3/functions/ice_adjust.py)) : performs condensation and adjustments following supersaturation, and is the mirror of PHYEX's ice_adjust.F90,
+- IceAdjustSplit ([ice_adjust_split.py](src/ice3/components/ice_adjust_split.py)) : split version of the ice adjustment component.
 - To launch ice_adjust (with cli):
 
 ```bash
@@ -92,47 +93,47 @@ There are three components available for microphysical adjustments, under _/src/
 ## (WIP) Integration with PHYEX
   
 - Option 1:
-  - intégration par Serialbox dans IAL_de330 sous ecbuild
-  - édition de lien vers Serialbox à faire
+  - Integration via Serialbox in IAL_de330 under ecbuild
+  - Link editing to Serialbox to be done
 
 - Option 2:
-  - intégration des fonctions DaCe (C++)
+  - Integration of DaCe functions (C++)
 
 ## (WIP) Integration with PMAP-L
 
 - Option 1:
-  - Intégration Python (nécessite peut-être de la réécriture de composants).
+  - Python integration (may require rewriting of components)
 
 
 ## Unit tests
 
-Unit tests for reproductibility are using pytest. 
+Unit tests for reproducibility are using pytest. 
 
 They test the components for every backend.
 
-Fortran and GT4Py stencils can be tested side-by-side with test components (_stencil_fortran_ directory).
+Fortran and GT4Py stencils can be tested side-by-side with test components ([stencils_fortran](src/ice3/stencils_fortran) directory).
 
 Fortran routines are issued from CY49T0 version of the code and reworked to eliminate
-derivate types from routines. Then both stencils are ran with random numpy arrays
-as an input.
+derivative types from routines. Then both stencils are run with random numpy arrays
+as input.
 
-- conftest.py : 
-  - tous les utilitaires pour les tests : grille, domain, origine de test et config gt4py
-  - compile_fortran_stencil(fichier, module, subroutine)
+- [conftest.py](tests/conftest.py) : 
+  - All test utilities: grid, domain, test origin and gt4py config
+  - compile_fortran_stencil(file, module, subroutine)
 
 
-## Structure du projet 
+## Project Structure
 
-- src 
-  - drivers : Command Line Interface
-  - ice3_gt4py :
-    - stencils : stencils gt4py et dace
-    - functions : fonctions gt4py
-    - initialisation : initialisation des champs (arrays)
-    - phyex_common : équivalents des modd en python : les modd ont été recodés en dataclasses
-    - stencils_fortran : équivalent fortran des stencisl gt4py (modules + 1 subroutine = 1 stencil gt4py)
-    - utils : utilitaires pour la config et l'allocation des champs
-  - testprogs_data :
-    - main : Command Line Interface pour le décodage des testprogs phyex
-    - .yaml : config de décodage des fichiers
+- [src](src/) 
+  - [drivers](src/drivers/) : Command Line Interface
+  - [ice3](src/ice3/) :
+    - [stencils](src/ice3/stencils/) : GT4Py and DaCe stencils
+    - [functions](src/ice3/functions/) : GT4Py functions
+    - [initialisation](src/ice3/initialisation/) : Field initialization (arrays)
+    - [phyex_common](src/ice3/phyex_common/) : Python equivalents of MODD modules (recoded as dataclasses)
+    - [stencils_fortran](src/ice3/stencils_fortran/) : Fortran equivalents of GT4Py stencils (modules + 1 subroutine = 1 GT4Py stencil)
+    - [utils](src/ice3/utils/) : Utilities for configuration and field allocation
+  - [testprogs_data](src/testprogs_data/) :
+    - [main](src/testprogs_data/main.py) : Command Line Interface for decoding PHYEX testprogs
+    - .yaml files : Configuration for file decoding
 
