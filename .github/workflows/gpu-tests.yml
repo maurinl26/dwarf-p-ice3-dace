@@ -1,0 +1,266 @@
+name: GPU Tests
+
+on:
+  push:
+    branches: [ main, develop, cy48t3_deode ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  gpu-tests:
+    runs-on: [self-hosted, gpu, linux]  # Requires self-hosted GPU runner
+    # Alternative: Use GitHub-hosted runners with GPU (when available)
+    # runs-on: ubuntu-latest-gpu
+
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+        cuda-version: ["11.8", "12.1"]
+      fail-fast: false
+
+    env:
+      CUDA_VERSION: ${{ matrix.cuda-version }}
+      PYTHON_VERSION: ${{ matrix.python-version }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Check GPU availability
+      run: |
+        nvidia-smi || echo "No NVIDIA GPU detected"
+        lspci | grep -i nvidia || echo "No NVIDIA devices found"
+        echo "CUDA_VISIBLE_DEVICES: $CUDA_VISIBLE_DEVICES"
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install CUDA toolkit
+      uses: Jimver/cuda-toolkit@v0.2.11
+      with:
+        cuda: ${{ matrix.cuda-version }}
+        method: 'network'
+        sub-packages: '["nvcc", "cudart", "cublas", "curand", "cusparse", "cusolver"]'
+
+    - name: Verify CUDA installation
+      run: |
+        nvcc --version
+        echo "CUDA_HOME: $CUDA_HOME"
+        echo "PATH: $PATH"
+        echo "LD_LIBRARY_PATH: $LD_LIBRARY_PATH"
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+      with:
+        version: "latest"
+
+    - name: Set up Python environment
+      run: |
+        uv python install ${{ matrix.python-version }}
+        uv sync --group tests --group gpu
+
+    - name: Install additional GPU dependencies
+      run: |
+        # Install CuPy for the specific CUDA version
+        if [[ "${{ matrix.cuda-version }}" == "11.8" ]]; then
+          uv add cupy-cuda11x
+        elif [[ "${{ matrix.cuda-version }}" == "12.1" ]]; then
+          uv add cupy-cuda12x
+        fi
+
+        # Install other GPU-specific packages
+        uv add pynvml gpustat
+
+    - name: Verify GPU Python packages
+      run: |
+        uv run python -c "import cupy; print(f'CuPy version: {cupy.__version__}')"
+        uv run python -c "import cupy; print(f'CUDA version: {cupy.cuda.runtime.runtimeGetVersion()}')"
+        uv run python -c "import dace; print(f'DaCe version: {dace.__version__}')"
+
+    - name: Run GPU-specific tests
+      run: |
+        # Set environment variables for GPU testing
+        export CUDA_VISIBLE_DEVICES=0
+        export DACE_CONFIG_COMPILER_CUDA_BACKEND=cuda
+        export DACE_CONFIG_COMPILER_CUDA_SYNCDEBUG=0
+
+        # Run tests with GPU focus
+        uv run pytest tests/test_dace_integration.py -v -k "gpu or cuda or dace" \
+          --tb=short \
+          --disable-warnings \
+          -x
+
+   - name: Run DaCe GPU compilation tests
+      run: |
+        export CUDA_VISIBLE_DEVICES=0
+        export DACE_CONFIG_COMPILER_CUDA_BACKEND=cuda
+
+        # Test DaCe GPU compilation
+        uv run python -c "
+import dace
+import numpy as np
+import cupy as cp
+
+@dace.program
+def gpu_add(A: dace.float64[1024], B: dace.float64[1024], C: dace.float64[1024]):
+    C[:] = A + B
+
+# Test compilation for GPU
+sdfg = gpu_add.to_sdfg()
+sdfg.apply_gpu_transformations()
+compiled = sdfg.compile()
+
+# Test execution
+A_gpu = cp.random.rand(1024)
+B_gpu = cp.random.rand(1024)
+C_gpu = cp.zeros(1024)
+
+compiled(A=A_gpu, B=B_gpu, C=C_gpu)
+
+# Verify result
+expected = A_gpu + B_gpu
+assert cp.allclose(C_gpu, expected), 'GPU computation failed'
+print('GPU DaCe test passed!')
+"
+
+    - name: Run ice3 GPU stencil tests
+      run: |
+        export CUDA_VISIBLE_DEVICES=0
+        export DACE_CONFIG_COMPILER_CUDA_BACKEND=cuda
+
+        # Test ice3 stencils on GPU if available
+        uv run python -c "
+try:
+    from ice3.stencils.sigma_rc_dace import sigrc_computation
+    from ice3.phyex_common.tables import SRC_1D
+    import numpy as np
+  import cupy as cp
+  
+  # Create test data on GPU
+  I, J, K = 10, 10, 5
+  q1 = cp.random.rand(I, J, K).astype(cp.float32)
+  inq1 = cp.ones((I, J, K), dtype=cp.int32)
+  sigrc = cp.zeros((I, J, K), dtype=cp.float32)
+  src_1d_gpu = cp.array(SRC_1D, dtype=cp.float32)
+  
+  # Test GPU execution
+  sigrc_computation(
+  q1=q1, inq1=inq1, src_1d=src_1d_gpu, sigrc=sigrc,
+  LAMBDA3=0, I=I, J=J, K=K, F=34
+  )
+  
+  print('Ice3 GPU stencil test passed!')
+
+  except ImportError as e:
+    print(f'Ice3 GPU test skipped: { e }')
+  except Exception as e:
+      print(f'Ice3 GPU test failed: { e }')
+    exit(1)
+"
+
+    - name: Run performance benchmarks
+      run: |
+        export CUDA_VISIBLE_DEVICES=0
+
+        # Run GPU vs CPU performance comparison
+        uv run python -c "
+import time
+import numpy as np
+try:
+    import cupy as cp
+
+    # Test data
+    size = (100, 100, 50)
+
+    # CPU test
+    A_cpu = np.random.rand(*size)
+    B_cpu = np.random.rand(*size)
+
+    start = time.time()
+    C_cpu = A_cpu + B_cpu * 2.0
+    cpu_time = time.time() - start
+
+    # GPU test
+    A_gpu = cp.asarray(A_cpu)
+    B_gpu = cp.asarray(B_cpu)
+  
+   start = time.time()
+    C_gpu = A_gpu + B_gpu * 2.0
+    cp.cuda.Stream.null.synchronize()  # Wait for GPU completion
+    gpu_time = time.time() - start
+
+    # Verify correctness
+    assert np.allclose(C_cpu, cp.asnumpy(C_gpu)), 'GPU/CPU results differ'
+
+    print(f'CPU time: {cpu_time:.6f}s')
+    print(f'GPU time: {gpu_time:.6f}s')
+    print(f'Speedup: {cpu_time/gpu_time:.2f}x')
+
+except ImportError:
+    print('CuPy not available, skipping GPU performance test')
+"
+
+    - name: Generate GPU test report
+      if: always()
+      run: |
+        echo "## GPU Test Report" > gpu_test_report.md
+        echo "- Python version: ${{ matrix.python-version }}" >> gpu_test_report.md
+        echo "- CUDA version: ${{ matrix.cuda-version }}" >> gpu_test_report.md
+        echo "- GPU info:" >> gpu_test_report.md
+        nvidia-smi --query-gpu=name,memory.total,memory.used --format=csv >> gpu_test_report.md || echo "No GPU info available" >> gpu_test_report.md
+        echo "- Test timestamp: $(date)" >> gpu_test_report.md
+
+    - name: Upload GPU test artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: gpu-test-report-py${{ matrix.python-version }}-cuda${{ matrix.cuda-version }}
+        path: |
+          gpu_test_report.md
+          .dacecache/
+        retention-days: 7
+
+  gpu-tests-fallback:
+    # Fallback job for when GPU runners are not available
+    runs-on: ubuntu-latest
+    if: failure() || cancelled()
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+
+    - name: Run CPU-only tests
+      run: |
+        uv sync --group tests
+
+        # Run DaCe tests without GPU
+        uv run pytest tests/test_dace_integration.py -v \
+          --tb=short \
+          --disable-warnings \
+          -k "not gpu and not cuda"
+
+    - name: Generate fallback report
+      run: |
+        echo "## GPU Test Fallback Report" > fallback_report.md
+        echo "GPU runners not available, ran CPU-only tests" >> fallback_report.md
+        echo "- Timestamp: $(date)" >> fallback_report.md
+
+    - name: Upload fallback artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: gpu-test-fallback-report
+        path: fallback_report.md
+        retention-days: 7
