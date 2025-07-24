@@ -56,7 +56,6 @@ def ice_adjust(
     TT: dtype_float,
     dt: dtype_float,
 ):
-
     cph = np.ndarray([I, J, K], dtype=dtype_float)
     lv = np.ndarray([I, J, K], dtype=dtype_float)
     ls = np.ndarray([I, J, K], dtype=dtype_float)
@@ -86,7 +85,7 @@ def ice_adjust(
         CI=CI,
         LSTT=LSTT,
         LVTT=LVTT,
-        TT=TT
+        TT=TT,
     )
 
     condensation(
@@ -139,7 +138,7 @@ def ice_adjust(
         rvs1=rvs1,
         rcs1=rcs1,
         ris1=ris1,
-        dt=dt
+        dt=dt,
     )
 
 
@@ -159,24 +158,24 @@ if __name__ == "__main__":
         name: dace.ndarray(shape=[I, J, K], dtype=dace.float64)
         for name in [
             "sigqsat",
-    "rhodref",
-    "exn",
-    "pabs",
-    "sigs",
-    "rc_mf",
-    "ri_mf",
-    "cf_mf",
-    "th0",
-    "rv0",
-    "rc0",
-    "rr0",
-    "ri0",
-    "rs0",
-    "rg0",
-    "ths0",
-    "rvs0",
-    "rcs0",
-    "ris0",
+            "rhodref",
+            "exn",
+            "pabs",
+            "sigs",
+            "rc_mf",
+            "ri_mf",
+            "cf_mf",
+            "th0",
+            "rv0",
+            "rc0",
+            "rr0",
+            "ri0",
+            "rs0",
+            "rg0",
+            "ths0",
+            "rvs0",
+            "rcs0",
+            "ris0",
         ]
     }
 
@@ -184,15 +183,15 @@ if __name__ == "__main__":
         name: dace.ndarray(shape=[I, J, K], dtype=dace.float64)
         for name in [
             "ths1",
-    "rvs1",
-    "rcs1",
-    "ris1",
-    "cldfr",
-    "sigrc",
-    "hlc_hrc",
-    "hlc_hcf",
-    "hli_hri",
-    "hli_hcf",
+            "rvs1",
+            "rcs1",
+            "ris1",
+            "cldfr",
+            "sigrc",
+            "hlc_hrc",
+            "hlc_hcf",
+            "hli_hri",
+            "hli_hcf",
         ]
     }
 
@@ -207,42 +206,39 @@ if __name__ == "__main__":
         **state,
         **outputs,
         NRR=6,
-    CPD=1.0,
-    CPV=1.0,
-    CL=1.0,
-    CI=1.0,
-    OCND2=True,
-    FRAC_ICE_ADJUST=True,
-    RD=1.0,
-    RV=1.0,
-    # condens=1,
+        CPD=1.0,
+        CPV=1.0,
+        CL=1.0,
+        CI=1.0,
+        OCND2=True,
+        FRAC_ICE_ADJUST=True,
+        RD=1.0,
+        RV=1.0,
+        # condens=1,
         LSTT=1.0,
         LVTT=1.0,
-    TMAXMIX=1.0,
-    TMINMIX=1.0,
-    LSIGMAS=True,
-    LSTATNW=True,
-    ALPW=1.0,
-    BETAW=1.0,
-    GAMW=1.0,
-    ALPI=1.0,
-    BETAI=1.0,
-    GAMI=1.0,
-    LAMBDA3=True,
-    LSUBG_COND=True,
-    CRIAUTC=1.0,
-    SUBG_MF_PDF=1,
-    CRIAUTI=1.0,
-    ACRIAUTI=1.0,
-    BCRIAUTI=1.0,
-    TT=1.0,
-    dt=50.0,
+        TMAXMIX=1.0,
+        TMINMIX=1.0,
+        LSIGMAS=True,
+        LSTATNW=True,
+        ALPW=1.0,
+        BETAW=1.0,
+        GAMW=1.0,
+        ALPI=1.0,
+        BETAI=1.0,
+        GAMI=1.0,
+        LAMBDA3=True,
+        LSUBG_COND=True,
+        CRIAUTC=1.0,
+        SUBG_MF_PDF=1,
+        CRIAUTI=1.0,
+        ACRIAUTI=1.0,
+        BCRIAUTI=1.0,
+        TT=1.0,
+        dt=50.0,
         I=I,
         J=J,
-        K=K
+        K=K,
     )
 
     print(outputs["hlc_hrc"].mean())
-
-
-

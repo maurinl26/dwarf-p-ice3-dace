@@ -206,7 +206,7 @@ def test_cloud_fraction_1(gt4py_config, externals, fortran_dims, precision, back
         dt = gt4py_config.dtypes.float(50.0)
         
         FloatFieldsIJK_Names = [
-             "lv",
+            "lv",
             "ls",
             "cph",
             "exnref",
@@ -229,40 +229,52 @@ def test_cloud_fraction_1(gt4py_config, externals, fortran_dims, precision, back
         }
         
         lv_gt4py = from_array(FloatFieldsIJK["lv"],
-                backend=gt4py_config.backend, dtype=gt4py_config.dtypes.float
+                backend=gt4py_config.backend, 
+                dtype=gt4py_config.dtypes.float
             )
         ls_gt4py = from_array(FloatFieldsIJK["ls"],
-                backend=gt4py_config.backend,dtype=gt4py_config.dtypes.float
+                backend=gt4py_config.backend,
+                dtype=gt4py_config.dtypes.float
             )
         cph_gt4py = from_array(FloatFieldsIJK["cph"],
-                backend=gt4py_config.backend,dtype=gt4py_config.dtypes.float
+                backend=gt4py_config.backend,
+                dtype=gt4py_config.dtypes.float
             )
         exnref_gt4py = from_array(FloatFieldsIJK["exnref"],
-                backend=gt4py_config.backend,dtype=gt4py_config.dtypes.float
+                backend=gt4py_config.backend,
+                dtype=gt4py_config.dtypes.float
             )
         rc_gt4py = from_array(FloatFieldsIJK["rc"],
-                backend=gt4py_config.backend,dtype=gt4py_config.dtypes.float
+                backend=gt4py_config.backend,
+                dtype=gt4py_config.dtypes.float
             )
         ri_gt4py = from_array(FloatFieldsIJK["ri"],
-                backend=gt4py_config.backend,dtype=gt4py_config.dtypes.float
+                backend=gt4py_config.backend,
+                dtype=gt4py_config.dtypes.float
             )
         ths_gt4py = from_array(FloatFieldsIJK["ths"],
-                backend=gt4py_config.backend,dtype=gt4py_config.dtypes.float
+                backend=gt4py_config.backend,
+                dtype=gt4py_config.dtypes.float
             )
         rvs_gt4py = from_array(FloatFieldsIJK["rvs"],
-                backend=gt4py_config.backend,dtype=gt4py_config.dtypes.float
+                backend=gt4py_config.backend,
+                dtype=gt4py_config.dtypes.float
             )
         rcs_gt4py = from_array(FloatFieldsIJK["rcs"],
-                backend=gt4py_config.backend,dtype=gt4py_config.dtypes.float
+                backend=gt4py_config.backend,
+                dtype=gt4py_config.dtypes.float
             )
         ris_gt4py = from_array(FloatFieldsIJK["ris"],
-                backend=gt4py_config.backend,dtype=gt4py_config.dtypes.float
+                backend=gt4py_config.backend,
+                dtype=gt4py_config.dtypes.float
             )
         rc_tmp_gt4py = from_array(FloatFieldsIJK["rc_tmp"],
-                backend=gt4py_config.backend,dtype=gt4py_config.dtypes.float
+                backend=gt4py_config.backend,
+                dtype=gt4py_config.dtypes.float
             )
         ri_tmp_gt4py = from_array(FloatFieldsIJK["ri_tmp"],
-                backend=gt4py_config.backend,dtype=gt4py_config.dtypes.float
+                backend=gt4py_config.backend,
+                dtype=gt4py_config.dtypes.float
             )
 
         cloud_fraction_1(
