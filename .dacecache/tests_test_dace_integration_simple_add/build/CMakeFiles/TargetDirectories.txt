@@ -1,0 +1,4 @@
+/workspace/dwarf-p-ice3-dace/.dacecache/tests_test_dace_integration_simple_add/build/CMakeFiles/tests_test_dace_integration_simple_add.dir
+/workspace/dwarf-p-ice3-dace/.dacecache/tests_test_dace_integration_simple_add/build/CMakeFiles/dacestub_tests_test_dace_integration_simple_add.dir
+/workspace/dwarf-p-ice3-dace/.dacecache/tests_test_dace_integration_simple_add/build/CMakeFiles/edit_cache.dir
+/workspace/dwarf-p-ice3-dace/.dacecache/tests_test_dace_integration_simple_add/build/CMakeFiles/rebuild_cache.dir
