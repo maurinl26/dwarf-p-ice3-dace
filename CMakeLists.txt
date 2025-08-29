@@ -2,7 +2,7 @@
 cmake_minimum_required( VERSION 3.12 FATAL_ERROR)
 find_package( ecbuild 3.4 REQUIRED HINTS ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/../ecbuild )
 
-project( dwarf-p-ice3-dace LANGUAGES Fortran C CXX)
+project( dwarf-p-ice3-dace VERSION 1.0 LANGUAGES Fortran C CXX)
 
 ecbuild_enable_fortran( REQUIRED NO_MODULE_DIRECTORY )
 
