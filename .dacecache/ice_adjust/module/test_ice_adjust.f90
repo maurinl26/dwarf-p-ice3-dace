@@ -165,4 +165,6 @@ program test_ice_adjust
     print *, "mean, prcs1 :", sum(prcs1)/(I * J * K)
     print *, "mean, prvs1 :", sum(prvs1)/(I * J * K)
 
+    print *, "Success"
+
 end program test_ice_adjust
