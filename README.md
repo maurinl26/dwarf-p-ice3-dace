@@ -90,6 +90,22 @@ There are components available for microphysical adjustments, under the [src/ice
   ./data/ice_adjust/reference.nc
 ```
 
+## Integration with IAL
+
+- All the code is generated under _.dacecache_
+  - [ice_adjust](.dacecache/ice_adjust) folder in _.dacecache_ contains code and shared libraries for [ice_adjust_split.py](src/ice3/components/ice_adjust_split.py)
+- In _.dacecache_, a "module" directory is added to contain Fortran-C++ binding module, a fortran test file, and the build system
+  - (WIP) : this part should be automatized with dace tooling (generating Fortran interface)
+- Environment variables
+  - LD_LIBRARY_PATH should include [libice_adjust.so](.dacecache/ice_adjust/build/libice_adjust.so
+  )
+  - PATH should include [libice_adjust.so](.dacecache/ice_adjust/build/libice_adjust.so
+  )
+
+  This part is handled with IAL-bundle
+- Build in IAL 
+
+
 ## (WIP) Integration with PHYEX
   
 - Option 1:
