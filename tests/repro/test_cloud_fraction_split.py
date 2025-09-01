@@ -1,4 +1,3 @@
-from ifs_physics_common.framework.stencil import compile_stencil
 from gt4py.storage import from_array
 import numpy as np
 from numpy.testing import assert_allclose
