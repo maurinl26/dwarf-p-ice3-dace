@@ -156,10 +156,8 @@ program test_ice_adjust
                 &LSIGMAS=LSIGMAS, LSTATNW=LSTATNW, LSTT=LSTT, LVTT=LVTT, OCND2=OCND2, RD=RD, RV=RV, TMAXMIX=TMAXMIX, &
                 &TMINMIX=TMINMIX, TT=TT)
 
-    print *, "handle :", handle
-    print *, "error :", err
-    print *, "mean, hlc_hrc :", sum(phlc_hcf)/(I * J * K)
 
+    print *, "mean, hlc_hrc :", sum(phlc_hcf)/(I * J * K)
     print *, "mean, pths1 :", sum(pths1)/(I * J * K)
     print *, "mean, pris1 :", sum(pris1)/(I * J * K)
     print *, "mean, prcs1 :", sum(prcs1)/(I * J * K)
