@@ -151,7 +151,7 @@ if __name__ == "__main__":
     K = domain[2]
 
     sdfg = ice_adjust.to_sdfg()
-    sdfg.save("ice_adjust.sdfg")
+    sdfg.save("sdfg/ice_adjust.sdfg")
     csdfg = sdfg.compile()
 
     state = {
