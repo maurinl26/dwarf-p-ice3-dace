@@ -1,88 +1,120 @@
 # -*- coding: utf-8 -*-
-from pathlib import Path
-
-import numpy as np
 import typer
+import dace
 import logging
-import time
+import numpy as np
 
-from ice3.components.ice_adjust_split import ice_adjust, IceAdjustState
-from ice3.initialisation.state_ice_adjust import (
-    get_state_ice_adjust,
-)
-from ice3.phyex_common.phyex import Phyex
-from ice3.utils.reader import NetCDFReader
+from ice3.components.ice_adjust_split import ice_adjust
+from ice3.utils.allocate import allocate
 
-from ice3.utils.typingx import dtype_float, precision
-from ice3.utils.dims import I, J, K
-from ice3.utils.dict_to_class import DictToClass
+from typing import Tuple
 
 app = typer.Typer()
 
 ######################## drivers #######################
 @app.command()
-def ice_adjust_split(
-    dataset: str,
+def generate_sdfg(
+    domain: Tuple[int, int, int] = (50, 50, 15)
 ):
     """Run ice_adjust splitted version to avoid
     interpolation problems for sigrc
     """
-    ##### Grid #####
-    logging.info("Initializing grid ...")
-    nx = 9472
-    ny = 2
-    nz = 15
 
-    I = 50
-    J = 50
-    K = 15
+    I = domain[0]
+    J = domain[1]
+    K = domain[2]
+    
+    logging.info("Generate SDFG")
+    sdfg = ice_adjust.to_sdfg()
+    sdfg.save("sdfg/ice_adjust.sdfg")
+    
+    logging.info("Compile SDFG")
+    csdfg = sdfg.compile()
 
-    ################## Phyex #################
-    logging.info("Initializing Phyex ...")
-    phyext = Phyex("AROME").to_externals()
-    phyext.update({
-        "OCND2": False
-    })
+    state = {
+        name: dace.ndarray(shape=[I, J, K], dtype=dace.float64)
+        for name in [
+            "sigqsat",
+            "rhodref",
+            "exn",
+            "pabs",
+            "sigs",
+            "rc_mf",
+            "ri_mf",
+            "cf_mf",
+            "th0",
+            "rv0",
+            "rc0",
+            "rr0",
+            "ri0",
+            "rs0",
+            "rg0",
+            "ths0",
+            "rvs0",
+            "rcs0",
+            "ris0",
+        ]
+    }
 
-    ####### Create state for AroAdjust #######
-    reader = NetCDFReader(Path(dataset))
+    outputs = {
+        name: dace.ndarray(shape=[I, J, K], dtype=dace.float64)
+        for name in [
+            "ths1",
+            "rvs1",
+            "rcs1",
+            "ris1",
+            "cldfr",
+            "sigrc",
+            "hlc_hrc",
+            "hlc_hcf",
+            "hli_hri",
+            "hli_hcf",
+        ]
+    }
+    
+    allocate(domain, state, outputs)
 
-    logging.info("Getting state for IceAdjust")
-
-    th = np.ones((I, J, K), dtype=np.float64)
-    exn = np.ones((I, J, K), dtype=np.float64)
-    rv = np.ones((I, J, K), dtype=np.float64)
-    rc = np.ones((I, J, K), dtype=np.float64)
-    rr = np.ones((I, J, K), dtype=np.float64)
-    ri = np.ones((I, J, K), dtype=np.float64)
-    rs = np.ones((I, J, K), dtype=np.float64)
-    rg = np.ones((I, J, K), dtype=np.float64)
-
-
-    start = time.time()
-    ice_adjust(
-        th[:,:,:],
-        exn[:,:,:],
-        rv[:,:,:],
-        rc[:,:,:],
-        rr[:,:,:],
-        ri[:,:,:],
-        rs[:,:,:],
-        rg[:,:,:],
-        NRR=phyext["NRR"],
-        CPD=phyext["CPD"],
-        CPV=phyext["CPV"],
-        CL=phyext["CL"],
-        CI=phyext["CI"],
-        I=nx,
-        J=ny,
-        K=nz,
+    logging.info("Call compiled SDFG")
+    csdfg(
+        **state,
+        **outputs,
+        NRR=6,
+        CPD=1.0,
+        CPV=1.0,
+        CL=1.0,
+        CI=1.0,
+        OCND2=True,
+        FRAC_ICE_ADJUST=True,
+        RD=1.0,
+        RV=1.0,
+        # condens=1,
+        LSTT=1.0,
+        LVTT=1.0,
+        TMAXMIX=1.0,
+        TMINMIX=1.0,
+        LSIGMAS=True,
+        LSTATNW=True,
+        ALPW=1.0,
+        BETAW=1.0,
+        GAMW=1.0,
+        ALPI=1.0,
+        BETAI=1.0,
+        GAMI=1.0,
+        LAMBDA3=True,
+        LSUBG_COND=True,
+        CRIAUTC=1.0,
+        SUBG_MF_PDF=1,
+        CRIAUTI=1.0,
+        ACRIAUTI=1.0,
+        BCRIAUTI=1.0,
+        TT=1.0,
+        dt=50.0,
+        I=I,
+        J=J,
+        K=K,
     )
-    stop = time.time()
-    elapsed_time = stop - start
-    logging.info(f"Execution duration for IceAdjust : {elapsed_time} s")
 
-    print(ri.shape)
+    logging.info(f"hlc_hrc mean {outputs['hlc_hrc'].mean()}")
 
 
 if __name__ == "__main__":
