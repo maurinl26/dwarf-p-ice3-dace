@@ -15,23 +15,6 @@ app = typer.Typer()
 
 
 @app.command()
-def test_compile_stencils(backend: str):
-    """Compile the list of stencils with given backend"""
-
-    # Compiling with phyex externals
-    for backend, stencil_collection in itertools.product(
-        [backend], STENCIL_COLLECTIONS
-    ):
-
-        logging.info("Building with Phyex externals")
-        config = GT4PyConfig(
-            backend=backend, rebuild=True, validate_args=True, verbose=True
-        )
-        phyex = Phyex("AROME")
-        build(phyex.to_externals(), backend, config, stencil_collection)
-
-
-@app.command()
 def test_components(backend: str):
     """Test ImplicitTendencyComponents for parts of model"""
 

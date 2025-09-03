@@ -1,43 +1,21 @@
 [project]
 name = "dwarf-p-ice3-dace"
-version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
+version = "0.0.0"
 dependencies = [
-    "dace",
-    "gt4py>=1.0.7",
-    "netcdf4>=1.7.2",
-    "numpy<2.0",
-    "scipy>=1.15.3",
-    "typer>=0.15.2",
-    "xarray>=2025.4.0",
+    "dace>=1.0.2",
 ]
 
 [build-system]
-build-backend = 'setuptools.build_meta'
-requires = ['setuptools>=65.5.0', 'wheel']
+requires = [
+  "uv_build>=0.7.19,<0.8.0",
+]
+build-backend = "uv_build"
 
-[project.scripts]
-testprogs-data = "testprogs_data.main:app"
-standalone-model = "drivers.cli:app"
+[tool.uv.build-backend]
+namespace = true
 
-[dependency-groups]
-dev = [
-    "isort>=6.0.1",
-    "ruff>=0.11.11",
+[tool.uv.workspace]
+members = [
+  "/home/maurinl/maurinl26/dwarf-p-ice3-dace",
 ]
-gpu = [
-    "cupy==14.0.0a1",
-    "cupy-xarray>=0.1.4",
-]
-tests = [
-    "pytest>=8.3.5",
-    "pytest-cov>=6.2.1",
-]
-fortran = [
-    "fprettify>=0.3.7",
-]
-
-[tool.uv.sources]
-dace = { git = "https://github.com/spcl/dace.git" }

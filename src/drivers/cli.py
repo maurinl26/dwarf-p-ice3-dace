@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import typer
 import dace
 import logging
 import numpy as np
@@ -9,10 +8,8 @@ from ice3.utils.allocate import allocate
 
 from typing import Tuple
 
-app = typer.Typer()
 
 ######################## drivers #######################
-@app.command()
 def generate_sdfg(
     domain: Tuple[int, int, int] = (50, 50, 15)
 ):
@@ -118,5 +115,5 @@ def generate_sdfg(
 
 
 if __name__ == "__main__":
-    app()
+    generate_sdfg()
 
