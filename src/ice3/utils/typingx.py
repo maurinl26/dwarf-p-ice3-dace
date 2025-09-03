@@ -28,8 +28,9 @@ from ice3.utils.dims import I, J, K
 try:
     precision = os.environ["FP_PRECISION"]
 except KeyError as ke:
-    logging.error(f"{ke}")
+    logging.warning(f"{ke} environment variable not set")
     precision = "double"
+logging.info(f"precision set to {precision}")
 
 match precision:
     case "single":

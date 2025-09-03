@@ -1,6 +1,7 @@
 *.log
 */*.egg-info/
 
+build
 mode_condensation/
 __pycache__/
 data/

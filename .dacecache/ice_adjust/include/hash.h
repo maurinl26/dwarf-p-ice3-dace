@@ -1,1 +1,0 @@
-#define __HASH_ice_adjust "5bc8745809bc7cfb07b0be9813658ab3569e4799f48640c62009adc5ee3ca318"

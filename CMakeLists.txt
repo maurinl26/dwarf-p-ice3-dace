@@ -41,12 +41,31 @@ function(create_venv venv_dir requirements_path)
 		message(FATAL_ERROR "Failed to install dependencies from ${requirements_path}")
 	endif()
 
+	execute_process(
+		COMMAND ${venv_dir}/bin/pip install -e ${CMAKE_CURRENT_SOURCE_DIR}
+		RESULT_VARIABLE pip_e_install_ret_code
+	)
+
+	if(pip_e_install_ret_code)
+		message(FATAL_ERROR "Failed to install ice3")
+	endif()
+
 	message(STATUS "Virtual environment setup done at ${venv_dir} with dependencies from ${requirements_path}")
 endfunction()
 
-function(dace_codegen)
+function(dace_codegen venv_dir)
+	message("Current source dir for code generation ${CMAKE_CURRENT_SOURCE_DIR}")
+	message("Command : ${venv_dir}/bin/python3 ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers/cli.py")
+
+	message("Activate venv")
 	execute_process(
-		COMMAND $Python3_EXECUTABLE ${CMAKE_CURRENT_SOURCE_DIR}/src/ice3/drivers/cli.py
+		COMMAND source ${venv_dir}/bin/activate
+		RESULT_VARIABLE venv_activate_ret_code
+	)
+
+	message("Execute process")
+	execute_process(
+		COMMAND python ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers/cli.py
 		RESULT_VARIABLE dace_codegen_ret_code
 	)
 
@@ -60,10 +79,12 @@ endfunction()
 set(DWARF_P_ICE3_VENV ${CMAKE_BINARY_DIR}/ice3_venv)
 
 # Create venv with typer (cli) and dace (codegen)
-create_venv($DWARF_P_ICE3_VENV ${CMAKE_CURRENT_SOURCE_DIR}/requirements.txt)
+message("Create venv")
+create_venv(${DWARF_P_ICE3_VENV} ${CMAKE_CURRENT_SOURCE_DIR}/requirements.txt)
 
 # Generate backend code
-dace_codegen()
+message("Generate DaCe code")
+dace_codegen(${DWARF_P_ICE3_VENV})
 
 ### Sources
 if(EXISTS .dacecache)
