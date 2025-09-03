@@ -20,6 +20,7 @@ def generate_sdfg(
     I = domain[0]
     J = domain[1]
     K = domain[2]
+    IJ = I * J
     
     logging.info("Generate SDFG")
     sdfg = ice_adjust.to_sdfg()
@@ -106,8 +107,7 @@ def generate_sdfg(
         BCRIAUTI=1.0,
         TT=1.0,
         dt=50.0,
-        I=I,
-        J=J,
+        IJ=IJ, 
         K=K,
     )
 

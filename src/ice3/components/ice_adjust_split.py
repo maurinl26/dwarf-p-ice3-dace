@@ -8,32 +8,32 @@ from ice3.stencils.cloud_fraction_split import cloud_fraction_1
 from ice3.stencils.thermo import thermodynamic_fields
 
 from ice3.utils.typingx import dtype_float, dtype_int
-from ice3.utils.dims import I, J, K
+from ice3.utils.dims import IJ, K
 
 
 @dace.program
 def ice_adjust(
-    sigqsat: dtype_float[I, J, K],
-    exn: dtype_float[I, J, K],
-    pabs: dtype_float[I, J, K],
-    sigs: dtype_float[I, J, K],
-    th0: dtype_float[I, J, K],
-    rv0: dtype_float[I, J, K],
-    rc0: dtype_float[I, J, K],
-    rr0: dtype_float[I, J, K],
-    ri0: dtype_float[I, J, K],
-    rs0: dtype_float[I, J, K],
-    rg0: dtype_float[I, J, K],
-    ths0: dtype_float[I, J, K],
-    rvs0: dtype_float[I, J, K],
-    rcs0: dtype_float[I, J, K],
-    ris0: dtype_float[I, J, K],
-    ths1: dtype_float[I, J, K],
-    rvs1: dtype_float[I, J, K],
-    rcs1: dtype_float[I, J, K],
-    ris1: dtype_float[I, J, K],
-    cldfr: dtype_float[I, J, K],
-    sigrc: dtype_float[I, J, K],
+    sigqsat: dtype_float[IJ, K],
+    exn: dtype_float[IJ, K],
+    pabs: dtype_float[IJ, K],
+    sigs: dtype_float[IJ, K],
+    th0: dtype_float[IJ, K],
+    rv0: dtype_float[IJ, K],
+    rc0: dtype_float[IJ, K],
+    rr0: dtype_float[IJ, K],
+    ri0: dtype_float[IJ, K],
+    rs0: dtype_float[IJ, K],
+    rg0: dtype_float[IJ, K],
+    ths0: dtype_float[IJ, K],
+    rvs0: dtype_float[IJ, K],
+    rcs0: dtype_float[IJ, K],
+    ris0: dtype_float[IJ, K],
+    ths1: dtype_float[IJ, K],
+    rvs1: dtype_float[IJ, K],
+    rcs1: dtype_float[IJ, K],
+    ris1: dtype_float[IJ, K],
+    cldfr: dtype_float[IJ, K],
+    sigrc: dtype_float[IJ, K],
     CPD: dtype_float,
     CPV: dtype_float,
     CL: dtype_float,
@@ -56,14 +56,14 @@ def ice_adjust(
     TT: dtype_float,
     dt: dtype_float,
 ):
-    cph = np.ndarray([I, J, K], dtype=dtype_float)
-    lv = np.ndarray([I, J, K], dtype=dtype_float)
-    ls = np.ndarray([I, J, K], dtype=dtype_float)
-    t = np.ndarray([I, J, K], dtype=dtype_float)
+    cph = np.ndarray([IJ, K], dtype=dtype_float)
+    lv = np.ndarray([IJ, K], dtype=dtype_float)
+    ls = np.ndarray([IJ, K], dtype=dtype_float)
+    t = np.ndarray([IJ, K], dtype=dtype_float)
 
-    rv_out = np.ndarray([I, J, K], dtype=dtype_float)
-    rc_out = np.ndarray([I, J, K], dtype=dtype_float)
-    ri_out = np.ndarray([I, J, K], dtype=dtype_float)
+    rv_out = np.ndarray([IJ, K], dtype=dtype_float)
+    rc_out = np.ndarray([IJ, K], dtype=dtype_float)
+    ri_out = np.ndarray([IJ, K], dtype=dtype_float)
 
     thermodynamic_fields(
         th=th0,

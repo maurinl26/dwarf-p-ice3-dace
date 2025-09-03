@@ -90,7 +90,15 @@ There are components available for microphysical adjustments, under the [src/ice
   ./data/ice_adjust/reference.nc
 ```
 
+## Automatic DaCe code generation
+
+- [CMakeLists.txt](CMakeLists.txt) is able to generate DaCe generated code (.dacecache) for [ice_adjust](src/ice3/components/ice_adjust_split.py), with execution of [CLI](src/drivers/cli.py) in an isolated virtual environment.
+
+
+
 ## Integration with IAL
+
+(WIP) for now, dwarf-p-ice3-dace is manually copied into IAL repo. C++/Fortran interfaces must be written by hand.
 
 - All the code is generated under _.dacecache_
   - [ice_adjust](.dacecache/ice_adjust) folder in _.dacecache_ contains code and shared libraries for [ice_adjust_split.py](src/ice3/components/ice_adjust_split.py)
@@ -103,7 +111,7 @@ There are components available for microphysical adjustments, under the [src/ice
   )
 
   This part is handled with IAL-bundle
-- Build in IAL 
+- Build in [IAL](https://github.com/maurinl26/IAL), branch develop 
 
 
 ## (WIP) Integration with PHYEX

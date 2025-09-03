@@ -1,24 +1,24 @@
 import dace
 
-from ice3.utils.dims import I, J, K
+from ice3.utils.dims import IJ, K
 from ice3.utils.typingx import dtype_float, dtype_int
 
 NRR = dace.symbol("NRR", dtype=dace.int32)
 
 @dace.program
 def thermodynamic_fields(
-    th: dtype_float[I, J, K],
-    exn: dtype_float[I, J, K],
-    rv: dtype_float[I, J, K],
-    rc: dtype_float[I, J, K],
-    rr: dtype_float[I, J, K],
-    ri: dtype_float[I, J, K],
-    rs: dtype_float[I, J, K],
-    rg: dtype_float[I, J, K],
-    lv: dtype_float[I, J, K],
-    ls: dtype_float[I, J, K],
-    cph: dtype_float[I, J, K],
-    t: dtype_float[I, J, K],
+    th: dtype_float[IJ, K],
+    exn: dtype_float[IJ, K],
+    rv: dtype_float[IJ, K],
+    rc: dtype_float[IJ, K],
+    rr: dtype_float[IJ, K],
+    ri: dtype_float[IJ, K],
+    rs: dtype_float[IJ, K],
+    rg: dtype_float[IJ, K],
+    lv: dtype_float[IJ, K],
+    ls: dtype_float[IJ, K],
+    cph: dtype_float[IJ, K],
+    t: dtype_float[IJ, K],
     CPD: dtype_float,
     CPV: dtype_float,
     CL: dtype_float,
@@ -29,21 +29,21 @@ def thermodynamic_fields(
 ):
 
     # 2.3 Compute the variation of mixing ratio
-    for i, j, k in dace.map[0:I, 0:J, 0:K]:
-        t[i, j, k] = exn[i, j, k] * th[i, j, k]
-        lv[i, j, k] = LVTT + (CPV - CL) * (t[i, j, k] - TT)
-        ls[i, j, k] = LSTT + (CPV - CI) * (t[i, j, k] - TT)
+    for ij, k in dace.map[0:IJ, 0:K]:
+        t[ij, k] = exn[ij, k] * th[ij, k]
+        lv[ij, k] = LVTT + (CPV - CL) * (t[ij, k] - TT)
+        ls[ij, k] = LSTT + (CPV - CI) * (t[ij, k] - TT)
 
     # 2.4 specific heat for moist air at t+1
-    for i, j, k in dace.map[0:I, 0:J, 0:K]:
+    for ij, k in dace.map[0:IJ, 0:K]:
         if NRR == 6:
-            cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * (rc[i, j, k] + rr[i, j, k]) + CI * (ri[i, j, k] + rs[i, j, k] + rg[i, j, k])
+            cph[ij, k] = CPD + CPV * rv[ij, k] + CL * (rc[ij, k] + rr[ij, k]) + CI * (ri[ij, k] + rs[ij, k] + rg[ij, k])
         if NRR == 5:
-            cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * (rc[i, j, k] + rr[i, j, k]) + CI * (ri[i, j, k] + rs[i, j, k])
+            cph[ij, k] = CPD + CPV * rv[ij, k] + CL * (rc[ij, k] + rr[ij, k]) + CI * (ri[ij, k] + rs[ij, k])
         if NRR == 4:
-            cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * (rc[i, j, k] + rr[i, j, k])
+            cph[ij, k] = CPD + CPV * rv[ij, k] + CL * (rc[ij, k] + rr[ij, k])
         if NRR == 2:
-            cph[i, j, k] = CPD + CPV * rv[i, j, k] + CL * rc[i, j, k] + CI * ri[i, j, k]
+            cph[ij, k] = CPD + CPV * rv[ij, k] + CL * rc[ij, k] + CI * ri[ij, k]
 
 if __name__ == "__main__":
     import numpy as np
@@ -52,13 +52,14 @@ if __name__ == "__main__":
     I = domain[0]
     J = domain[1]
     K = domain[2]
+    IJ = I * J
 
     sdfg = thermodynamic_fields.to_sdfg()
-    sdfg.save("thermo.sdfg")
+    sdfg.save("sdfg/thermo.sdfg")
     csdfg = sdfg.compile()
 
     state = {
-        name: dace.ndarray(shape=[I, J, K], dtype=dtype_float)
+        name: dace.ndarray(shape=[IJ, K], dtype=dtype_float)
         for name in [
             "th",
             "exn",
@@ -72,7 +73,7 @@ if __name__ == "__main__":
     }
 
     outputs = {
-        name: dace.ndarray(shape=[I, J, K], dtype=dtype_float)
+        name: dace.ndarray(shape=[IJ, K], dtype=dtype_float)
         for name in [
             "cph",
             "lv",
@@ -83,9 +84,9 @@ if __name__ == "__main__":
 
     print("Allocation \n")
     for key, storage in state.items():
-        storage[:,:,:] = np.ones(domain, dtype=np.float64)
+        storage[:,:] = np.ones((IJ, K), dtype=np.float64)
     for key, storage in outputs.items():
-        storage[:,:,:] = np.zeros(domain, dtype=np.float64)
+        storage[:,:] = np.zeros((IJ, K), dtype=np.float64)
 
     print("Call ")
     csdfg(
@@ -99,8 +100,7 @@ if __name__ == "__main__":
         LSTT=1.0,
         LVTT=1.0,
         TT=1.0,
-        I=I,
-        J=J,
+        IJ=IJ,
         K=K
     )
 

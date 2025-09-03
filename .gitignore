@@ -7,3 +7,4 @@ __pycache__/
 data/
 .idea
 src/dwarf_ice3_gt4py.egg-info/
+.dacecache
