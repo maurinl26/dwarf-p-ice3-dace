@@ -1,1 +1,0 @@
-#define __HASH_multiply "d1a13b4c035b8af6a775c02847393dbeeff4d36ea1cc7bb2f3915ab2fae2d173"
