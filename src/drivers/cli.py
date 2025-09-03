@@ -30,7 +30,7 @@ def generate_sdfg(
     csdfg = sdfg.compile()
 
     state = {
-        name: dace.ndarray(shape=[I, J, K], dtype=dace.float64)
+        name: dace.ndarray(shape=[IJ, K], dtype=dace.float64)
         for name in [
             "sigqsat",
             "rhodref",
@@ -55,7 +55,7 @@ def generate_sdfg(
     }
 
     outputs = {
-        name: dace.ndarray(shape=[I, J, K], dtype=dace.float64)
+        name: dace.ndarray(shape=[IJ, K], dtype=dace.float64)
         for name in [
             "ths1",
             "rvs1",

@@ -9,6 +9,6 @@ def allocate(
 ):
     
     for key, storage in state.items():
-        storage[:, :, :] = np.ones(domain, dtype=np.float64)
+        storage[:, :] = np.ones(domain, dtype=np.float64)
     for key, storage in outputs.items():
-        storage[:, :, :] = np.zeros(domain, dtype=np.float64)
+        storage[:, :] = np.zeros(domain, dtype=np.float64)
