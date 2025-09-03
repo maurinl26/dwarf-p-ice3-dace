@@ -30,7 +30,7 @@ try:
 except KeyError as ke:
     logging.warning(f"{ke} environment variable not set")
     precision = "double"
-logging.info(f"precision set to {precision}")
+logging.warning(f"precision set to {precision}")
 
 match precision:
     case "single":

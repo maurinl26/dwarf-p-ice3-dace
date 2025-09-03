@@ -54,9 +54,6 @@ function(create_venv venv_dir requirements_path)
 endfunction()
 
 function(dace_codegen venv_dir)
-	message("Current source dir for code generation ${CMAKE_CURRENT_SOURCE_DIR}")
-	message("Command : ${venv_dir}/bin/python3 ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers/cli.py")
-
 	message("Activate venv")
 	execute_process(
 		COMMAND source ${venv_dir}/bin/activate
@@ -87,8 +84,8 @@ message("Generate DaCe code")
 dace_codegen(${DWARF_P_ICE3_VENV})
 
 ### Sources
-if(EXISTS .dacecache)
-	add_subdirectory(.dacecache)
+if(EXISTS ${CMAKE_BINARY_DIR}/.dacecache)
+	message("Successfully generated dacecache")
 endif()
 
 ecbuild_install_project( NAME dwarf-p-ice3-dace )
