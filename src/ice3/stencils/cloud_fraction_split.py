@@ -6,7 +6,7 @@ from ice3.utils.typingx import dtype_float, dtype_int
 SUBG_MF_PDF = dace.symbol("SUBG_MF_PDF")
 
 
-@dace.program
+# @dace.program
 def cloud_fraction_1(
     lv: dtype_float[IJ, K],
     ls: dtype_float[IJ, K],

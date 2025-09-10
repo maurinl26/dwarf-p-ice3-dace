@@ -8,7 +8,7 @@ from ice3.utils.typingx import dtype_int, dtype_float
 FRAC_ICE_ADJUST = dace.symbol("FRAC_ICE_ADJUST", dtype=dace.bool)
 LAMBDA3 = dace.symbol("LAMBDA3", dtype=dace.bool)
 
-@dace.program
+# @dace.program
 def condensation(
     sigqsat: dtype_float[IJ, K],
     pabs: dtype_float[IJ, K],

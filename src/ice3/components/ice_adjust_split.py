@@ -56,14 +56,14 @@ def ice_adjust(
     TT: dtype_float,
     dt: dtype_float,
 ):
-    cph = np.ndarray([IJ, K], dtype=dtype_float)
-    lv = np.ndarray([IJ, K], dtype=dtype_float)
-    ls = np.ndarray([IJ, K], dtype=dtype_float)
-    t = np.ndarray([IJ, K], dtype=dtype_float)
+    cph = dace.ndarray([IJ, K], dtype=dtype_float)
+    lv = dace.ndarray([IJ, K], dtype=dtype_float)
+    ls = dace.ndarray([IJ, K], dtype=dtype_float)
+    t = dace.ndarray([IJ, K], dtype=dtype_float)
 
-    rv_out = np.ndarray([IJ, K], dtype=dtype_float)
-    rc_out = np.ndarray([IJ, K], dtype=dtype_float)
-    ri_out = np.ndarray([IJ, K], dtype=dtype_float)
+    rv_out = dace.ndarray([IJ, K], dtype=dtype_float)
+    rc_out = dace.ndarray([IJ, K], dtype=dtype_float)
+    ri_out = dace.ndarray([IJ, K], dtype=dtype_float)
 
     thermodynamic_fields(
         th=th0,

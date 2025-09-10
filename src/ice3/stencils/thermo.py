@@ -5,7 +5,7 @@ from ice3.utils.typingx import dtype_float, dtype_int
 
 NRR = dace.symbol("NRR", dtype=dace.int32)
 
-@dace.program
+# @dace.program
 def thermodynamic_fields(
     th: dtype_float[IJ, K],
     exn: dtype_float[IJ, K],
