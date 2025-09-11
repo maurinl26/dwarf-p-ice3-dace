@@ -189,6 +189,40 @@ program test_ice_adjust
     pths0_ptr = fortran_to_c_ptr(pths0)
     pths1_ptr = fortran_to_c_ptr(pths1)
 
+    if ( c_associated(pcf_mf_ptr) .and. &
+    & c_associated(pcldfr_ptr) .and. &
+    & c_associated(pexn_ptr) .and. &
+    & c_associated(phlc_hcf_ptr) .and. &
+    & c_associated(phlc_hrc_ptr) .and. & 
+    & c_associated(phli_hcf_ptr) .and. &
+    & c_associated(phli_hri_ptr) .and. &
+    & c_associated(ppabs_ptr) .and. & 
+    & c_associated(prc0_ptr) .and. & 
+    & c_associated(prc_mf_ptr) .and. & 
+    & c_associated(prcs0_ptr) .and. & 
+    & c_associated(prcs1_ptr) .and. &
+    & c_associated(prg0_ptr) .and. & 
+    & c_associated(prhodref_ptr) .and. &
+    & c_associated(pri0_ptr) .and. &
+    & c_associated(pri_mf_ptr) .and. &
+    & c_associated(pris0_ptr) .and. &
+    & c_associated(pris1_ptr) .and. & 
+    & c_associated(prr0_ptr) .and. & 
+    & c_associated(prs0_ptr) .and. & 
+    & c_associated(prv0_ptr) .and. & 
+    & c_associated(prvs0_ptr) .and. & 
+    & c_associated(prvs1_ptr) .and. &
+    & c_associated(psigqsat_ptr) .and. & 
+    & c_associated(psigrc_ptr) .and. & 
+    & c_associated(psigs_ptr) .and. & 
+    & c_associated(pth0_ptr) .and. & 
+    & c_associated(pths0_ptr) .and. &
+    & c_associated(pths1_ptr)) then
+        print *, "debug : main_ice_adjust.F90 - Array pointer associated"
+    else
+        print *, "debug : main_ice_adjust.F90 - Error in c pointer association"
+    endif
+
     print *, "debug : main_ice_adjust.F90 - Call  handle"
     handle = c_dace_init_ice_adjust(IJ, K)
 
