@@ -3,44 +3,53 @@
 program test_ice_adjust
 
     use modi_ice_adjust_dace
+    use fortran_c_array_interface
     use, intrinsic :: iso_c_binding, only : c_double, c_int, c_funptr, c_bool
 
     implicit none
 
-    integer(c_int) :: I, J, K, IJ
+    integer(c_int) :: I, J, IJ, K
 
+    ! Fortran arrays
+    real(c_double), allocatable, target :: pcf_mf(:,:)
+    real(c_double), allocatable, target :: pcldfr(:,:)
+    real(c_double), allocatable, target :: pexn(:,:)
+    real(c_double), allocatable, target :: phlc_hcf(:,:)
+    real(c_double), allocatable, target :: phlc_hrc(:,:)
+    real(c_double), allocatable, target :: phli_hcf(:,:)
+    real(c_double), allocatable, target :: phli_hri(:,:)
+    real(c_double), allocatable, target :: ppabs(:,:)
+    real(c_double), allocatable, target :: prc0(:,:)
+    real(c_double), allocatable, target :: prc_mf(:,:)
+    real(c_double), allocatable, target :: prcs0(:,:)
+    real(c_double), allocatable, target :: prcs1(:,:)
+    real(c_double), allocatable, target :: prg0(:,:)
+    real(c_double), allocatable, target :: prhodref(:,:)
+    real(c_double), allocatable, target :: pri0(:,:)
+    real(c_double), allocatable, target :: pri_mf(:,:)
+    real(c_double), allocatable, target :: pris0(:,:)
+    real(c_double), allocatable, target :: pris1(:,:)
+    real(c_double), allocatable, target :: prr0(:,:)
+    real(c_double), allocatable, target :: prs0(:,:)
+    real(c_double), allocatable, target :: prv0(:,:)
+    real(c_double), allocatable, target :: prvs0(:,:)
+    real(c_double), allocatable, target :: prvs1(:,:)
+    real(c_double), allocatable, target :: psigqsat(:,:)
+    real(c_double), allocatable, target :: psigrc(:,:)
+    real(c_double), allocatable, target :: psigs(:,:)
+    real(c_double), allocatable, target :: pth0(:,:)
+    real(c_double), allocatable, target :: pths0(:,:)
+    real(c_double), allocatable, target :: pths1(:,:)
 
-    real(c_double), allocatable :: pcf_mf(:,:)
-    real(c_double), allocatable :: pcldfr(:,:)
-    real(c_double), allocatable :: pexn(:,:)
-    real(c_double), allocatable :: phlc_hcf(:,:)
-    real(c_double), allocatable :: phlc_hrc(:,:)
-    real(c_double), allocatable :: phli_hcf(:,:)
-    real(c_double), allocatable :: phli_hri(:,:)
-    real(c_double), allocatable :: ppabs(:,:)
-    real(c_double), allocatable :: prc0(:,:)
-    real(c_double), allocatable :: prc_mf(:,:)
-    real(c_double), allocatable :: prcs0(:,:)
-    real(c_double), allocatable :: prcs1(:,:)
-    real(c_double), allocatable :: prg0(:,:)
-    real(c_double), allocatable :: prhodref(:,:)
-    real(c_double), allocatable :: pri0(:,:)
-    real(c_double), allocatable :: pri_mf(:,:)
-    real(c_double), allocatable :: pris0(:,:)
-    real(c_double), allocatable :: pris1(:,:)
-    real(c_double), allocatable :: prr0(:,:)
-    real(c_double), allocatable :: prs0(:,:)
-    real(c_double), allocatable :: prv0(:,:)
-    real(c_double), allocatable :: prvs0(:,:)
-    real(c_double), allocatable :: prvs1(:,:)
-    real(c_double), allocatable :: psigqsat(:,:)
-    real(c_double), allocatable :: psigrc(:,:)
-    real(c_double), allocatable :: psigs(:,:)
-    real(c_double), allocatable :: pth0(:,:)
-    real(c_double), allocatable :: pths0(:,:)
-    real(c_double), allocatable :: pths1(:,:)
+    ! C pointers
+    type(c_ptr) :: pcf_mf_ptr, pcldfr_ptr, pexn_ptr
+    type(c_ptr) :: phlc_hcf_ptr, phlc_hrc_ptr, phli_hcf_ptr, phli_hri_ptr
+    type(c_ptr) :: ppabs_ptr, prc0_ptr, prc_mf_ptr, prcs0_ptr, prcs1_ptr
+    type(c_ptr) :: prg0_ptr, prhodref_ptr, pri0_ptr, pri_mf_ptr, pris0_ptr
+    type(c_ptr) :: pris1_ptr, prr0_ptr, prs0_ptr, prv0_ptr, prvs0_ptr, prvs1_ptr
+    type(c_ptr) :: psigqsat_ptr, psigrc_ptr, psigs_ptr, pth0_ptr, pths0_ptr, pths1_ptr
 
-
+    ! Constants
     real(c_double), parameter :: ACRIAUTI = 1.0
     real(c_double), parameter :: ALPI = 1.0
     real(c_double), parameter :: ALPW = 1.0
@@ -80,7 +89,8 @@ program test_ice_adjust
     K = 90
     IJ = I * J
 
-    print *, "Allocation"
+    print *, "debug : main_ice_adjust.F90 - Allocation"
+    !! Allocation
     allocate(pcf_mf(IJ, K))
     allocate(pcldfr(IJ, K))
     allocate(pexn(IJ, K))
@@ -113,56 +123,124 @@ program test_ice_adjust
     allocate(phli_hcf(IJ, K))
     allocate(phli_hri(IJ, K))
 
-    print *, "Dummy values"
-    pcf_mf(:,:) = 1.0
-    pcldfr(:,:) = 1.
-    pexn(:,:) = 1.
-    ppabs(:,:) = 1.
-    prc0(:,:) = 1.
-    prc_mf(:,:) = 1.
-    prcs0(:,:) = 1.
-    prg0(:,:) = 1.
-    prhodref(:,:) = 1.
-    pri0(:,:) = 1.
-    pri_mf(:,:) = 1.
-    pris0(:,:) = 1.
-    prr0(:,:) = 1.
-    prs0(:,:) = 1.
-    prv0(:,:) = 1.
-    prvs0(:,:) = 1.
-    psigqsat(:,:) = 1.
-    psigrc(:,:) = 1.
-    psigs(:,:) = 1.
-    pth0(:,:) = 1.
-    pths0(:,:) = 1.
+    print *, "debug : main_ice_adjust.F90 - Dummy values"
+    !! Default values
+    pcf_mf(:,:) = 1.0_c_double
+    pcldfr(:,:) = 1.0_c_double
+    pexn(:,:) = 1.0_c_double
+    ppabs(:,:) = 1.0_c_double
+    prc0(:,:) = 1.0_c_double
+    prc_mf(:,:) = 1.0_c_double
+    prcs0(:,:) = 1.0_c_double
+    prg0(:,:) = 1.0_c_double
+    prhodref(:,:) = 1.0_c_double
+    pri0(:,:) = 1.0_c_double
+    pri_mf(:,:) = 1.0_c_double
+    pris0(:,:) = 1.0_c_double
+    prr0(:,:) = 1.0_c_double
+    prs0(:,:) = 1.0_c_double
+    prv0(:,:) = 1.0_c_double
+    prvs0(:,:) = 1.0_c_double
+    psigqsat(:,:) = 1.0_c_double
+    psigrc(:,:) = 1.0_c_double
+    psigs(:,:) = 1.0_c_double
+    pth0(:,:) = 1.0_c_double
+    pths0(:,:) = 1.0_c_double
 
-    pths1(:,:) = 0.
-    pris1(:,:) = 0.
-    prcs1(:,:) = 0.
-    prvs1(:,:) = 0.
+    pths1(:,:) = 0.0_c_double
+    pris1(:,:) = 0.0_c_double
+    prcs1(:,:) = 0.0_c_double
+    prvs1(:,:) = 0.0_c_double
 
-    phlc_hcf(:,:) = 0.
-    phlc_hrc(:,:) = 0.
-    phli_hcf(:,:) = 0.
-    phli_hri(:,:) = 0.
+    phlc_hcf(:,:) = 0.0_c_double
+    phlc_hrc(:,:) = 0.0_c_double
+    phli_hcf(:,:) = 0.0_c_double
+    phli_hri(:,:) = 0.0_c_double
+
+    print *, "debug : main_ice_adjust.F90 - Pointer association"
+    !! Association
+    pcf_mf_ptr = fortran_to_c_ptr(pcf_mf)
+    pcldfr_ptr = fortran_to_c_ptr(pcldfr)
+    pexn_ptr = fortran_to_c_ptr(pexn)
+    phlc_hcf_ptr = fortran_to_c_ptr(phlc_hcf)
+    phlc_hrc_ptr = fortran_to_c_ptr(phlc_hrc) 
+    phli_hcf_ptr = fortran_to_c_ptr(phli_hcf)
+    phli_hri_ptr = fortran_to_c_ptr(phli_hri)
+    ppabs_ptr = fortran_to_c_ptr(ppabs) 
+    prc0_ptr = fortran_to_c_ptr(prc0) 
+    prc_mf_ptr = fortran_to_c_ptr(prc_mf) 
+    prcs0_ptr = fortran_to_c_ptr(prcs0) 
+    prcs1_ptr = fortran_to_c_ptr(prcs1)
+    prg0_ptr = fortran_to_c_ptr(prg0) 
+    prhodref_ptr = fortran_to_c_ptr(prhodref)
+    pri0_ptr = fortran_to_c_ptr(pri0)
+    pri_mf_ptr = fortran_to_c_ptr(pri_mf)
+    pris0_ptr = fortran_to_c_ptr(pris0)
+    pris1_ptr = fortran_to_c_ptr(pris1) 
+    prr0_ptr = fortran_to_c_ptr(prr0) 
+    prs0_ptr = fortran_to_c_ptr(prs0) 
+    prv0_ptr = fortran_to_c_ptr(prv0) 
+    prvs0_ptr = fortran_to_c_ptr(prvs0) 
+    prvs1_ptr = fortran_to_c_ptr(prvs1)
+    psigqsat_ptr = fortran_to_c_ptr(psigqsat) 
+    psigrc_ptr = fortran_to_c_ptr(psigrc) 
+    psigs_ptr = fortran_to_c_ptr(psigs) 
+    pth0_ptr = fortran_to_c_ptr(pth0) 
+    pths0_ptr = fortran_to_c_ptr(pths0)
+    pths1_ptr = fortran_to_c_ptr(pths1)
 
     print *, "debug : main_ice_adjust.F90 - Call  handle"
     handle = c_dace_init_ice_adjust(IJ, K)
 
     print *, "debug : main_ice_adjust.F90 - Call  program"
-    call c_program_ice_adjust(handle=handle, cldfr=pcldfr, exn=pexn, pabs=ppabs, rc0=prc0, rcs0=prcs0, rcs1=prcs1, &
-                &rg0=prg0, ri0=pri0, ris0=pris0, ris1=pris1, rr0=prr0, rs0=prs0, rv0=prv0, rvs0=prvs0, rvs1=prvs1, &
-                &sigqsat=psigqsat, sigrc=psigrc, sigs=psigs, th0=pth0, ths0=pths0, ths1=pths1, ALPI=ALPI, ALPW=ALPW, &
-                &BETAI=BETAI, BETAW=BETAW, CI=CI, CL=CL, CPD=CPD, CPV=CPV, GAMI=GAMI, GAMW=GAMW, IJ=IJ, K=K, &
-                &LSIGMAS=LSIGMAS, LSTATNW=LSTATNW, LSTT=LSTT, LVTT=LVTT, OCND2=OCND2, RD=RD, RV=RV, TMAXMIX=TMAXMIX, &
-                &TMINMIX=TMINMIX, TT=TT, dt=dt)
+    call c_program_ice_adjust(handle=handle, cldfr=pcldfr_ptr, exn=pexn_ptr, pabs=ppabs_ptr,&
+            &rc0=prc0_ptr, rcs0=prcs0_ptr, rcs1=prcs1_ptr, rg0=prg0_ptr, ri0=pri0_ptr,&
+            &ris0=pris0_ptr, ris1=pris1_ptr, rr0=prr0_ptr, rs0=prs0_ptr, rv0=prv0_ptr,&
+            &rvs0=prvs0_ptr, rvs1=prvs1_ptr, sigqsat=psigqsat_ptr, sigrc=psigrc_ptr, sigs=psigs_ptr,&
+            &th0=pth0_ptr, ths0=pths0_ptr, ths1=pths1_ptr, &
+            &ALPI=ALPI, ALPW=ALPW, BETAI=BETAI, BETAW=BETAW, CI=CI, CL=CL,&
+            &CPD=CPD, CPV=CPV, GAMI=GAMI, GAMW=GAMW, IJ=IJ, K=K, LSIGMAS=LSIGMAS,&
+            &LSTATNW=LSTATNW, LSTT=LSTT, LVTT=LVTT, OCND2=OCND2, RD=RD, RV=RV, TMAXMIX=TMAXMIX,&
+            &TMINMIX=TMINMIX, TT=TT, dt=dt)
 
+    print *, "debug : main_ice_adjust.F90 - mean, hlc_hrc :", sum(phlc_hcf)/(I * J * K)
+    print *, "debug : main_ice_adjust.F90 - mean, pths1 :", sum(pths1)/(I * J * K)
+    print *, "debug : main_ice_adjust.F90 - mean, pris1 :", sum(pris1)/(I * J * K)
+    print *, "debug : main_ice_adjust.F90 - mean, prcs1 :", sum(prcs1)/(I * J * K)
+    print *, "debug : main_ice_adjust.F90 - mean, prvs1 :", sum(prvs1)/(I * J * K)
 
-    print *, "mean, hlc_hrc :", sum(phlc_hcf)/(I * J * K)
-    print *, "mean, pths1 :", sum(pths1)/(I * J * K)
-    print *, "mean, pris1 :", sum(pris1)/(I * J * K)
-    print *, "mean, prcs1 :", sum(prcs1)/(I * J * K)
-    print *, "mean, prvs1 :", sum(prvs1)/(I * J * K)
+    print *, "debug : main_ice_adjust.F90 - Deallocation values"
+    deallocate(pcf_mf)
+    deallocate(pcldfr)
+    deallocate(pexn)
+    deallocate(ppabs)
+    deallocate(prc0)
+    deallocate(prc_mf)
+    deallocate(prcs0)
+    deallocate(prg0)
+    deallocate(prhodref)
+    deallocate(pri0)
+    deallocate(pri_mf)
+    deallocate(pris0)
+    deallocate(prr0)
+    deallocate(prs0)
+    deallocate(prv0)
+    deallocate(prvs0)
+    deallocate(psigqsat)
+    deallocate(psigrc)
+    deallocate(psigs)
+    deallocate(pth0)
+    deallocate(pths0)
+
+    deallocate(pths1)
+    deallocate(pris1)
+    deallocate(prcs1)
+    deallocate(prvs1)
+
+    deallocate(phlc_hcf)
+    deallocate(phlc_hrc)
+    deallocate(phli_hcf)
+    deallocate(phli_hri)
 
     print *, "Success"
 
