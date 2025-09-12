@@ -15,12 +15,12 @@ find_package(Python3 REQUIRED COMPONENTS Interpreter)
 function(create_venv venv_dir requirements_path)
 
 	if(EXISTS ${env_dir})
-		message(STATUS "-- Virtual environment already exists in venv_dir")
+		message(STATUS "Virtual environment already exists in venv_dir")
 		return()
 	endif()
 
 	if(NOT EXISTS ${requirements_path})
-		message(FATAL_ERROR "-- Requirements file not found : ${requirements_path}")
+		message(FATAL_ERROR "Requirements file not found : ${requirements_path}")
 	endif()
 	
 	execute_process(
@@ -29,7 +29,7 @@ function(create_venv venv_dir requirements_path)
 	)
 
 	if(venv_creation_ret_code)
-		message(FATAL_ERROR "-- Failed to create virtual environment at ${venv_dir}")
+		message(FATAL_ERROR "Failed to create virtual environment at ${venv_dir}")
 	endif()
 
 	execute_process(
@@ -38,7 +38,7 @@ function(create_venv venv_dir requirements_path)
 	)
 
 	if(pip_install_ret_code)
-		message(FATAL_ERROR "-- Failed to install dependencies from ${requirements_path}")
+		message(FATAL_ERROR "Failed to install dependencies from ${requirements_path}")
 	endif()
 
 	execute_process(
@@ -47,27 +47,27 @@ function(create_venv venv_dir requirements_path)
 	)
 
 	if(pip_e_install_ret_code)
-		message(FATAL_ERROR "-- Failed to install ice3")
+		message(FATAL_ERROR "Failed to install ice3")
 	endif()
 
-	message(STATUS "-- Virtual environment setup done at ${venv_dir} with dependencies from ${requirements_path}")
+	message(STATUS "Virtual environment setup done at ${venv_dir} with dependencies from ${requirements_path}")
 endfunction()
 
 function(dace_codegen venv_dir)
-	message("-- Activate venv")
+	message(STATUS "Activate venv")
 	execute_process(
 		COMMAND source ${venv_dir}/bin/activate
 		RESULT_VARIABLE venv_activate_ret_code
 	)
 
-	message("-- Execute process")
+	message(STATUS "Execute process")
 	execute_process(
 		COMMAND ${venv_dir}/bin/python3 ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers/cli.py
 		RESULT_VARIABLE dace_codegen_ret_code
 	)
 
 	if(dace_codegen_ret_code)
-		message(FATAL_ERROR "-- Failed to generate dace code")
+		message(FATAL_ERROR "Failed to generate dace code")
 	endif()
 endfunction()
 
@@ -76,16 +76,16 @@ endfunction()
 set(DWARF_P_ICE3_VENV ${CMAKE_BINARY_DIR}/ice3_venv)
 
 # Create venv with typer (cli) and dace (codegen)
-message("-- Create venv")
+message(STATUS "Create venv")
 create_venv(${DWARF_P_ICE3_VENV} ${CMAKE_CURRENT_SOURCE_DIR}/requirements.txt)
 
 # Generate backend code
-message("-- Generate DaCe code")
+message(STATUS "Generate DaCe code")
 dace_codegen(${DWARF_P_ICE3_VENV})
 
 ### Sources
 if(EXISTS ${CMAKE_BINARY_DIR}/.dacecache)
-	message("-- Successfully generated dacecache")
+	message(STATUS "Successfully generated dacecache")
 endif()
 
 ### Module and test

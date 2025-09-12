@@ -22,31 +22,31 @@ module modi_ice_adjust_dace
 
             use, intrinsic :: iso_c_binding
 
-            type(c_funptr), value :: handle
+            type(c_funptr) :: handle
             integer(c_int) :: IJ
             integer(c_int) :: K
 
-            type(c_ptr), value :: cldfr
-            type(c_ptr), value :: exn
-            type(c_ptr), value :: pabs
-            type(c_ptr), value :: rc0
-            type(c_ptr), value :: rcs0
-            type(c_ptr), value :: rcs1
-            type(c_ptr), value :: rg0
-            type(c_ptr), value :: ri0
-            type(c_ptr), value :: ris0
-            type(c_ptr), value :: ris1
-            type(c_ptr), value :: rr0
-            type(c_ptr), value :: rs0
-            type(c_ptr), value :: rv0
-            type(c_ptr), value :: rvs0
-            type(c_ptr), value :: rvs1
-            type(c_ptr), value :: sigqsat
-            type(c_ptr), value :: sigrc
-            type(c_ptr), value :: sigs
-            type(c_ptr), value :: th0
-            type(c_ptr), value :: ths0
-            type(c_ptr), value :: ths1
+            real(c_double) :: cldfr(*)
+            real(c_double) :: exn(*)
+            real(c_double) :: pabs(*)
+            real(c_double) :: rc0(*)
+            real(c_double) :: rcs0(*)
+            real(c_double) :: rcs1(*)
+            real(c_double) :: rg0(*)
+            real(c_double) :: ri0(*)
+            real(c_double) :: ris0(*)
+            real(c_double) :: ris1(*)
+            real(c_double) :: rr0(*)
+            real(c_double) :: rs0(*)
+            real(c_double) :: rv0(*)
+            real(c_double) :: rvs0(*)
+            real(c_double) :: rvs1(*)
+            real(c_double) :: sigqsat(*)
+            real(c_double) :: sigrc(*)
+            real(c_double) :: sigs(*)
+            real(c_double) :: th0(*)
+            real(c_double) :: ths0(*)
+            real(c_double) :: ths1(*)
 
             real(c_double) :: ALPI
             real(c_double) :: ALPW
