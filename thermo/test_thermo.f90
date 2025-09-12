@@ -11,31 +11,19 @@ program test_thermo
 
     type(c_funptr) :: handle
     
-    real(c_double), dimension(250000), target :: cph
-    real(c_double), dimension(250000), target :: exn 
-    real(c_double), dimension(250000), target :: ls
-    real(c_double), dimension(250000), target :: lv
-    real(c_double), dimension(250000), target :: rc
-    real(c_double), dimension(250000), target :: rg
-    real(c_double), dimension(250000), target :: ri
-    real(c_double), dimension(250000), target :: rr
-    real(c_double), dimension(250000), target :: rs 
-    real(c_double), dimension(250000), target :: rv
-    real(c_double), dimension(250000), target :: t
-    real(c_double), dimension(250000), target :: th
+    real(c_double), dimension(IJK), target :: cph
+    real(c_double), dimension(IJK), target :: exn 
+    real(c_double), dimension(IJK), target :: ls
+    real(c_double), dimension(IJK), target :: lv
+    real(c_double), dimension(IJK), target :: rc
+    real(c_double), dimension(IJK), target :: rg
+    real(c_double), dimension(IJK), target :: ri
+    real(c_double), dimension(IJK), target :: rr
+    real(c_double), dimension(IJK), target :: rs 
+    real(c_double), dimension(IJK), target :: rv
+    real(c_double), dimension(IJK), target :: t
+    real(c_double), dimension(IJK), target :: th
 
-    type(c_ptr):: cph_ptr
-    type(c_ptr):: exn_ptr 
-    type(c_ptr):: ls_ptr
-    type(c_ptr):: lv_ptr
-    type(c_ptr):: rc_ptr
-    type(c_ptr):: rg_ptr
-    type(c_ptr):: ri_ptr
-    type(c_ptr):: rr_ptr
-    type(c_ptr):: rs_ptr 
-    type(c_ptr):: rv_ptr
-    type(c_ptr):: t_ptr
-    type(c_ptr):: th_ptr
     
     real(c_double) :: CI, CL, CPD, CPV, LSTT
     real(c_double) :: LVTT, TT
