@@ -40,19 +40,6 @@ program test_thermo
     real(c_double) :: CI, CL, CPD, CPV, LSTT
     real(c_double) :: LVTT, TT
 
-    ! allocate(cph(IJK))
-    ! allocate(exn(IJK)) 
-    ! allocate(ls(IJK))
-    ! allocate(lv(IJK))
-    ! allocate(rc(IJK))
-    ! allocate(rg(IJK))
-    ! allocate(ri(IJK))
-    ! allocate(rr(IJK))
-    ! allocate(rs(IJK)) 
-    ! allocate(rv(IJK))
-    ! allocate(t(IJK))
-    ! allocate(th(IJK))
-
     cph(:) = 1.0_c_double
     exn(:) = 1.0_c_double 
     ls(:) = 1.0_c_double
@@ -66,19 +53,6 @@ program test_thermo
     t(:) = 1.0_c_double
     th(:) = 1.0_c_double
 
-    ! cph_ptr = fortran_to_c_ptr(cph)
-    ! exn_ptr = fortran_to_c_ptr(exn) 
-    ! ls_ptr = fortran_to_c_ptr(ls)
-    ! lv_ptr = fortran_to_c_ptr(lv)
-    ! rc_ptr = fortran_to_c_ptr(rc)
-    ! rg_ptr = fortran_to_c_ptr(rg)
-    ! ri_ptr = fortran_to_c_ptr(ri)
-    ! rr_ptr = fortran_to_c_ptr(rr)
-    ! rs_ptr = fortran_to_c_ptr(rs) 
-    ! rv_ptr = fortran_to_c_ptr(rv)
-    ! t_ptr = fortran_to_c_ptr(t)
-    ! th_ptr = fortran_to_c_ptr(th)
-
     IJ = 2500
     K = 90
     NRR = 6
@@ -91,8 +65,8 @@ program test_thermo
         & LVTT, NRR, TT)
 
     print *, "mean, cph : ", sum(cph)/IJK
-    print *, "mean, lv : ", sum(lv)/IJK
-    print *, "mean, ls : ", sum(ls)/IJK
-    print *, "mean, t : ", sum(t)/IJK
+    print *, "mean, lv  : ", sum(lv)/IJK
+    print *, "mean, ls  : ", sum(ls)/IJK
+    print *, "mean, t   : ", sum(t)/IJK
 
 end program test_thermo
