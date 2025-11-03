@@ -1,119 +1,143 @@
 # -*- coding: utf-8 -*-
-import dace
+import datetime
 import logging
-import numpy as np
-
-from ice3.components.ice_adjust_split import ice_adjust
-from ice3.utils.allocate import allocate
-
+import sys
+import time
+from pathlib import Path
 from typing import Tuple
 
+import typer
+import xarray as xr
+from ifs_physics_common.framework.config import GT4PyConfig
+from ifs_physics_common.framework.grid import ComputationalGrid
 
-######################## drivers #######################
-def generate_sdfg(
-    domain: Tuple[int, int, int] = (50, 50, 15)
+from ..drivers.core import write_performance_tracking, compare_fields
+from ..ice3.components.ice_adjust import IceAdjust
+from ..ice3.components.rain_ice import RainIce
+from ..ice3.initialisation.state_ice_adjust import get_state_ice_adjust
+from ..ice3.initialisation.state_rain_ice import get_state_rain_ice
+from ..ice3.phyex_common.phyex import Phyex
+from ..ice3.utils.reader import NetCDFReader
+from ..ice3.utils.env import ROOT_PATH
+
+
+logging.basicConfig(level=logging.DEBUG, stream=sys.stdout)
+log = logging.getLogger(__name__)
+
+app = typer.Typer()
+
+######################## GT4Py drivers #######################
+@app.command()
+def ice_adjust(
+    domain: Tuple[int, int, int] = (10000, 1, 50),
+    dataset: Path = Path(ROOT_PATH, "data", "ice_adjust.nc"),
+    output_path: Path = Path(ROOT_PATH, "data", "ice_adjust_run.nc"),
+    tracking_file: Path = Path(ROOT_PATH, "ice_adjust_run.json"),
+    backend: str = "gt:cpu_ifirst",
+    rebuild: bool = True,
+    validate_args: bool = False,
 ):
-    """Run ice_adjust splitted version to avoid
-    interpolation problems for sigrc
-    """
+    """Run ice_adjust component"""
 
-    I = domain[0]
-    J = domain[1]
-    K = domain[2]
-    IJ = I * J
-    
-    logging.info("Generate SDFG")
-    sdfg = ice_adjust.to_sdfg()
-    sdfg.save("sdfg/ice_adjust.sdfg")
-    
-    logging.info("Compile SDFG")
-    csdfg = sdfg.compile()
+    ################## Domain ################
+    log.info("Initializing grid ...")
+    grid = ComputationalGrid(*domain)
+    dt = datetime.timedelta(seconds=1)
 
-    state = {
-        name: dace.ndarray(shape=[IJ, K], dtype=dace.float64)
-        for name in [
-            "sigqsat",
-            "rhodref",
-            "exn",
-            "pabs",
-            "sigs",
-            "rc_mf",
-            "ri_mf",
-            "cf_mf",
-            "th0",
-            "rv0",
-            "rc0",
-            "rr0",
-            "ri0",
-            "rs0",
-            "rg0",
-            "ths0",
-            "rvs0",
-            "rcs0",
-            "ris0",
-        ]
-    }
+    ################## Phyex #################
+    log.info("Initializing Phyex ...")
+    phyex = Phyex("AROME")
 
-    outputs = {
-        name: dace.ndarray(shape=[IJ, K], dtype=dace.float64)
-        for name in [
-            "ths1",
-            "rvs1",
-            "rcs1",
-            "ris1",
-            "cldfr",
-            "sigrc",
-            "hlc_hrc",
-            "hlc_hcf",
-            "hli_hri",
-            "hli_hcf",
-        ]
-    }
-    
-    allocate(domain, state, outputs)
-
-    logging.info("Call compiled SDFG")
-    csdfg(
-        **state,
-        **outputs,
-        NRR=6,
-        CPD=1.0,
-        CPV=1.0,
-        CL=1.0,
-        CI=1.0,
-        OCND2=True,
-        FRAC_ICE_ADJUST=True,
-        RD=1.0,
-        RV=1.0,
-        # condens=1,
-        LSTT=1.0,
-        LVTT=1.0,
-        TMAXMIX=1.0,
-        TMINMIX=1.0,
-        LSIGMAS=True,
-        LSTATNW=True,
-        ALPW=1.0,
-        BETAW=1.0,
-        GAMW=1.0,
-        ALPI=1.0,
-        BETAI=1.0,
-        GAMI=1.0,
-        LAMBDA3=True,
-        LSUBG_COND=True,
-        CRIAUTC=1.0,
-        SUBG_MF_PDF=1,
-        CRIAUTI=1.0,
-        ACRIAUTI=1.0,
-        BCRIAUTI=1.0,
-        TT=1.0,
-        dt=50.0,
-        IJ=IJ, 
-        K=K,
+    ######## Backend and gt4py config #######
+    log.info(f"With backend {backend}")
+    gt4py_config = GT4PyConfig(
+        backend=backend, rebuild=rebuild, validate_args=validate_args, verbose=True
     )
 
-    logging.info(f"hlc_hrc mean {outputs['hlc_hrc'].mean()}")
+    ######## Instanciation + compilation #####
+    log.info(f"Compilation for IceAdjust stencils")
+    start_time = time.time()
+    ice_adjust = IceAdjust(grid, gt4py_config, phyex)
+    elapsed_time = time.time() - start_time
+    log.info(f"Compilation duration for IceAdjust : {elapsed_time} s")
+
+    ####### Create state for AroAdjust #######
+    log.info("Getting state for IceAdjust")
+    reader = NetCDFReader(dataset)
+    state = get_state_ice_adjust(grid, gt4py_config=gt4py_config, netcdf_reader=reader)
+
+    # TODO: decorator for tracking
+    start = time.time()
+    tends, diags = ice_adjust(state, dt)
+    stop = time.time()
+    elapsed_time = stop - start
+    log.info(f"Execution duration for IceAdjust : {elapsed_time} s")
+
+    #################### Write dataset ######################
+    xr.Dataset(state).to_netcdf(output_path)
+
+    ############### Compute differences per field ###########
+    metrics = compare_fields(dataset, output_path, "ice_adjust")
+
+    ####################### Tracking ########################
+    write_performance_tracking(gt4py_config, metrics, tracking_file)
+
+
+@app.command()
+def rain_ice(
+    domain: Tuple[int, int, int] = (5000, 1, 15),
+    dataset: Path = Path(ROOT_PATH, "data", "rain_ice.nc"),
+    output_path: Path = Path(ROOT_PATH, "data", "rain_ice_run.nc"),
+    tracking_file: Path = Path(ROOT_PATH, "rain_ice_run.json"),
+    backend: str = "gt:cpu_ifirst",
+    rebuild: bool = True,
+    validate_args: bool = False,
+):
+    """Run aro_rain_ice component"""
+
+    ################## Grid ##################
+    log.info("Initializing grid ...")
+    grid = ComputationalGrid(*domain)
+    dt = datetime.timedelta(seconds=1)
+
+    ################## Phyex #################
+    log.info("Initializing Phyex ...")
+    phyex = Phyex("AROME")
+
+    ######## Backend and gt4py config #######
+    log.info(f"With backend {backend}")
+    gt4py_config = GT4PyConfig(
+        backend=backend, rebuild=rebuild, validate_args=validate_args, verbose=True
+    )
+
+    ######## Instanciation + compilation #####
+    log.info(f"Compilation for RainIce stencils")
+    start = time.time()
+    rain_ice = RainIce(grid, gt4py_config, phyex)
+    stop = time.time()
+    elapsed_time = stop - start
+    log.info(f"Compilation duration for RainIce : {elapsed_time} s")
+
+    ####### Create state for AroAdjust #######
+    log.info("Getting state for RainIce")
+    reader = NetCDFReader(dataset)
+    state = get_state_rain_ice(grid, gt4py_config=gt4py_config, netcdf_reader=reader)
+
+    ###### Launching RainIce #################
+    log.info("Launching RainIce")
+    start = time.time()
+    tends, diags = rain_ice(state, dt)
+    stop = time.time()
+    elapsed_time = stop - start
+    log.info(f"Execution duration for RainIce : {elapsed_time} s")
+
+    log.info(f"Extracting state data to {output_path}")
+    xr.Dataset(state).to_netcdf(output_path)
+
+    ################# Metrics and Performance tracking ############
+    metrics = compare_fields(dataset, output_path, "rain_ice")
+    write_performance_tracking(gt4py_config, metrics, tracking_file)
 
 
 if __name__ == "__main__":
-    generate_sdfg()
-
+    app()
